@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>新增地址</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/addressDetails.css"/>
+
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+<div id="layer"></div>
+<!--弹窗-->
+<div class="alert_div">
+  <input name='id' type='hidden' value=''/>
+  <div class="content">
+    <p>最多只能添加三个地址!</p>
+  </div>
+  <div class="confirm_bt">
+    <a class="confirm" href="address.html" id="ok">确定</a>
+  </div>
+</div>
+<header>
+  <a class="goBack" href="address.html"></a>
+  <h1>新增地址</h1>
+  <!-- <a class="save_ad">保存</a> -->
+</header>
+<div class="main_content">
+  <input type="hidden" value="" name="id"/>
+  <div class="per_info">
+    <div class="info_list">
+      <label>姓名:</label>
+      <p><input name="userName" type="text" placeholder="请输入姓名"></p>
+    </div>
+    <div class="info_list">
+      <label>联系电话:</label>
+      <p><input name="phone" type="text" placeholder="请输入电话"></p>
+    </div>
+    <div class="info_list">
+      <label>服务区域:</label>
+      <p>
+        <input class="address name_id" name="serviceArea" type="text" readonly="readonly" placeholder="请选择地址">
+        <input type="hidden" name="serviceProvice" value="">
+        <input type="hidden" name="serviceCity" value="">
+        <input type="hidden" name="serviceCounty" value="">
+      </p>
+    </div>
+    <div class="info_list">
+      <label>详细地址:</label>
+      <p><input name="address" type="text" placeholder="请输入地址"></p>
+    </div>
+  </div>
+  </div>
+<div class="button"><a class="save_ad">保存</a></div>
+<!--地区选择-->
+<div id="area">
+  <div class="provice">
+    <ul>
+    </ul>
+  </div>
+  <div class="city">
+    <ul>
+    </ul>
+  </div>
+  <div class="country">
+    <ul>
+    </ul>
+  </div>
+</div>
+
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function () {
+    //  var token ="2FVn7iYizaJRwvlUKgVZPjs4jWA0C9QxwQRttZiGG6ou577ehTF3RXG9-yhYCUPcKiajfAgp13jven4jy6-7sQ";
+    // var uid=68;
+    // var token=$.getUrlParam('token');
+    // var uid=$.getUrlParam('uid');
+
+    var objct = GetRequest();
+    var id = objct.id;
+    var reservation = objct.reservation;
+    $("input[name='id']").val(id);
+    // 修改地址
+    if (id != "" && id != undefined) {
+      $("title,header h1").html("修改地址");
+      $.ajax({
+        url: publicPathCmn + "/api/user/address/" + id,
+        type: "get",
+        data: {},
+        dataType: "json",
+        headers: params,
+        success: function (data) {
+          if (data.success) {
+            if (data.code == 0) {
+              var dataJD = data.jsonData;
+              $("input[name='userName']").val(dataJD.userName || "");
+              $("input[name='phone']").val(dataJD.phone || "");
+              $("input[name='address']").val(dataJD.address);
+              $("input[name='serviceArea']").val(dataJD.provinceValue + " " + dataJD.cityValue + " " + dataJD.districtValue);
+              $("input[name='serviceProvice']").val(dataJD.province);
+              $("input[name='serviceCity']").val(dataJD.city);
+              $("input[name='serviceCounty']").val(dataJD.district);
+              // serviceProvice();
+              // serviceCity(dataJD.province);
+              // serviceCountry(dataJD.city);
+            } else {
+              console.log(data.msg);
+            }
+          } else {
+            checkAuth(data.code);
+            console.log(data.msg);
+          }
+        },
+      });
+    }
+    // 提交保存地址
+    $(".save_ad").click(function () {
+      // 表单验证
+      // var regTel = /^1(3|4|5|7|8)\d{9}$/; //电话
+      // if ($("input[name='userName']").val() == "") {
+      //   onError("请输入姓名", self);
+      //   return false;
+      // }
+      // if ($("input[name='phone']").val() == "") {
+      //   onError("请输入电话", self);
+      //   return false;
+      // } else if (!regTel.test($("input[name='phone']").val())) {
+      //   onError('请填写正确的电话', self);
+      //   return false;
+      // }
+      // if ($("input[name='serviceProvice']").val() == "" || $("input[name='serviceCity']").val() == "" || $("input[name='serviceCounty']").val() == "") {
+      //   onError("请选择地址", self);
+      //   return false;
+      // }
+      // if ($("input[name='address']").val() == "") {
+      //   onError("请填写地址", self);
+      //   return false;
+      // } else if ($("input[name='address']").val().length >= 80) {
+      //   onError("不能超过80个汉字", self);
+      //   return false;
+      // }
+      for (var i = 0; i < $(".per_info input").length; i++) {
+        $(".per_info input").eq(i).trigger("blur");
+        if ($(".validation").length > 0) {
+          return;
+          break;
+        }
+      }
+      var addressId = "";
+      if ($(".main_content input[name='id']").val() != "") {
+        addressId = "/" + $(".main_content input[name='id']").val();
+      }
+      var userName = $("input[name='userName']").val();
+      var phone = $("input[name='phone']").val();
+      var province = $("input[name='serviceProvice']").val();
+      var city = $("input[name='serviceCity']").val();
+      var district = $("input[name='serviceCounty']").val();
+      var address = $("input[name='address']").val();
+      $.ajax({
+        url: publicPathCmn + "/api/user/address" + addressId,
+        type: "post",
+        data: {
+          userName: userName,
+          phone: phone,
+          province: province,
+          city: city,
+          district: district,
+          address: address
+        },
+        dataType: "json",
+        headers: params,
+        success: function (data) {
+          if (data.success) {
+            if (data.code == 0) {
+              if (reservation == 1) {
+                window.history.go(-1);
+              } else {
+                window.location.href = "address.html";
+              }
+              console.log(data.msg);
+            } else {
+              console.log(data.msg);
+            }
+          } else {
+            if (data.code == 90001) {
+              $("#layer,.alert_div").show();
+              console.log(data.msg);
+            }else {
+              checkAuth(data.code);
+            }
+            console.log(data.msg);
+          }
+        },
+      });
+
+    });
+    // 表单验证
+    var regTel = /^1(3|4|5|7|8)\d{9}$/; //电话
+    $(".per_info input").blur(function () {
+      var self = $(this);
+      var name = $(this).attr("name");
+      switch (name) {
+        case "userName":
+          if (self.val() == "") {
+            onError("请输入姓名", self);
+            return;
+          } else {
+            onSuccess(self);
+          }
+          break;
+        case "phone":
+          if (self.val() == "") {
+            onError("请输入电话", self);
+            return;
+          } else if (!regTel.test(self.val())) {
+            onError('请填写正确的电话', self);
+            return;
+          } else {
+            onSuccess(self);
+          }
+          break;
+        case "serviceProvice":
+          if (self.val() == "") {
+            onError("请选择地址", self);
+            return;
+          } else {
+            onSuccess(self);
+          }
+          break;
+        case "serviceCity":
+          if (self.val() == "") {
+            onError("请选择地址", self);
+            return;
+          } else {
+            onSuccess(self);
+          }
+          break;
+        case "serviceCounty":
+          if (self.val() == "") {
+            onError("请选择地址", self);
+            return;
+          } else {
+            onSuccess(self);
+          }
+          break;
+        case "address":
+          if (self.val() == "") {
+            onError("请填写地址", self);
+            return;
+          } else if (self.val().length >= 80) {
+            onError("不能超过80个汉字", self);
+            return;
+          } else {
+            onSuccess(self);
+          }
+          break;
+        default:
+          break;
+      }
+    });
+  })
+  function onError(msg, self) {
+    $(".validation").remove();
+    $(".main_content").append("<p class='validation'>" + msg + "</p>");
+     return;
+  }
+
+  function onSuccess(self) {
+    $(".validation").remove();
+  }
+</script>
+</body>
+</html>

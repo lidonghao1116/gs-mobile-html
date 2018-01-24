@@ -1,0 +1,72 @@
+body{
+	background-color:#fff;
+}
+input{
+	-webkit-appearance:none;
+}
+.height{
+	width:100%;
+	height:1.2rem;
+	background-color:#f0f0f0;
+}
+.set_list {
+    height: 4.2rem;
+    line-height: 4.2rem;
+    border-bottom: 1px solid #e6e6e6;
+}
+.set_list a {
+	position: relative;
+	padding: 0 0.8rem;
+    height: 100%;
+    line-height: 4.2rem;
+    display: block;
+    color: #333;
+    font-size: 1.4rem;
+}
+.set_list img {
+    position: absolute;
+    right: 1.1rem;
+    top: 1.5rem;
+    width: 0.6rem;
+    height: 1.1rem;
+}
+.confirm {
+	display: none;
+    z-index: 101;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 31rem;
+    margin-left: -15.5rem;
+    margin-top: -5.9rem;
+    border-radius: 0.2rem;
+    padding-top: 0.7rem;
+    overflow: hidden;
+}
+.confirm p {
+    padding: 2rem 0;
+    line-height: 2rem;
+    font-size: 1.4rem;
+    text-align: center;
+    border-bottom: 1px solid #e6e6e6;
+}
+.confirm_bt {
+    height: 4.2rem;
+    width: 100%;
+}
+.confirm_bt a {
+	display: block;
+    width: 50%;
+    border: 0;
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    background-color: #ffffff;
+    text-align: center;
+    line-height: 4.2rem;
+    font-size: 1.6rem;
+}
+.confirm_bt .cancel{
+	border-right: 1px solid #e6e6e6;
+}

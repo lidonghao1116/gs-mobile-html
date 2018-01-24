@@ -1,0 +1,218 @@
+body{
+ background-color: #efeff4;
+}
+header {position: relative;}
+header h1 img {width: .8rem;height: .4rem;margin-left: .6rem;}
+header .st-filter {width: 100%;position: absolute;left: 0;top: 4.4rem;background-color: #F0F0F0;z-index: 100;display: none;}
+header .st-filter ul {padding: 0 .7rem;border-top: 1px solid #E6E6E6;margin-top: .3rem;background-color: #FFFFFF;}
+header .st-filter ul li {height: 3.6rem;border-top: 1px solid #F0F0F0;line-height: 3.6rem;font-size: 1.2rem;padding-left: .8rem;position: relative;}
+header .st-filter ul li:first-child {border: none;}
+header .st-filter ul li a {display: block;width: 100%;height: 100%;color: #333333;}
+
+.jobDescription {height: 6.4rem;background-repeat: no-repeat;background-size: 100% 100%;padding-top: 1.4rem;margin-bottom: 1.2rem;padding-left: .9rem;}
+.jobDescription p {font-size: 1.2rem;margin-bottom: .8rem;color: #808080;}
+/* .st-list {background-color: #FFFFFF;} */
+.st-list .stl-filter {background-color: #fff;height: 4.2rem;border-top: 1px solid #E6E6E6;border-bottom: 1px solid #E6E6E6;position: relative;}
+.st-list .stl-filter .sort {  
+    width: 100%;
+    display: flex;
+    display: -webkit-flex;
+  }
+.st-list .stl-filter .sort a {font-size: 1.4rem;display: inline-block;text-align: center;line-height:4.2rem;}
+.st-list .stl-filter .sort .default {color: #FF9900;}
+.st-list .stl-filter .sort .sortType { flex: 1;}
+.st-list .stl-filter .sort .sortType img {width: .6rem;height:.3rem;margin-left: .3rem;}
+.st-list .stl-filter .sortCondition {border-top: 1px solid #E6E6E6;position: absolute;padding: 0 .7rem;background-color: #FFFFFF;left: 0;top: 4.2rem; width: 100%;box-sizing: border-box;display: none;z-index: 111;}
+.st-list .stl-filter .sortCondition p {height: 4.2rem;border-bottom: 1px solid #F0F0F0;line-height: 4.2rem;position: relative;padding-left: .4rem;font-size: 1.2rem;}
+.st-list .stl-filter .sortCondition p img {position: absolute;right: .4rem;top: 1.8rem;width: 1.4rem;height: .8rem;display: none;}
+.st-list .stl-filter .moreFilter-btn {height: 1.6rem;width: 14%;float: right;border-left: 1px solid #E6E6E6;margin-top: 1rem;text-align: center;vertical-align: middle;}
+.st-list .stl-filter .moreFilter-btn img {width: 1.3rem;height: 1.4rem;}
+
+.st-list .stl-frame {position: relative;}
+#stl-layer,#st-layer {position: fixed;left: 0;right:0;bottom:0;background-color:#000000;z-index:90;-moz-opacity: 0.5;opacity:.50;filter: alpha(opacity=50);display: none;}
+.st-list .stl-info {padding: 1.2rem 1rem 0;}
+.st-list .stl-info li {  
+    border-bottom: 1px solid #F0F0F0;
+    padding: 1.5rem 1rem;
+    position: relative;
+    min-height: 9rem;
+    background-color: #fff;
+    border-radius: .3rem;
+    margin-bottom: 1.2rem;
+  }
+.st-list .stl-info li .stl-pic {
+  width: 7.4rem;
+    height: 9rem;
+    float: left;
+    border: 1px solid #f2f2f2;
+    border-radius: .3rem;
+    overflow: hidden;
+}
+.st-list .stl-info li .stl-pic img {width: 100%;height: 100%;}
+.st-list .stl-info li .stl-intro {
+      padding-left: 8.8rem;
+    height: 100%;
+}
+  .stl-intro h1 {
+    font-size: 1.2rem;
+    margin-top: .6rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+  .stl-intro h1 span {
+    font-size: 1.7rem;
+    margin-right: 2rem;
+    line-height: 1.7rem;
+}
+  .stl-intro p {
+    font-size: 1.2rem;
+    color: #a9a9a9;
+    margin-top: 1.4rem;
+}
+  .stl-intro h2 {
+    font-size: 1rem;
+    color: #ff681e;
+    margin-top: 1.3rem;
+}
+  .stl-intro h2 span {
+    font-size: 1.6rem;
+}
+.st-list .stl-info li .stl-intro .stli-t h1 {font-size: 1.6rem;line-height:2.4rem;margin-bottom: .4rem;}
+.st-list .stl-info li .stl-intro .stli-t h1 span {margin-left: 2rem;font-size: 1.2rem;color: #808080;}
+.st-list .stl-info li .stl-intro .stli-t p span {font-size: 1.2rem;margin-left: 1.3rem;}
+.st-list .stl-info li .stl-intro .stli-b {
+   width: 100%;
+    height: 2rem;
+    margin-top: .8rem;
+    color: #FF681E;
+    line-height: 2rem;
+    font-size: 1.6rem;
+    padding: .5rem 0;
+    background-color: #fafafa;
+position: relative;
+  }
+.st-list .stl-info li .stl-intro .stli-b span {font-size: 1rem;}
+.st-list .stl-info li .stl-intro a {
+  position: absolute;
+    right: 0;
+    top: 0;
+    width: 7rem;
+    height: 3rem;
+    border: 1px solid #FF9900;
+    color: #FF9900;
+    font-size: 1.4rem;
+    background-color: #FFFFFF;
+    text-align: center;
+    line-height: 3.2rem;
+    box-sizing: border-box;
+  }
+/*薪资*/
+.price_content_box div{
+  display: none;
+}
+.price_content_box div:first-child{
+  display: block;
+}
+.price_tab {
+    border-bottom: 1px solid #F0F0F0;
+}
+.price_tab ul {
+    display: flex;
+    display: -webkit-flex;
+}
+.price_tab ul li {
+    flex: 1;
+    text-align: center;
+    height: 4rem;
+    line-height: 4rem;
+    color: #343434;
+    font-size: 1.4rem;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+.price_tab ul li.active {
+    border-bottom: 3px solid #ff7f3a;
+    margin-bottom: -2px;
+}
+.moreFilter {background-color: #FFFFFF;  padding-bottom: 2rem;}
+.close-btn {position: absolute;right: .9rem;top: .9rem;}
+.st-list .stl-filter .sortCondition p.mf-title {
+    height: 4.7rem;
+    line-height: 4.7rem;
+    font-size: 1.5rem;
+    border: 0;
+}
+.more_box {
+    height: 20rem;
+    overflow: scroll;
+}
+.moreFilter .education,.moreFilter .zodiac {height: 14.5rem;border-bottom: 1px solid #F0F0F0;overflow: hidden;}
+.moreFilter .education ul li {width: 25%;float: left;margin-bottom: 1rem;}
+.moreFilter .education ul li a {display: block; width: 7.8rem;height: 3.4rem;border: 1px solid #F5F5F5; background-color: #F5F5F5;text-align: center;line-height: 3.6rem;border-radius: 4px;margin: 0 auto;}
+.moreFilter .zodiac ul li {width: 16.66%;float: left;margin-bottom: 1rem;}
+.moreFilter .zodiac ul li a {display: block;width: 4.8rem;height: 3.4rem;border: 1px solid #F5F5F5; background-color: #F5F5F5;text-align: center;line-height: 3.6rem;border-radius: 4px;margin: 0 auto;}
+.moreFilter .mf-btn {width: 28.3rem;height: 4.2rem;margin: 1.8rem auto 0 auto;}
+.moreFilter .mf-btn a {border-radius: .2rem;display: block;width: 12rem;height: 100%;font-size: 1.6rem;line-height: 4.2rem;text-align: center;}
+.moreFilter .mf-btn .mfb-clear {float: left;background-color: #E6E6E6;}
+.moreFilter .mf-btn .mfb-confirm {float: right;background-color: #FF9900;color: #FFFFFF;}
+.moreFilter .mf-on {border-color: #FF9900!important;color: #FF9900;background-color: #FFFFFF!important;}
+
+.reservation-pop {display: none; width: 30rem;height: 39rem;background-color: #FFFFFF;position: fixed;left: 50%;top: 50%;margin-left: -15rem;margin-top: -19.5rem;z-index: 110;}
+.reservation-pop .close-btn {position: absolute;right: -.7rem;top: -.7rem;background-color: #FFFFFF;border-color:#FFFFFF ;}
+.reservation-pop .rp-title {height: 4.2rem;color: #808080;line-height: 4.2rem;text-align: center;border-bottom: .3rem solid #F0F0F0;font-size: 1.2rem;}
+.reservation-pop .rp-content {padding: 0 1.1rem;}
+.reservation-pop .rp-content p {height: 2.4rem;padding: .9rem 0; border-bottom: 1px solid #E6E6E6;line-height: 2.4rem;display: flex;display: -webkit-flex;}
+.reservation-pop .rp-content p label {display: block;flex: 1;color: #808080;}
+.reservation-pop .rp-content p span {display: inherit;flex: 3;}
+.reservation-pop .rp-content p span input[type="text"] {height: 100%;border: none;width: 100%;line-height: 2.4rem;}
+.reservation-pop .rp-content p span input.date{width:38%;}
+.reservation-pop .rp-content p span .expectedBirth {height: 100%;display: block;flex: 3;}
+.reservation-pop .rp-content p span .expectedBirth input[type="text"] {flex: 3;}
+.reservation-pop .rp-content p span .born {display: block;flex: 2; height: 100%;border-left: 2px solid #CCCCCC;font-size: 1rem;}
+.reservation-pop .rp-content p span .born input[type="checkbox"] {margin-left: 1.1rem;}
+.reservation-pop .rp-content p .sel-arrow {position: relative;}
+.reservation-pop .rp-content p .sel-arrow:after {position: absolute; display: block;content: '';width: .7rem;height: 1.2rem;background: url(../img/arrow.png) no-repeat;background-size: 100% 100%;right: 0;top: .6rem;}
+.reservation-pop .rp-btn {position: absolute;bottom: 0;left: 0; display: block;width: 100%;height: 4.2rem;line-height: 4.2rem;font-size: 1.5rem;text-align: center;background-color: #FF9900;margin: 2.1rem auto 0 auto;color: #FFFFFF;}
+.reservation-pop .validationFrame {border: none!important;}
+
+
+.otherRequirements {width:100%; height: 31.5rem;background-color: #FFFFFF;position: fixed;bottom: -31.5rem;left: 0; z-index: 120;overflow: hidden;}
+.otherRequirements .close-btn {position: absolute;right: .3rem;top: .6rem;}
+.otherRequirements .or-title {height: 4.2rem;line-height: 4.2rem;border-bottom: 1px solid #E6E6E6;text-align: center;margin-bottom: 2.5rem;}
+.otherRequirements ul li {float: left;margin-bottom: 1rem;}
+.otherRequirements ul li a {display: block;height: 3.5rem;border: 1px solid #F5F5F5; background-color: #F5F5F5;text-align: center;line-height: 3.7rem;border-radius: 4px;margin: 0 .6rem;padding: 0 1rem; font-size: 1.2rem;}
+.otherRequirements .or-btn {width: 24rem;height: 4.2rem;display: block;position: absolute;bottom: 2.2rem;left: 50%;margin-left: -12rem;background-color: #FF9900;color: #FFFFFF;font-size: 1.6rem;text-align: center;line-height: 4.2rem;}
+.or-on {border-color: #FF9900!important;color: #FF9900;background-color: #FFFFFF!important;}
+.stli-t p{
+  margin-top: .9rem;
+}
+.stli-t p span{
+  padding-left: 2.1rem;
+line-height: 2rem;
+font-size: 1.2rem;
+display: inline-block;
+margin-left: 0 !important;
+width:8rem;
+}
+.stli-t p span.gongzhong{
+  background: url(../img/icongz.png) no-repeat;
+  background-position: left top;
+      background-size: 1.4rem auto;
+}
+.stli-t p span.congye{
+  background: url(../img/icongzjy.png) no-repeat;
+  background-position: left center;
+      background-size: 1.4rem auto;
+
+}
+.stli-t p span.xueli{
+  background: url(../img/iconxueli.png) no-repeat;
+  background-position: left center;
+      background-size: 1.4rem auto;
+}
+.stli-t p span.xingzuo{
+  background: url(../img/iconxz.png) no-repeat;
+  background-position: left center;
+      background-size: 1.4rem auto;
+}

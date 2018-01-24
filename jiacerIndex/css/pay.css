@@ -1,0 +1,43 @@
+body {
+    background-color: #fafafa;
+}
+.amount_box {
+    padding: 3.5rem 0 4rem;
+    text-align: center;
+}
+.amount_box h2 {
+    font-size: 1.5rem;
+}
+.amount_box p {
+    font-size: 3rem;
+}
+.shou_info {
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+    background-color: #fff;
+    line-height: 4rem;
+    padding: 0 1.7rem;
+    font-size: 1.2rem;
+}
+.shou_info .right {
+    float: right;
+}
+.pay_bt_box {
+    padding: 0 1.7rem;
+    margin-top: 4.3rem;
+    text-align: center;
+}
+.pay_bt_box button {
+    width: 100%;
+    display: block;
+    background-color: #40af36;
+    color: #fff;
+    line-height: 4.2rem;
+    border-radius: .2rem;
+    font-size: 1.5rem;
+    border: 0;
+    outline: none;
+}
+ .pay_bt_box button.disabled {
+    background-color: #bdbdbd;
+} 

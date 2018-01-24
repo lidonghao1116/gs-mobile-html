@@ -1,0 +1,280 @@
+.validation {color: #FF411B!important;margin: 0!important;}
+
+.frame .hs-search {padding: 22px 0 0 10px;margin-bottom: 25px;}
+.frame .hs-search label {margin-right: 44px;}
+.frame .hs-search label input[type="text"] {width: 202px;height: 26px;margin-left: 16px;}
+.frame .hs-filter {padding: 8px 0 14px 14px;border: 1px solid #F5F5F5;background-color: #FCFCFC;position: relative;}
+.frame .hs-filter .hsf-more {display: block;width: 116px;height: 28px;line-height: 28px; position: absolute;bottom: -29px;margin-left: -58px;left: 50%;text-align: center;background-color: #FCFCFC;border: 1px solid #F5F5F5;border-top: none;cursor: pointer;}
+.frame .hs-filter .hsf-more img {margin-left: 10px;}
+.frame .hs-filter div {line-height: 26px;margin-top: 9px;position: relative;}
+.frame .hs-filter .advancedFilter {display: none;}
+
+.frame .hs-filter div p {font-weight: bold;width: 56px;text-align: right;position: absolute;}
+.frame .hs-filter div dl {float: left;margin-left: 92px;}
+.frame .hs-filter div dl a {color: #808080;cursor: pointer;}
+.frame .hs-filter div dl .hsf-on {background-color: #E6E6E6;}
+.frame .hs-filter div dl dt {float: left;margin-right: 28px;}
+.frame .hs-filter div dl dt a {color: #0A7EE3;padding: 0 10px;height: 26px;display: block;}
+.frame .hs-filter div dl dd {float: left;margin-right: 28px;}
+.frame .hs-filter div dl dd a {padding: 0 10px;height: 26px;display: block;}
+.frame .hs-filter div dl dd label {padding: 0 10px;height: 26px;display: block;color: #808080;}
+
+
+.frame .hs-filter .sw-filter {margin: 0;line-height: 36px;position: relative;}
+.frame .hs-filter .sw-filter dl dt a {line-height: 26px;margin-top: 4px;}
+.frame .hs-filter .sw-filter dl dd .swf-on {height: 34px;background-color: #F2F4F7;border: 1px solid #E9EDF7;border-bottom: none;position: relative;z-index: 10;line-height: 34px;padding: 0 9px;}
+.frame .hs-filter .sw-filter dl dd ul {position: absolute;top: 34px;left: 92px;padding-left: 12px;line-height: 44px;background-color: #F2F4F7;border: 1px solid #E9EDF7;display: none;}
+.frame .hs-filter .sw-filter dl dd ul li {float: left;margin-right: 50px;}
+.frame .hs-filter .sw-filter dl dd a img {margin-left: 6px;}
+
+.frame .hs-sheet {margin-top: 30px;}
+.frame .hs-sheet p a {float: right;color: #0A7EE3;}
+.frame .hs-sheet table {width: 100%;text-align: center;margin-top: 10px;}
+.frame .hs-sheet table td img {width: 62px;height: 76px;}
+.frame .hs-sheet table thead tr {height: 46px;background-color: #EBEFF8;}
+.frame .hs-sheet table tbody tr {height: 86px;background-color: #F5F5F5;border-top: 2px solid #FFFFFF;}
+.frame .hs-sheet table tbody tr:hover {background-color: #C1DEF8!important;}
+/*.sheetT-on {background-color: #C1DEF8!important;}*/
+/*家政员详情*/
+.hs-info-detail {position: fixed; bottom: 0;top: 92px; right: -1020px;width:1020px;z-index: 20;background-color: #DBE6F0;overflow: auto;padding: 4px 0;}
+.hs-info-detail .hid-title {font-size: 16px;font-weight: bold;height: 36px;line-height: 36px;margin: 0 10px;}
+.hs-info-detail .hid-title span {float: left;}
+.hs-info-detail .hid-title a {float: right;cursor: pointer;}
+.hs-info-detail .hid-title a:after {content: '\279C';font-size: 24px;font-weight: 100;}
+.hs-info-detail .infoCard {margin: 10px;padding: 0 15px 15px 15px;background-color: #FFFFFF;box-shadow:3px 3px 5px 2px #C3D5E4;position: relative;}
+.hs-info-detail .infoCard .scanPic {position: absolute;top: 60px;right: 0;width: 130px;height: 130px;background-color: #FFFFFF;padding: 5px;display: none;z-index: 100;}
+.hs-info-detail .infoCard .scanPic img {width: 100%;height: 100%;}
+.hs-info-detail .infoCard .hs-photo {width: 106px;height: 130px;float: left;margin-top: 20px;}
+.hs-info-detail .infoCard .hs-photo img {width: 100%;height: 100%;}
+.hs-info-detail .infoCard .IDc-info {float: left;width: 660px;margin-top: 15px;}
+.hs-info-detail .infoCard .IDc-info>p {font-weight: bold;margin:0 0 10px 38px;}
+.hs-info-detail .infoCard .IDc-info ul li {float: left;}
+.hs-info-detail .infoCard .IDc-info ul li p {line-height: 30px;}
+.hs-info-detail .infoCard .IDc-info ul li p label {font-weight: bold;display: inline-block;text-align: right;width: 80px;}
+.hs-info-detail .infoCard .scanCode {float: right;margin-top: 10px;width: 130px;text-align: center;}
+.hs-info-detail .infoCard .scanCode .QR-code {width: 80px;height: 80px;margin: 10px auto 10px auto;}
+.hs-info-detail .infoCard .scanCode .QR-code img {width: 100%;height: 100%;}
+.hs-info-detail .infoCard .scanCode p {margin-top: 2px;}
+.hs-info-detail .infoCard .title {padding-top: 15px;}
+.hs-info-detail .infoCard .edit {margin-top: 15px;}
+.hs-info-detail .infoCard .ic-cbtn {float: right;margin:8px 20px;background-color:#DBDBDB;width:68px;height: 32px;line-height: 32px;text-align: center;font-size: 16px;font-weight: bold;color: #FFFFFF;cursor: pointer;display: none;}
+
+.afterEditing {display: none;}
+.btnCass-b {width: 260px;height: 40px;margin: 20px auto 0 auto;display: none;}
+.btnCass-b a {width: 120px;height: 100%;color: #FFF;cursor: pointer;border: none;font-size: 16px;font-weight: bold;text-align: center;line-height: 40px;}
+.btnCass-b .bcb-cancel {float: left;background-color: #DBDBDB;}
+.btnCass-b .bcb-save {float: right;background-color: #0A7EE3;}
+.btnCass-b .bcb-sub {float: right;background-color: #0A7EE3;width: 120px;height: 100%;color: #FFF;cursor: pointer;border: none;font-size: 16px;font-weight: bold;text-align: center;line-height: 40px;}
+
+.btnCass-s {width: 148px;height: 32px;margin: 20px auto 0 auto;display: none;}
+.btnCass-s a {width: 68px;height: 100%;color: #FFF;cursor: pointer;border: none;font-size: 16px;font-weight: bold;text-align: center;line-height: 32px;}
+.btnCass-s .bcs-cancel {float: left;background-color: #DBDBDB;}
+.btnCass-s .bcs-save {float: right;background-color: #0A7EE3;}
+
+/*.hs-info-detail .infoCard .basicData {border-top: 1px solid #F5F5F5;width: 100%;margin-top: 10px;padding-top: 5px;}
+.hs-info-detail .infoCard .basicData li {width: 50%;float: left;}
+.hs-info-detail .infoCard .basicData li p {line-height: 30px;}
+.hs-info-detail .infoCard .basicData li p label {font-weight: bold;display: inline-block;text-align: right;width: 65px;margin-right: 12px;}
+.hs-info-detail .infoCard .basicData li p .afterEditing select {width: 68px;height: 20px;border: 1px solid #CCCCCC;}
+.hs-info-detail .infoCard .basicData li p .afterEditing input[type="text"] {width: 158px;height: 18px;}*/
+
+.hs-info-detail .infoCard .basicData {border-top: 1px solid #F5F5F5;width: 100%;margin-top: 10px;padding-top: 5px;}
+.hs-info-detail .infoCard .basicData p {margin-top: 10px;}
+.hs-info-detail .infoCard .basicData p i {width: 49%;display: inline-block;vertical-align: top;}
+.hs-info-detail .infoCard .basicData p i label {font-weight: bold;display: inline-block;text-align: right;width: 65px;margin-right: 12px;}
+.hs-info-detail .infoCard .basicData p i .afterEditing select {width: 68px;height: 20px;border: 1px solid #CCCCCC;}
+.hs-info-detail .infoCard .basicData p i .afterEditing input[type="text"] {width: 158px;height: 18px;}
+.hs-info-detail .infoCard .basicData .validation {margin-left: 82px!important;}
+
+.hs-info-detail .infoCard .resume {width: 100%;margin-top: 10px;}
+.hs-info-detail .infoCard .resume .ae-post {position: relative;}
+.hs-info-detail .infoCard .resume .ae-post .addPostBtn,.hs-info-detail .infoCard .resume .ae-post .deletePostBtn {color: #0A7EE3;cursor: pointer;position: absolute;right: 0;top: 6px;display: none;}
+.hs-info-detail .infoCard .resume li {width: 100%;border-top: 1px solid #F5F5F5;padding-bottom: 15px;}
+.hs-info-detail .infoCard .resume li p {margin-top: 10px;}
+.hs-info-detail .infoCard .resume li p label {font-weight: bold;margin-right: 12px;}
+.hs-info-detail .infoCard .resume li p i {width: 33%;display: inline-block;}
+.hs-info-detail .infoCard .resume li .beforeEditing em {display: inline-block;height: 26px;padding: 0 12px;border: 1px solid #B1B1B1;line-height: 26px;text-align: center;border-radius: 5px;margin-right: 30px;margin-bottom: 10px;}
+.hs-info-detail .infoCard .resume li .afterEditing select {width: 166px;height: 20px;border: 1px solid #CCCCCC;}
+.hs-info-detail .infoCard .resume li .afterEditing input[type="text"] {width: 158px;height: 18px;}
+.hs-info-detail .infoCard .resume li .afterEditing em {width: 122px;display: inline-block;}
+.hs-info-detail .infoCard .resume li .afterEditing em input[type="checkbox"] {margin-right: 10px;}
+.hs-info-detail .infoCard .resume .experience {padding-bottom: 0;}
+.hs-info-detail .infoCard .resume .experience p label {vertical-align: top;}
+.hs-info-detail .infoCard .resume .experience p span {display: inline-block;width: 92%;}
+.hs-info-detail .infoCard .resume .experience p .afterEditing textarea {width: 100%;height: 70px;border: 1px solid #CCCCCC;resize: none;}
+.hs-info-detail .infoCard .resume .experience p .afterEditing {display: none;}
+.hs-info-detail .infoCard .resume .validation {margin-left: 68px!important;}
+.hs-info-detail .infoCard .resume .workExperience .validation {margin-left: 0!important;}
+.hs-info-detail .infoCard .resume .selfEvaluation .validation {margin-left: 0!important;}
+.hs-info-detail .infoCard .resume .teacherEvaluation .validation {margin-left: 0!important;}
+
+.hs-info-detail .infoCard .addNew {float: right;margin-top: 15px;color: #0A7EE3;cursor: pointer;}
+.hs-info-detail .infoCard .certification-detail {width: 100%;background-color: #FAFAFA;padding-bottom: 15px;display: none;}
+.hs-info-detail .infoCard .certification-detail li {float: left;width: 50%;}
+.hs-info-detail .infoCard .certification-detail li p {margin-top: 20px;padding-left: 50px;}
+.hs-info-detail .infoCard .certification-detail li p label {margin-right: 34px;}
+.hs-info-detail .infoCard .certification-detail li p select {width: 220px;height: 24px;border: 1px solid #CCCCCC;}
+.hs-info-detail .infoCard .certification-detail li p input[type="text"] {width: 212px;height: 22px;}
+.hs-info-detail .infoCard .certification-detail li .clearfix {padding-left: 50px;}
+.hs-info-detail .infoCard .certification-detail li .clearfix label {float: left;margin-right: 34px;}
+.hs-info-detail .infoCard .certification-detail li .clearfix .cd-pic {display: inline-block;width: 154px;height: 108px;float: left;margin-right: 30px;position: relative;background: url(../img/uploadCertificate.jpg) no-repeat;}
+.hs-info-detail .infoCard .certification-detail li .clearfix .cd-pic .deleteCover {z-index: 6;position: absolute;right: 0px;top:0px;width: 26px;height: 26px;display: block;background-color: #999999;display: none;}
+.hs-info-detail .infoCard .certification-detail li .clearfix .cd-pic .deletePic {z-index: 7;width: 19px;height: 21px;position: absolute;right: 4px;top: 2px;background: url(../img/dustbin.png) no-repeat;background-size: 100% 100%;cursor: pointer; display: none;}
+.hs-info-detail .infoCard .certification-detail li .clearfix .cd-pic img {width: 100%;height: 100%;}
+.hs-info-detail .infoCard .certification-detail li .clearfix .cd-pic input {position: absolute;left: 0;top: 0;width: 100%;height: 100%;-moz-opacity:0;opacity:0;filter:alpha(opacity=0)}
+.hs-info-detail .infoCard .certification-detail li .clearfix .cd-scan {display: inline-block; width: 100px;text-align: center;float: left;margin-top: 5px;}
+.hs-info-detail .infoCard .certification-detail li .clearfix .cd-scan img {width: 64px;height: 64px;}
+.hs-info-detail .infoCard .certification-detail li .clearfix .cd-scan i {display: block;}
+.hs-info-detail .infoCard .certification {margin-top: 10px;border-top: 1px solid #F5F5F5;}
+.hs-info-detail .infoCard .certification p {margin-top: 20px;}
+.hs-info-detail .infoCard .certification p label {font-weight: bold;}
+.hs-info-detail .infoCard .certification p a {display: inline-block;height: 33px;line-height: 33px;padding: 0 14px;border: 1px solid #808080;border-radius: 5px;cursor: pointer;margin-right: 25px;}
+.hs-info-detail .infoCard .certification p a:hover {border: 1px solid #FF9C00!important;color: #FF9C00!important;}
+.hs-info-detail .infoCard .certification p .authenticated {position: relative;}
+.hs-info-detail .infoCard .certification p .authenticated:after {display: block;content: '';background:url(../img/authenticated.png) no-repeat;width: 37px;height: 28px;position: absolute;right: -20px;top: -9px;}
+
+
+.hs-info-detail .lr-layout1 {margin: 10px;}
+.hs-info-detail .lr-layout2 {height: 230px;margin: 10px 10px 35px 10px;}
+.hs-info-detail .lr-layout3 {height: 180px;margin: 10px;}
+.hs-info-detail .l-layout {width: 558px;float: left;height: 100%;}
+.hs-info-detail .r-layout {width: 410px;float: right;height: 100%;}
+.hs-info-detail .l-layout .infoCard,.hs-info-detail .r-layout .infoCard {height: 100%;margin: 0;padding-bottom: 15px;}
+.hs-info-detail .lr-layout1 .infoCard .scanUpload {float: right;padding-top: 18px;background: url(../img/scanUpload.png) no-repeat top;font-size: 12px;margin-top: 8px;display: none;}
+.hs-info-detail .lr-layout1 .l-layout .infoCard .videoShow {width: 100%;height: 250px;padding-top: 14px;margin-top: 10px;border-top: 1px solid #F5F5F5;position: relative;}
+.hs-info-detail .lr-layout1 .l-layout .infoCard .videoShow.addVS {background: url(../img/append.jpg) no-repeat;background-size: 100% 100%;}
+.hs-info-detail .lr-layout1 .l-layout .infoCard .videoShow video {width: 100%;height: 250px;}
+.hs-info-detail .lr-layout1 .l-layout .infoCard .videoShow input {position: absolute;left: 0;top: 0;width: 100%;height: 100%;-moz-opacity: 0;opacity:0;filter:alpha(opacity=0)}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall {width: 346px;height: 264px; overflow: hidden;padding: 0 17px;border-top: 1px solid #F5F5F5;margin-top: 10px;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul {width: 368px;margin-top: 18px;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul li {width: 162px;height: 110px;float: left;margin: 0 22px 22px 0;position: relative;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul li input {position: absolute;left: 0;top: 0;width: 100%;height: 100%;-moz-opacity: 0;opacity:0;filter:alpha(opacity=0)}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul li>img {width: 100%;height: 100%;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul .headPortrait {position: relative;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul .headPortrait:after {display: block;position: absolute;content: '头像';width: 32px;height: 22px;line-height: 22px;text-align: center;color: #FF9C00;background-color: #FFF;-moz-opacity: 0.8;opacity:.80;filter: alpha(opacity=80);top: 0;right: 0;font-size: 12px;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul .append {cursor: pointer;background: url(../img/append.jpg) no-repeat;background-size: 100% 100%;}
+.hs-info-detail .ordinary {position: relative;}
+.hs-info-detail .cover {z-index: 5; display: none;content: ''; position: absolute;left: 0;top: 0;width: 100%;height: 100%;background-color: #000000;-moz-opacity: 0.6;opacity:.60;filter: alpha(opacity=60);}
+.hs-info-detail .lr-layout1 .l-layout .infoCard .videoShow .deleteCover {z-index: 6;position: absolute;right: 0px;top:0px;width: 42px;height: 42px;display: block;background-color: #999999;display: none;}
+.hs-info-detail .lr-layout1 .l-layout .infoCard .videoShow .deletePic {z-index: 7;width: 30px;height: 32px;position: absolute;right: 6px;top: 5px;background: url(../img/dustbin.png) no-repeat;background-size: 100% 100%;cursor: pointer; display: none;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul .ordinary .deleteCover {z-index: 6;position: absolute;right: 0px;top:0px;width: 26px;height: 26px;display: block;background-color: #999999;display: none;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul .ordinary .deletePic {z-index: 7;width: 19px;height: 21px;position: absolute;right: 4px;top: 2px;background: url(../img/dustbin.png) no-repeat;background-size: 100% 100%;cursor: pointer; display: none;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul li a {display: none;}
+.hs-info-detail .lr-layout1 .r-layout .infoCard .pic-wall ul .ordinary .setWords {z-index: 6;position: absolute;display: block;width: 72px;height: 20px;line-height: 20px;background-color: #FF9C00;color: #FFF;font-size: 12px;text-align: center;margin-left: -36px;margin-top: -10px;left: 50%;top: 50%;border-radius: 10px;display: none;cursor: pointer;}
+.hs-info-detail .lr-layout2,.hs-info-detail .lr-layout3 {font-size: 12px;}
+.hs-info-detail .lr-layout2 .infoCard {height: 215px;}
+.hs-info-detail .lr-layout2 table,.hs-info-detail .lr-layout3 table {width: 100%;text-align: center;margin-top: 16px;}
+.hs-info-detail .lr-layout2 table tr,.hs-info-detail .lr-layout3 table tr {height: 26px;border: 1px solid #EBEBEB;}
+.hs-info-detail .lr-layout2 table thead tr,.hs-info-detail .lr-layout3 table thead tr {background-color: #FAFAFA;}
+.hs-info-detail .lr-layout3 .infoCard {height: 165px;}
+.hs-info-detail .lr-layout3 .r-layout .infoCard {height: 67px;}
+.hs-info-detail .lr-layout3 .r-layout .infoCard:first-child {height: 75px;margin-bottom: 8px;}
+.hs-info-detail .lr-layout3 .r-layout .infoCard .bankCard-info {padding: 10px 0 0 10px;border-top: 1px solid #F5F5F5;margin-top: 14px;}
+.hs-info-detail .lr-layout3 .r-layout .infoCard .bankCard-info span {margin-left: 48px;}
+
+.hs-info-detail .infoCard #scheduleTime {float: right;margin-top: 15px;}
+#laydate_box {z-index: 120;}
+.hs-info-detail .infoCard .workSchedule {width: 100%;margin-top: 16px;position: relative;overflow: hidden;}
+.hs-info-detail .infoCard .workSchedule .slide {position: absolute;width: 100%;top: 6px;z-index: 10;}
+.hs-info-detail .infoCard .workSchedule .slide a {font-size: 24px;font-weight: bold;cursor: pointer;}
+.hs-info-detail .infoCard .workSchedule .slide .sLeft {position: absolute;left: 18px;}
+.hs-info-detail .infoCard .workSchedule .slide .sRight {position: absolute;right: 18px;}
+.hs-info-detail .infoCard .workSchedule ul {height: 100%;border-left: 1px solid #EBEBEB;position: absolute;width: 1088px;}
+.hs-info-detail .infoCard .workSchedule ul li {float: left;width: 135px;height: 144px;border: 1px solid #EBEBEB;border-left: none;text-align: center;display: table;}
+.hs-info-detail .infoCard .workSchedule ul li .date {display: table-row;height: 46px;}
+.hs-info-detail .infoCard .workSchedule ul li .date div {display: table-cell;vertical-align: middle;border-bottom: 1px solid #EBEBEB;}
+.hs-info-detail .infoCard .workSchedule ul li .schedule {display: table-row;}
+.hs-info-detail .infoCard .workSchedule ul li .schedule div {font-size: 12px;display: table-cell;vertical-align: middle;}
+.hs-info-detail .infoCard .workSchedule ul li .schedule div p span {margin-right: 10px;}
+
+/*财务、保险、银行信息增改*/
+.fdb-alter {width: 400px;padding:28px 0 20px 0;background-color: #F5F5F5;position: fixed;right: -400px;bottom: 180px;z-index: 25;}
+.fdb-alter .btnCass-s {display: block;}
+.fdb-alter p {margin-top: 12px;text-align: center;}
+.fdb-alter p:first-child {margin-top: 0;}
+.fdb-alter p label {display: inline-block; width: 56px;text-align: right;margin-right: 12px;}
+.fdb-alter p input[type="text"] {width: 140px;height: 18px;}
+#financialAlter p span input[type="text"] {width: 112px;}
+#financialAlter p>label {vertical-align: top;}
+#financialAlter p textarea {width: 315px;height: 48px;border: 1px solid #CCCCCC;resize: none;}
+
+/*新增家政员*/
+.paths {padding-bottom: 20px;border-bottom: 1px solid #E9E9E9;box-shadow: 0 0 8px 1px #E9E9E9;}
+.add-hs-ID {height: 224px;min-width: 1050px;}
+.add-hs-ID .ID-photo {margin-top: 28px;float: left;width: 13%;text-align: right;}
+.add-hs-ID .ID-photo img {width: 120px;height: 140px;margin-left: 18px;}
+.add-hs-ID .ID-info {float: left;margin-left: 25px;width: 80%;}
+.add-hs-ID .ID-info .ID-no {margin: 20px 0;}
+.add-hs-ID .ID-info .ID-no label {margin-right: 14px;}
+.add-hs-ID .ID-info ul li {float: left;width: 49%;}
+.add-hs-ID .ID-info ul li p {line-height: 28px;}
+.add-hs-ID .ID-info ul li p span {display: inline-block;width: 94px;text-align: right;}
+.add-hs-ID input {height: 22px;line-height: 22px;}
+.add-hs-ID .ID-info .ID-no label input[type="text"] {width: 218px;height: 26px;line-height: 26px;}
+.required {color: #FF9C00;margin-right: 2px;display: inline!important;}
+.hs-info-title {position: relative;margin-left: 18px;}
+.hs-info-title .hit2 {position: absolute;top: 0;left: 100px;}
+
+/*基本资料*/
+.basic-info .frame .clearfix span {float: right;padding-top: 20px;}
+.basic-info .frame ul {margin: 30px 0 0 35px;}
+.basic-info .frame ul li {float: left;width: 50%;}
+.basic-info .frame ul li p {margin-bottom: 14px;}
+.basic-info .frame ul li p label {display: inline-block;width: 66px;text-align: right;margin-right: 34px;}
+.basic-info .frame ul li p select {width: 90px;height: 24px;border: 1px solid #CCCCCC;}
+.basic-info .frame ul li p input[type="text"] {height: 22px;}
+.basic-info .frame ul li p .validation {margin-left: 10px!important;}
+.basic-info .frame .addCertificate {height: 24px;border-bottom: 2px solid #F5F5F5;}
+.basic-info .frame .addCertificate a {float: right;color: #0A7EE3;cursor: pointer;}
+.basic-info .frame .certificate-info {width: 100%;text-align: center;}
+.basic-info .frame .certificate-info tr {height: 59px;border-bottom: 1px solid #F5F5F5;}
+/*.basic-info .frame .certificate-info tbody tr:hover {background-color: #C1DEF8!important;}*/
+
+.basic-info .frame .ac-info {padding: 26px 0 36px 36px;background-color: #FAFAFA;display: none;}
+.basic-info .frame .ac-info ul {margin: 0;}
+.basic-info .frame .ac-info ul li p select {width: 220px;}
+.basic-info .frame .ac-info .certificate-photo {height: 108px;}
+.basic-info .frame .ac-info .certificate-photo label {vertical-align: top;display: inline-block;width: 66px;text-align: right;margin-right: 34px;}
+.basic-info .frame .ac-info .certificate-photo .certImage {position: relative; width: 154px;height: 108px;display: inline-block;background: url(../img/uploadCertificate.jpg) no-repeat;margin-right: 42px;vertical-align: bottom;}
+.basic-info .frame .ac-info .certificate-photo .certImage input {position: absolute;left: 0;top: 0; width: 100%;height: 100%;-moz-opacity: 0;opacity:0;filter: alpha(opacity=0);cursor: pointer;font-size: 0;}
+.basic-info .frame .ac-info .certificate-photo .certImage img {width: 100%;height: 100%;}
+.basic-info .frame .ac-info .certificate-photo .certImage .deleteCover {z-index: 6;position: absolute;right: 0px;top:0px;width: 26px;height: 26px;display: block;background-color: #999999;display: none;}
+.basic-info .frame .ac-info .certificate-photo .certImage .deletePic {z-index: 7;width: 19px;height: 21px;position: absolute;right: 4px;top: 2px;background: url(../img/dustbin.png) no-repeat;background-size: 100% 100%;cursor: pointer; display: none;}
+.basic-info .frame .ac-info .certificate-photo .certImage .cover {z-index: 5; display: none;content: ''; position: absolute;left: 0;top: 0;width: 100%;height: 100%;background-color: #000000;-moz-opacity: 0.6;opacity:.60;filter: alpha(opacity=60);}
+.basic-info .frame .ac-info .certificate-photo .scanUpCer {display: inline-block;text-align: center;}
+.basic-info .frame .ac-info .certificate-photo .scanUpCer img {width: 70px;height: 70px;}
+.basic-info .frame .ac-info .certificate-photo span {vertical-align: bottom;margin-left: 22px;}
+.basic-info .frame .ac-info .aci-btn {width: 272px;height: 40px;line-height: 40px;margin: 45px auto 0 auto;}
+.basic-info .frame .ac-info .aci-btn .acib-cancel {display: block;float: left;width: 120px;height: 100%;color: #FFF;background-color: #DBDBDB;font-size: 16px;font-weight: bold;text-align: center;cursor: pointer;}
+.basic-info .frame .ac-info .aci-btn .acib-save {display: block;border: none; float: right;width: 120px;height: 100%;color: #FFF;background-color: #0A7EE3;font-size: 16px;font-weight: bold;cursor: pointer;text-align: center;}
+
+/*求职信息*/
+.workingCondition {height: 33px;}
+.workingCondition .hs-info-title {float: left;}
+.workingCondition .hs-info-title a {cursor: pointer;}
+.workingCondition div {float: right;height: 100%;line-height: 33px;margin-right: 18px;display: none;}
+.workingCondition div p {display: inline-block;margin-left: 36px;}
+.workingCondition div p select {width: 78px;height: 24px;border: 1px solid #CCCCCC;}
+.job-info {display: none;}
+.job-info .frame label {margin-right: 18px;}
+.job-info .frame p i {margin-right: 38px;}
+.job-info .frame p i input {margin-right: 8px;}
+.job-info .frame .postList {border-top: 2px solid #F5F5F5;margin-top: 24px;padding: 0 15px;}
+.job-info .frame .postList li {padding: 20px 0;border-bottom: 1px solid #F5F5F5;position: relative;}
+.job-info .frame .postList li .addPostBtn,.job-info .frame .postList li .deletePostBtn {color: #0A7EE3;cursor: pointer;position: absolute;right: 0;top: 12px;}
+.job-info .frame .postList li span {display: inline-block; margin: 10px 0;width: 33%;}
+.job-info .frame .postList li select {width: 180px;height: 24px;border: 1px solid #CCCCCC;}
+.job-info .frame .postList li input[type="text"] {width: 172px;height: 22px;}
+
+.job-info .frame .postSkills {padding: 20px 0;margin: 0 15px;border-bottom: 1px solid #F5F5F5;}
+.job-info .frame .postSkills p {margin-top: 12px;}
+.job-info .frame .postSkills p:first-child {margin: 0;}
+.job-info .frame .postSkills p select {width: 120px;height: 24px;border: 1px solid #CCCCCC;margin-right: 12px;}
+.job-info .frame .postSkills p i input[type="text"] {width: 90px;height: 16px;}
+.job-info .frame .postEvaluate {padding-top: 20px;margin: 0 15px;}
+.job-info .frame .postEvaluate p {height: 72px;margin-top: 24px;}
+.job-info .frame .postEvaluate p:first-child {margin: 0;}
+.job-info .frame .postEvaluate p label {display: block;height: 100%;line-height: 72px;float: left;}
+.job-info .frame .postEvaluate p textarea {width: 92%;height: 70px;border: 1px solid #CCCCCC;resize: none;}
+
+.outerBtn,.ahs-sub {width: 240px;height: 48px;line-height: 48px;border: none;font-size: 24px;color: #FFF;background-color: #0A7EE3;cursor: pointer;display: block;margin: 32px auto 50px auto;text-align: center;}

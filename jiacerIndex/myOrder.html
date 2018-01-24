@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="css/myOrder.css"/>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mapping.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+      $(function () {
+        if (isEmpty(params.uid)) {
+          window.location.href = "login.html";
+          return;
+        }
+      })
+		</script>
+	</head>
+	<body>
+		<div id="layer"></div>
+		<div id="ol-layer"></div>
+		<div class="cancelReservation-pop">
+			<input type="hidden" name="orderNo" id="" />
+			<input type="hidden" name="tradeAmount" value="">
+			<input type="hidden" name="orderstatus" value="">
+			<div class="top_title">
+				<!-- <h2>温馨提示：</h2>
+				<p class='cancelOrder0'>确定要取消订单吗？取消订单后不能恢复。</p>
+				<p class='cancelOrder1'>取消订单后，系统将扣取已支付金额的0%作为手续费，剩余金额将按原路径退回。</p>
+				<h4 class='refund'><span>实际到账：<a>￥300</a></span><span class='tui'>退款手续费：<a>￥0</a></span></h4> -->
+			</div>
+			<h3 class="alert_bg"></h3>
+			<div class="reason">
+				<h4>请选择取消订单的原因（必选）：</h4>
+				<ul>
+				<li>
+					<input type="radio" name="cancel" value="01" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>不想要了</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="02" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>没有合适的阿姨</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="03" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>家政公司不能满足需求</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="04">
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>已经找到阿姨</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="05" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>需求填错，重新下单</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="06" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>其他原因</p>
+				</li>
+				<li class="last_r">
+					<div class="other_reason">
+						<textarea name="other_reason" placeholder="请输入具体原因"></textarea>
+					</div>
+				</li>
+				</ul>
+			</div>
+			<div class="crp-btn">
+				<a class="crpb-cancel">取消</a>
+				<a class="orange crpb-confirm">确定</a>
+			</div>
+		</div>
+	
+		<header>
+			<a class="goBack" href="center.html"></a>
+			<h1>
+				<a>我的订单<img src="img/down2.png"/></a>
+			</h1>
+		</header>
+		<div class="reservationFilter">
+			<ul>
+				<li><a href="myReservation.html">我的预约</a></li>
+				<!-- <li data-os="05" class="of-on">全部<img src="img/check.png"/></li>
+				<li data-os="01">待支付<img src="img/check.png"/></li>
+				<li data-os="02">待面试<img src="img/check.png"/></li>
+				<li data-os="03">已完成<img src="img/check.png"/></li>
+				<li data-os="04">已取消<img src="img/check.png"/></li> -->
+			</ul>
+		</div>
+		<div class="order_se">
+			<ul>
+				<li data-status="05" class="active">全部</li>
+				<li data-status="01">待支付</li>
+				<li data-status="02">待面试</li>
+				<li data-status="03">已完成</li>
+				<li data-status="04">已取消</li>
+			</ul>
+		</div>
+		<div class="orderList">
+			<ul>
+			</ul>
+		</div>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+			function orders(records,orderstatus){
+				$.ajax({
+					url: publicPath +"/orders/api/orders/list",
+          			headers:params,
+					type: "get",
+					data: {
+						pageNumber:1,
+						pageSize:records,
+						orderstatus:orderstatus
+					},
+					dataType: "json",
+					async:false,
+					success: function success(data) {
+						if(data.success) {
+							if(data.code == 0) {
+								if (records==0){
+									$(".orderList ul").html("<div class='noContent'>"+
+										"<img src='img/noContent.png'/>"+
+										"<p>暂无内容，去看看其他的吧~</p>"+
+									"</div>");
+									return;
+								}
+								var dataJD = data.jsonData.rows;
+								var html ="";
+								$.each(dataJD, function(i,item) {
+									var orderStatus = "";
+									var pay = "";
+									if (item.orderStatus=="01") {
+										orderStatus="<p class='statu'>待支付定金</p><p class='price'>¥"+RetainedDecimalPlacesNF(item.orderDeposit)+"</p><input type='hidden' value='"+item.orderDeposit+"' name='payAmount'>";
+										pay="<div class='li_bottom'>"+
+												"<a data-orderNo='" + item.orderNo + "' class='rl-cancel'>取消订单</a>"+
+												"<a data-orderNo='" + item.orderNo + "' class='rl-pay'>立即支付</a>"+
+											"</div>";
+										
+									} else if (item.orderStatus=="02") {
+										orderStatus="<p class='statu'>待面试</p>";
+										pay="<div class='li_bottom'>"+
+												"<a data-orderNo='" + item.orderNo + "' class='rl-cancel'>取消订单</a>"+
+											"</div>";
+									} else if (item.orderStatus=="03") {
+										orderStatus="<p class='statu'>待支付尾款</p><p class='price'>¥"+RetainedDecimalPlacesNF(item.orderBalance)+"</p><input type='hidden' value='"+item.orderBalance+"' name='payAmount'>";
+										pay="<div class='li_bottom'>"+
+												"<a data-orderNo='" + item.orderNo + "' class='rl-cancel'>取消订单</a>"+
+												"<a data-orderNo='" + item.orderNo + "' class='rl-pay'>立即支付</a>"+
+											"</div>";
+									} else if (item.orderStatus=="04") {
+										orderStatus="<p class='statu grey'>已完成</p>";
+										pay="";
+									} else if (item.orderStatus=="05") {
+										orderStatus="<p class='statu grey'>已取消</p>";
+										pay="";
+									} else if (item.orderStatus=="06") {
+										orderStatus="<p class='statu'>待退款</p>";
+										pay="";
+									} else if (item.orderStatus=="08") {
+										orderStatus="<p class='statu'>待更换阿姨</p>";
+										pay="";
+									}
+
+									var headImage = "";
+									var staffName = "";
+									var basicinfo = "";
+									if(item.staffId!=""&&item.staffId!=null){
+										headImage = item.staffInfo.headImage;
+										if (item.staffInfo.sex == "01") {
+										staffName = item.staffInfo.staffName.split("")[0] + "师傅";
+										} else if (item.staffInfo.sex == "02") {
+										staffName = item.staffInfo.staffName.split("")[0] + "阿姨";
+										}
+										basicinfo = item.staffInfo.age+"岁 | 属"+item.staffInfo.zodiacValue+" | "+item.staffInfo.nativePlaceValue+"人 | "+item.staffInfo.constellationValue+" | "+item.staffInfo.educationValue;
+									}else{
+										headImage = "img/dzstaff.png";
+										staffName = "服务定制";
+										basicinfo = "根据您的需求，正在挑选家政员";
+									}
+
+									var totalPrice = "";
+									if(item.totalPrice!=null){
+									totalPrice = RetainedDecimalPlacesNF(item.totalPrice);
+									}
+
+									html+="<li data-orderstatus='"+item.orderStatus+"' data-orderdeposit='"+item.orderDeposit+"' data-orderno='" + item.orderNo + "'>"+
+											"<input type='hidden' value='"+item.tenantInfo.domain+"' name='domain'>"+
+											"<div class='li_top'><a href='http://" + window.location.host + "/" + item.tenantInfo.domain + "/index.html" + "'>" + item.tenantInfo.websiteName + "</a><span>" + item.orderTime + "</span></div>"+
+											"<div class='li_location'>"+
+												"<div class='li_mid'>"+
+													"<div class='staff_info'>"+
+													"<img src='" + headImage + "'/>"+
+													"<div class='r_staff_info'>"+
+														"<h3>"+item.serviceItemCodeValue+"</h3>"+
+														"<h4>" + staffName + "</h4>"+
+														"<p>"+basicinfo+"</p>"+
+													"</div>"+
+													"</div>"+
+													"<div class='statu_price'>"+orderStatus+"</div>"+
+												"</div>"+
+												"<h2>订单金额：¥"+totalPrice+"</h2>"+
+											"</div>"+
+											pay+
+										"</li>";
+								});
+								$(".orderList ul").html(html);
+								console.log(data.msg);
+							} else{
+								console.log(data.msg);
+							}
+						}else {
+              checkAuth(data.code);
+						}
+					}
+				});
+			}
+
+			function getzf(num){
+	            if(parseInt(num) < 10){
+	                num = '0'+num;
+	            }
+	            return num;
+	        }
+
+			$(function(){
+				var url = location.search;
+				var orderstatus = "";
+				if (url.indexOf("?") != -1) {
+					var orderstatus = url.substr(1).split("=")[1];
+				}
+				//				加载所有订单
+				$.ajax({
+					url: publicPath +"/orders/api/orders/list",
+					headers:params,
+					type: "get",
+					data: {orderstatus:orderstatus},
+					dataType: "json",
+					async:false,
+					success: function success(data) {
+						if(data.success) {
+							if(data.code == 0) {
+								var records = data.jsonData.records;
+								orders(records,orderstatus);
+								console.log(data.msg);
+							} else{
+								console.log(data.msg);
+							}
+						}
+					}
+				});
+
+//				跳转订单详情
+				$(".orderList ul").on("click",".li_location",function(){
+					var Domain=$(this).parent("li").find("input[name='domain']").val();
+					var OrderNo=$(this).parent("li").data("orderno");
+					var Url="http://"+window.location.host+"/"+Domain+"/orderDetail.html?orderNo="+OrderNo;
+					location.assign(Url);
+				});
+				// 我的预约切换
+				$("header h1 a").click(function () {
+					if ($(".reservationFilter").css("display") == "none") {
+						$(".reservationFilter").slideDown();
+						$(this).children("img").attr("src", "img/up2.png");
+						$("#ol-layer").show();
+					} else {
+						$(".reservationFilter").slideUp();
+						$(this).children("img").attr("src", "img/down2.png");
+						$("#ol-layer").hide();
+					}
+				});
+
+			// 取消原因选择
+				$(".reason ul li").on("click","input[type='radio']",function(){
+					$(this).parent("li").find(".circle-box").addClass("active");
+					$(this).parent("li").siblings("li").find(".circle-box").removeClass("active");
+					if($(this).val()=="06"){
+						$(".other_reason").show();
+					}else{
+						$(".other_reason").hide().val("");
+					}
+				});
+
+//				遮盖层
+				var olH=$(".order_se").offset().top;
+				$("#ol-layer").css("top",olH);
+				$(document).scroll(function(){
+					var sTop = $(document).scrollTop();
+					var layH = olH-sTop;
+					if (layH>=0){
+						layH=layH;
+					} else {
+						layH=0;
+					}
+					$("#ol-layer").css("top",layH);
+				})
+
+				$(".order_se ul li").click(function(){
+					$(this).addClass("active").siblings().removeClass("active");
+					var orderstatus = $(this).data("status");
+					$.ajax({
+						url: publicPath +"/orders/api/orders/list",
+            			headers:params,
+						type: "get",
+						data: {orderstatus:orderstatus},
+						dataType: "json",
+						async:false,
+						success: function success(data) {
+							if(data.success) {
+								if(data.code == 0) {
+									var records = data.jsonData.records;
+									orders(records,orderstatus);
+									console.log(data.msg);
+								} else{
+									console.log(data.msg);
+								}
+							}
+						}
+					});
+				});
+
+				$("#ol-layer").click(function(){
+					$(".reservationFilter").slideUp();
+					$("header h1 a img").attr("src","img/down2.png");
+					$(this).hide();
+				})
+				// 支付
+				$("body").on("click",".orderList ul li .rl-pay",function(e){
+					e.stopPropagation();
+					var orderNo = $(this).parents("li").data("orderno");
+					var payAmount = $(this).parents("li").find("input[name='payAmount']").val();
+					var transDesc =$(this).parents("li").data("orderstatus");
+					if (transDesc=="01"){
+						transDesc="定金";
+					} else {
+						transDesc="尾款";
+					}
+					var domain= $(this).parents("li").find("input[name='domain']").val();
+					sessionStorage.setItem("orderNo",orderNo);
+					sessionStorage.setItem("payAmount",payAmount);
+					sessionStorage.setItem("transDesc",transDesc);
+					sessionStorage.setItem("domain",domain);
+					var Url = "http://"+window.location.host;
+					window.location.href=Url+"/pay.html"
+				});
+
+
+//				取消订单
+				$(".orderList ul").on("click",".rl-cancel",function(e){
+					e.stopPropagation();
+					var orderStatus = $(this).parents("li").data("orderstatus");
+					var orderNo = $(this).parents("li").data("orderno");
+					$(".cancelReservation-pop input[name='orderNo']").val(orderNo);
+					$(".cancelReservation-pop input[name='orderstatus']").val(orderStatus);
+					var title = "";
+					if (orderStatus=="01"){
+						title = "<h2>温馨提示：</h2>"+
+								"<p class='cancelOrder0'>确定要取消订单吗？取消订单后不能恢复。</p>";
+					} else {
+						var OrderDeposit = $(this).parents("li").data("orderdeposit");
+						$(".cancelReservation-pop input[name='tradeAmount']").val(OrderDeposit);
+						title = "<h2>温馨提示：</h2>"+
+								"<p class='cancelOrder1'>取消订单后，系统将扣取已支付金额的0%作为手续费，剩余金额将按原路径退回。</p>"+
+								"<h4 class='refund'><span>实际到账：<a>￥"+OrderDeposit+"</a></span><span class='tui'>退款手续费：<a>￥0</a></span></h4>";
+					}
+					$(".cancelReservation-pop .top_title").html(title);
+					$("#layer,.cancelReservation-pop").show();
+				});
+
+				$(".crpb-cancel,#layer").click(function(){
+					$("#layer,.cancelReservation-pop").hide();
+					 $(".reason .promt").remove();
+				});
+				// 确认取消
+				$(".crpb-confirm").click(function(){
+					var orderStatus = $(".cancelReservation-pop input[name='orderstatus']").val();
+					var orderNo = $(".cancelReservation-pop input[name='orderNo']").val();
+					var cancelReason ="";
+					if($("input[name='cancel']:checked").length<1){
+						$(".reason .promt").remove();
+						$(".reason ul").append("<p class='promt'>原因不能为空</p>");
+						return;
+					}else if($("input[name='cancel']:checked").val()=="06" && $(".other_reason textarea").val().trim()==""){
+						$(".reason .promt").remove();
+						$(".reason ul").append("<p class='promt'>原因不能为空</p>");
+						return;
+					}else if($("input[name='cancel']:checked").val()=="06" && $(".other_reason textarea").val().trim().length > 200){
+						$(".reason .promt").remove();
+						$(".reason ul").append("<p class='promt'>原因不能超过200字</p>");
+						return;
+					}else{
+						$(".reason .promt").remove();
+					}
+					if($("input[name='cancel']:checked").val()=="06"){
+						cancelReason = $(".other_reason textarea").val();
+					}else{
+						cancelReason = $("input[name='cancel']:checked").parents("li").find("p").text();
+					}
+					var params0 = "";
+					if(orderStatus=="01"){
+						params0 = {
+							orderNo:orderNo,
+							cancleReason:cancelReason,
+							counterFee:"",
+							tradeAmount:""
+						}
+					}else{
+						var tradeAmount = $(".cancelReservation-pop input[name='tradeAmount']").val();
+						var counterFee = 0;
+						params0 = {
+							orderNo:orderNo,
+							cancleReason:cancelReason,
+							counterFee:counterFee,
+							tradeAmount:tradeAmount
+						}
+					}
+					$.ajax({
+						url: publicPath+"/orders/api/orders/cancelorder",
+            			headers:params,
+						type: "post",
+						data: params0,
+						dataType: "json",
+						success: function success(data) {
+							if(data.success) {
+								if(data.code == 0) {
+									window.location.reload();
+									console.log(data.msg);
+								} else {
+									console.log(data.msg);
+								}
+							} else {
+								console.log(data.msg);
+							}
+						}
+					});
+				});
+			});
+
+		</script>
+	</body>
+</html>
+

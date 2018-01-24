@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>家策好服务</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/jiacerIndex.css"/>
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+<div class="head">
+  <img class="jiacerlogo" src="img/indexlogo.png"/>
+  <span class="my">我的</span>
+</div>
+<div class="banner">
+  <img src="img/banner.png"/>
+</div>
+<h1 class="search_tt">寻找附近的家政公司</h1>
+<div class="inquire_box">
+  <div class="inquire">
+    <span class="area_label">地区</span>
+    <div class="sel_box_box">
+      <div class="city sel_box">
+        <h2 class="city_in sel" privince-code="2">上海</h2>
+        <div class="sel_con_box">
+          <div class="hot_city sel_con">
+            <!-- <p>定位城市</p>
+            <span class="local_city">上海</span> -->
+            <p>热门城市</p>
+            <ul>
+              <li privince-code="2">上海</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="area sel_box">
+        <h2 class="area_in sel" id="area_in">所有区域</h2>
+        <div class="sel_con_box">
+          <div class="hot_area sel_con">
+            <ul>
+              <li area-code="">所有区域</li>
+              <li area-code="78">黄浦区</li>
+              <li area-code="2813">徐汇区</li>
+              <li area-code="2815">长宁区</li>
+              <li area-code="2817">静安区</li>
+              <li area-code="2841">普陀区</li>
+              <li area-code="2820">闸北区</li>
+              <li area-code="2822">虹口区</li>
+              <li area-code="2823">杨浦区</li>
+              <li area-code="2830">浦东新区</li>
+              <li area-code="2825">闵行区</li>
+              <li area-code="2824">宝山区</li>
+              <li area-code="2826">嘉定区</li>
+              <li area-code="2835">金山区</li>
+              <li area-code="2834">松江区</li>
+              <li area-code="2833">青浦区</li>
+              <li area-code="2837">奉贤区</li>
+              <li area-code="2919">崇明县</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input class="inquire_bt" type="button"/>
+  </div>
+</div>
+<div class="company_list">
+  <ul>
+    <!-- <li>
+      <a href="#">
+        <div class="company_info">
+          <div class="com_top">
+            <img src="img/mendianlogo.png"/>
+            <div class="top_right">
+              <h2>上海万家福家庭服务有限公司</h2>
+              <p>上海-徐汇区</p>
+            </div>
+          </div>
+          <div class="type">
+            <p>
+              <span>月嫂</span>
+              <span>育婴师</span>
+              <span>保姆</span>
+              <span>养老陪护</span>
+              <span>钟点工</span>
+              <span>家庭管家</span>
+            </p>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <div class="company_info">
+          <div class="com_top">
+            <img src="img/mendianlogo.png"/>
+            <div class="top_right">
+              <h2>上海万家福家庭服务有限公司</h2>
+              <p>上海-徐汇区</p>
+            </div>
+          </div>
+          <div class="type">
+            <p>
+              <span>月嫂</span>
+              <span>育婴师</span>
+              <span>保姆</span>
+              <span>养老陪护</span>
+              <span>钟点工</span>
+              <span>家庭管家</span>
+            </p>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <div class="company_info">
+          <div class="com_top">
+            <img src="img/mendianlogo.png"/>
+            <div class="top_right">
+              <h2>上海万家福家庭服务有限公司</h2>
+              <p>上海-徐汇区</p>
+            </div>
+          </div>
+          <div class="type">
+            <p>
+              <span>月嫂</span>
+              <span>育婴师</span>
+              <span>保姆</span>
+              <span>养老陪护</span>
+              <span>钟点工</span>
+              <span>家庭管家</span>
+            </p>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <div class="company_info">
+          <div class="com_top">
+            <img src="img/mendianlogo.png"/>
+            <div class="top_right">
+              <h2>上海万家福家庭服务有限公司</h2>
+              <p>上海-徐汇区</p>
+            </div>
+          </div>
+          <div class="type">
+            <p>
+              <span>月嫂</span>
+              <span>育婴师</span>
+              <span>保姆</span>
+              <span>养老陪护</span>
+              <span>钟点工</span>
+              <span>家庭管家</span>
+            </p>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <div class="company_info">
+          <div class="com_top">
+            <img src="img/mendianlogo.png"/>
+            <div class="top_right">
+              <h2>上海万家福家庭服务有限公司</h2>
+              <p>上海-徐汇区</p>
+            </div>
+          </div>
+          <div class="type">
+            <p>
+              <span>月嫂</span>
+              <span>育婴师</span>
+              <span>保姆</span>
+              <span>养老陪护</span>
+              <span>钟点工</span>
+              <span>家庭管家</span>
+            </p>
+          </div>
+        </div>
+      </a>
+    </li> -->
+  </ul>
+
+</div>
+<div id="layer"></div>
+<script src="js/jiacerIndex.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+  var imgurl = "http://" + window.location.host + "/images/fxlogo.jpeg";
+  shareWechat.init_share_params = {
+    'onMenuShareTimeline.title': '家策好服务，家庭有托付',
+    'onMenuShareTimeline.imgUrl': imgurl,
+    'onMenuShareAppMessage.title': '家策好服务，家庭有托付',
+    'onMenuShareAppMessage.imgUrl': imgurl,
+    'onMenuShareAppMessage.desc': '给生活添一份色彩！'
+  };
+  shareWechat.sharePage();
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+body {
+  background-color: #fff;
+}
+input {
+  -webkit-appearance: none;
+}
+.content {
+  padding: 1rem 0.7rem;
+}
+.content img {
+  max-width: 100%;
+  height: auto;
+}
+.content_p {
+  padding: 0 0.5rem;
+}
+.content_p h1 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin-top: 2rem;
+  line-height: 2.2rem;
+}
+.content_p p {
+  font-size: 1.2rem;
+  color: #666666;
+  line-height: 2.5rem;
+}
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  text-rendering: optimizelegibility;
+}
+.content h1 {
+  font-size: 38.5px;
+}
+.content h2 {
+  font-size: 31.5px;
+}
+.content h3 {
+  font-size: 24.5px;
+}
+.content h4 {
+  font-size: 17.5px;
+}
+.content h5 {
+  font-size: 14px;
+}
+.content h6 {
+  font-size: 11.9px;
+}
+.content strong,
+.content b {
+  font-weight: bold;
+}
+.content i,
+.content cite,
+.content em,
+.content var,
+.content address,
+.content dfn {
+  font-style: italic;
+}
+.content ol {
+  list-style-type: decimal;
+  list-style: decimal;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+.content ol li {
+  list-style: decimal;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+.content ul,
+.content menu,
+.content dir {
+  display: block;
+  list-style-type: disc;
+  list-style: disc;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+.content ul li,
+.content menu li,
+.content dir li {
+  list-style: disc;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}

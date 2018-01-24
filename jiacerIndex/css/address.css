@@ -1,0 +1,130 @@
+a:link{
+    color: #333;
+} 
+a:visited {
+     color: #333;
+}
+a:hover{
+     color: #333;
+}
+a:active{
+     color: #333;
+}
+.main_content {
+    padding: 1.2rem 1rem;
+}
+.add_list {
+    min-height: 11.4rem;
+    background-color: #fff;
+    border-radius: .4rem;
+    border: 1px solid #e5e5e5;
+    margin-bottom: .8rem;
+}
+.info_ad {
+    padding: 1.3em 1rem 1rem;
+    /* height: 6rem; */
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+.info_ad h2 {
+    font-size: 1.6rem;
+}
+.info_ad h2 span {
+    font-size: 1.4rem;
+    float: right;
+}
+.info_ad h3 {
+    color: #888888;
+    font-size: 1.4rem;
+    margin-top: .9rem;
+}
+.operation {
+    height: 3.6rem;
+    text-align: right;
+    padding-right: 1.4rem;
+}
+.operation p a {
+    padding-left: 2.1rem;
+    margin-left: 3.5rem;
+    display: inline-block;
+    line-height: 3.5rem;
+        color: #333;
+}
+
+.operation .edit {
+    background: url(../img/edit.png) no-repeat;
+    background-position: left center;
+        background-size: 1.4rem auto;
+}
+.operation .delete {
+    background: url(../img/deletebg.png) no-repeat;
+    background-position: left center;
+        background-size: 1.4rem auto;
+}
+.button {
+    text-align: center;
+    height: 4.4rem;
+    position: absolute;
+    border: 1.8rem;
+    left: 0;
+    right: 0;
+    padding: 0 1.5rem;
+}
+
+.button a {
+    border-radius: .4rem;
+    background-color: #ff9900;
+    color: #fff;
+    width: 100%;
+    -webkit-appearance: none;
+    border: 0;
+    height: 100%;
+    font-size: 1.8rem;
+    display: inline-block;
+    line-height: 4.4rem;
+}
+/* 弹窗 */
+.alert_div {
+     display: none; 
+    width: 31rem;
+    background-color: #FFFFFF;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -15.5rem;
+    margin-top: -5.9rem;
+    z-index: 110;
+    border-radius: 5px;
+}
+.alert_div .content {
+    text-align: center;
+    height: 5.2rem;
+    padding-top: 2.3rem;
+}
+.alert_div .content p {
+    margin-bottom: 1rem;
+}
+.alert_div .confirm_bt {
+    height: 4.2rem;
+    display: flex;
+    display: -webkit-flex;
+    border-top: 1px solid #E6E6E6;
+}
+.alert_div .confirm_bt a {
+    display: block;
+    flex: 1;
+    height: 100%;
+    line-height: 4.2rem;
+    text-align: center;
+    font-size: 1.6rem;
+}
+.alert_div .confirm_bt .cancel {
+    border-right: 1px solid #E6E6E6;
+}
+.alert_div .confirm_bt .confirm {
+    color: #FF9900;
+}
+.no_address {
+    text-align: center;
+    padding: 5rem 0;
+}

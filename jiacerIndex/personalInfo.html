@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <title>个人信息</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/jquery.mytoast.css"/>
+  <link rel="stylesheet" type="text/css" href="css/personalInfo.css"/>
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/jquery.myToast.js" type="text/javascript" charset="utf-8"></script>
+  <!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>-->
+
+  <script>
+    $(function () {
+      if (isEmpty(params.uid)) {
+        window.location.href = "login.html";
+        return;
+      }
+    })
+  </script>
+</head>
+<body>
+<header>
+  <a class="goBack" href="center.html"></a>
+  <h1>个人信息</h1>
+  <a class="save">保存</a>
+</header>
+<h2 class="list_title">基本信息</h2>
+<div class="per_info">
+  <div class="info_photo">头像<span class="photo"><img src="img/photo.png"/></span></div>
+  <div class="info_list">昵称
+    <input name="nickname" type="text" value="" placeholder="请输入昵称"/>
+    <div class="delete"><img src="img/delete.png"/></div>
+  </div>
+  <div class="info_list">姓名
+    <input name="name" type="text" placeholder="请输入您的姓名"/>
+    <div class="delete"><img src="img/delete.png"/></div>
+  </div>
+  <div class="info_list">手机号码
+    <span class="phone_num"></span>
+  </div>
+  <div class="validationFrame"></div>
+</div>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  var imgurl = "http://" + window.location.host + "/images/fxlogo.jpeg";
+  shareWechat.init_share_params = {
+    'onMenuShareTimeline.title': '家策好服务，家庭有托付',
+    'onMenuShareTimeline.imgUrl': imgurl,
+    'onMenuShareAppMessage.title': '家策好服务，家庭有托付',
+    'onMenuShareAppMessage.imgUrl': imgurl,
+    'onMenuShareAppMessage.desc': '给生活添一份色彩！'
+  };
+  shareWechat.sharePage();
+
+  // var publicPath = "http://" + window.location.host + "/fbeeWebConsole_web";
+  function getWeChatInfo(params) {
+    $.ajax({
+      url: window.global_config.weChatInfo,
+      type: "get",
+      data: {},
+      dataType: "json",
+      headers: params,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            console.log(data);
+            var avatar = data.jsonData.headImgUrl;
+            $(".photo img").attr("src", avatar)
+          }
+        } else {
+          checkAuth(data.code)
+          console.log(data.msg);
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  }
+  $(function () {
+    getWeChatInfo(params);
+    $(".info_list input").focus(function () {
+      if ($(this).val() != "") {
+        $(this).siblings(".delete").show();
+        $(this).addClass("name_id");
+      }
+    });
+    $(".delete").click(function () {
+      $(this).siblings("input").val("").removeClass("name_id");
+      $(this).hide();
+    });
+
+    $.ajax({
+      url: publicPath + "/profile/api/member/getMemberInfo",
+      type: "post",
+      dataType: "json",
+      headers: params,
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            $(".phone_num").html(dataJD[0].mobile);
+            if (dataJD[0].name != null && dataJD[0].name != "") {
+              $("input[name='name']").val(dataJD[0].name);
+            }
+            $("input[name='nickname']").val(dataJD[0].nickname);
+          }
+        } else {
+          if (data.code == 999010) {
+            location.href = "login.html";
+          }
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+
+    $(".save").click(function () {
+     for (var i = 0; i < $(".info_list input[type='text']").length; i++) {
+        $(".info_list").find("input").eq(i).trigger("blur");
+        if ($(".vf_on").length > 0) {
+
+          return;
+          break;
+        }
+      }
+      var name = $("input[name='name']").val();
+      var nickname = $("input[name='nickname']").val();
+      $.ajax({
+        url: publicPath + "/profile/api/member/updateMemberInfo",
+        type: "post",
+        headers: params,
+        data: {name: name,nickname: nickname},
+        dataType: "json",
+        success: function (data) {
+          if (data.success) {
+            if (data.code == 0) {
+               $.toast("保存成功");
+              console.log(data.msg);
+              setInterval(function(){
+                window.location.href = "center.html";
+              },2000);
+            } else {
+              console.log(data.msg);
+            }
+          } else {
+            checkAuth(data.code)
+            console.log(data.msg);
+          }
+        },
+      })
+    });
+
+    $(".info_list input[type='text']").blur(function () {
+      var self = $(this);
+      var name = $(this).attr("name");
+      setTimeout(function () {
+        self.siblings(".delete").hide();
+        self.removeClass("name_id");
+      }, 200);
+      switch(name){
+        case "name":
+          if (self.val() == "") {
+            onError('请填写姓名');
+          } else {
+            onSuccess();
+          }
+          break;
+        case "nickname":
+          if(self.val() == ""){
+            onError('请填写昵称');
+          }else{
+            onSuccess();
+          }
+          break;
+        default:
+          break;
+      }
+    });
+
+  })
+
+  function onError(msg) {
+    if ($(".validationFrame").hasClass("vf_on")) {
+      $(".validationFrame").text(msg);
+      return;
+    }
+    $(".validationFrame").addClass("vf_on").text(msg);
+  }
+
+  function onSuccess() {
+    $(".validationFrame").removeClass("vf_on").text("");
+  }
+</script>
+</body>
+</html>

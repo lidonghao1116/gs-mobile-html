@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>家政员详情</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/staffDetails.css"/>
+
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+<input id="shareInfo" type="hidden">
+<div id="layer"></div>
+
+<!--联系电话弹窗-->
+<div class="contact-pop">
+  <div class="cp-content">
+    <p>拨打家政门店电话</p>
+    <p></p>
+  </div>
+  <div class="cp-btn">
+    <a class="cpb-cancel">取消</a>
+    <a class="cpb-call">呼叫</a>
+  </div>
+</div>
+
+
+<header>
+  <a class="goBack" href="javascript:history.go(-1)"></a>
+  <h1>家政员详情</h1>
+</header>
+<!--资料-->
+<div class="staff-info">
+  <div class="si-video">
+
+  </div>
+  <div class="personal_info">
+    <!-- <p class="ic-title">基本信息</p> -->
+    <div class="top_info">
+      <img src=""/>
+      <div class="top_right_box">
+      </div>
+      <span class="more">更多</span>
+    </div>
+    <div class="bottom_info">
+      <ul>
+      </ul>
+    </div>
+  </div>
+  <div class="infoCard_update">
+    <p class="ic-title title_bg01">求职意向</p>
+    <div class="ic-content" id="service-info">
+      <div class="service_info_list">
+        <p class="info_list_left">服务工种</p>
+        <div class="info_list_right service_item"></div>
+      </div>
+      <div class="service_info_list">
+        <p class="info_list_left">期望薪资</p>
+        <div class="info_list_right price"></div>
+      </div>
+      <div class="service_info_list">
+        <p class="info_list_left">从业经验</p>
+        <div class="info_list_right experience"></div>
+      </div>
+      <div class="service_info_list">
+        <p class="info_list_left">服务区域</p>
+        <div class="info_list_right serviceAreaValue"></div>
+      </div>
+      <div class="service_info_list">
+        <p class="info_list_left">技能特点</p>
+        <div class="info_list_right skills"></div>
+      </div>
+    </div>
+  </div>
+  <div class="infoCard_update">
+    <p class="ic-title title_bg02">证件信息</p>
+    <div class="ic-content clearfix" id="certificate-info">
+      <p>身份证</p>
+    </div>
+  </div>
+
+  <div class="infoCard_update">
+    <p class="ic-title title_bg03">能力特点</p>
+    <div class="ic-content" id="nengli">
+    </div>
+  </div>
+  <div class="infoCard_update">
+    <p class="ic-title title_bg04">经历和评价</p>
+    <div class="ic-content" id="evaluate">
+     
+    </div>
+  </div>
+  <div class="infoCard_update">
+    <p class="ic-title title_bg05">照片</p>
+    <div class="ic-content photo_c" id="photo">
+      <ul class="clearfix">
+        <li>
+          <img src=""/>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+</div>
+<div class="reservation">
+  <div>
+    <a class="store" href="index.html">店铺</a>
+    <a class="contact">联系</a>
+    <a></a>
+  </div>
+  <a class="reservation-btn">预约面试</a>
+</div>
+
+<!--图片预览-->
+<div class="photo-mask" style="display: none;"></div>
+<div class="photo-panel" style="display: none;">
+  <div class="photo-div">
+    <div class="photo-img">
+      <div class="photo-left">
+        <div class="arrow-prv"></div>
+      </div>
+      <div class="photo-close"></div>
+      <div class="photo-view-h">
+        <img src="">
+      </div>
+      <div class="photo-right">
+        <div class="arrow-next"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="datePlugin"></div>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/date.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+  function StaffPersonInfo(staffId, serviceItemCode) {
+    $.ajax({
+      url: publicPath + "/api/houseKeeping/StaffPersonInfo",
+      headers: params,
+      type: "post",
+      data: {
+        staffId: staffId,
+        serviceItemCode: serviceItemCode
+      },
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            var dataJob = data.jsonData.jobInfo;
+            var staffName = "";
+            if (dataJD.sex == "01") {
+              staffName = dataJD.staffName.split("")[0] + "师傅";
+            } else if (dataJD.sex == "02") {
+              staffName = dataJD.staffName.split("")[0] + "阿姨";
+            }
+            var height = "";
+            if (dataJD.height != null) {
+              height = dataJD.height + "cm";
+            }
+            var weight = "";
+            if (dataJD.weight != null) {
+              weight = dataJD.weight + "kg";
+            }
+            var fertilitySituation = "";
+            if (dataJD.fertilitySituation == "01") {
+              fertilitySituation = "已生育";
+            } else if (dataJD.fertilitySituation == "02") {
+              fertilitySituation = "未生育";
+            }
+            $("#shareInfo").val(dataJD.age + "岁/属" + dataJD.zodiac + "/" + dataJD.nativePlace + "人/" + dataJD.constellation)
+            var html = "<div class='top_right'>" +
+                "<h1><b>" + staffName + "</b><span>编号：" + dataJD.staffNo + "</span></h1>" +
+                "<p>" + dataJD.age + "岁&nbsp;&nbsp;|&nbsp;&nbsp;属" + dataJD.zodiac + "&nbsp;&nbsp;|&nbsp;&nbsp;" + dataJD.nativePlace + "人&nbsp;&nbsp;|&nbsp;&nbsp;" + dataJD.constellation + "&nbsp;&nbsp;|&nbsp;&nbsp;" + dataJD.educarion + "</p>" +
+                "</div>";
+            var html0 = "<ul>" +
+                "<li>身高：<span>" + height + "</span></li>" +
+                "<li>婚姻状况：<span>" + dataJD.maritalStatus + "</span></li>" +
+                "<li>体重：<span>" + weight + "</span></li>" +
+                "<li>生育情况：<span>" + fertilitySituation + "</span></li>" +
+                "</ul>";
+            $(".top_info img").attr("src", dataJD.headImage);
+            $(".top_right_box").html(html);
+            $(".bottom_info").html(html0);
+
+            var cookingFeature = "";
+            if (dataJob.cookingFeatureValue != "" && dataJob.cookingFeatureValue != null) {
+              if (dataJob.cookingFeatureValue.indexOf(",") != "-1") {
+                cookingFeature = dataJob.cookingFeatureValue.replace(/,/g, "、");
+              } else {
+                cookingFeature = dataJob.cookingFeatureValue;
+              }
+
+            }
+            var languageFeature = "";
+            if (dataJob.languageFeatureValue != "" && dataJob.languageFeatureValue != null) {
+              if (dataJob.languageFeatureValue.indexOf(",") != "-1") {
+                languageFeature = dataJob.languageFeatureValue.replace(/,/g, "、");
+              } else {
+                languageFeature = dataJob.languageFeatureValue;
+              }
+            }
+            var characterFeature = "";
+            if (dataJob.characerFeatureValue != "" && dataJob.characerFeatureValue != null) {
+              if (dataJob.characerFeatureValue.indexOf(",") != "-1") {
+                characterFeature = dataJob.characerFeatureValue.replace(/,/g, "、");
+              } else {
+                characterFeature = dataJob.characerFeatureValue;
+              }
+            }
+            if (characterFeature == "" && cookingFeature == "" && languageFeature == "") {
+              $("#nengli").html("<p class='no_info'>该家政员没有留下相关信息~</p>");
+            } else {
+              var html0 = "<div class='service_info_list'>" +
+                  "<p class='info_list_left'>性格特点</p>" +
+                  "<div class='info_list_right'>" + characterFeature + "</div>" +
+                  "</div>" +
+                  "<div class='service_info_list'>" +
+                  "<p class='info_list_left'>烹饪特点</p>" +
+                  "<div class='info_list_right'>" + cookingFeature + "</div>" +
+                  "</div>" +
+                  "<div class='service_info_list'>" +
+                  "<p class='info_list_left'>语言特点</p>" +
+                  "<div class='info_list_right'>" + languageFeature + "</div>" +
+                  "</div>";
+              $("#nengli").html(html0);
+            }
+            var experience = "";
+            if (dataJob.experience != "" && dataJob.experience != null) {
+              if (dataJob.experience == "01") {
+                experience = "一年以下";
+              } else if (dataJob.experience == "02") {
+                experience = "1-2年";
+              } else if (dataJob.experience == "03") {
+                experience = "3-5年";
+              } else if (dataJob.experience == "04") {
+                experience = "5年以上";
+              }
+            }
+
+            var serArea = "";
+            if (dataJob.serviceAreaValue != "" && dataJob.serviceAreaValue != null) {
+              serviceArea = dataJob.serviceAreaValue.split(",");
+              console.log(serviceArea.length);
+              for (var i = 0; i < serviceArea.length; i++) {
+                serArea += serviceArea[i].split(":")[1] + "、";
+              }
+              serArea = serArea.substring(0, serArea.length - 1)
+            } else {
+              serArea = "不限";
+            }
+            $(".price").html(RetainedDecimalPlacesNF(dataJob.price) + "&nbsp;<span>" + dataJob.unitValue + "</span>");
+            $(".experience").html(experience);
+            $(".serviceAreaValue").html(serArea);
+
+            var workExperience = dataJob.workExperience || "";
+            var selfEvaluation = dataJob.selfEvaluation || "";
+            var teacherEvaluation = dataJob.teacherEvaluation || "";
+
+            if (workExperience == "" && selfEvaluation == "" && teacherEvaluation == "") {
+              $("#evaluate").html("<p class='no_info'>该家政员没有留下相关信息~</p>");
+            } else {
+              var html1 = "<div class='service_info_list'>" +
+                  "<p class='info_list_left'>工作经历</p>" +
+                  "<div class='info_list_right'>" + workExperience + "</div>" +
+                  "</div>" +
+                  "<div class='service_info_list'>" +
+                  "<p class='info_list_left'>老师评价</p>" +
+                  "<div class='info_list_right'>" + selfEvaluation + "</div>" +
+                  "</div>" +
+                  "<div class='service_info_list'>" +
+                  "<p class='info_list_left'>自我评价</p>" +
+                  "<div class='info_list_right'>" + teacherEvaluation + "</div>" +
+                  "</div>";
+              $("#evaluate").html(html1);
+            }
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          console.log(data.msg);
+        }
+      }
+    });
+
+    $.ajax({
+      url: publicPath + "/api/houseKeeping/StaffServiceInfo",
+      headers: params,
+      type: "post",
+      data: {
+        staffId: staffId,
+        serviceItemCode: serviceItemCode
+      },
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            var skills = "";
+            var serviceItemName = "";
+            var html1 = "";
+            if (dataJD != "") {
+              $.each(dataJD, function (i, item) {
+                if (item.skills != null && item.skills != "") {
+                  if (item.skills.indexOf(",") != "-1") {
+                    skills += item.skills.replace(/,/g, "、") + "、";
+                  } else {
+                    skills += item.skills + "、";
+                  }
+                }
+                serviceItemName += item.serviceItemName + "、";
+              })
+              skills = skills.substring(0, skills.length - 1);
+              serviceItemName = serviceItemName.substring(0, serviceItemName.length - 1);
+            }
+            $(".skills").html(skills);
+            $(".service_item").html(serviceItemName);
+
+
+            // var dataJD = data.jsonData;
+
+            // 	var serviceNature="";
+            // 	if(dataJD.serviceNature!="" && dataJD.serviceNature!=undefined && dataJD.serviceNature.indexOf(",")!="-1"){
+            // 		serviceNature = dataJD.serviceNature.replace(/,/g, "、");
+            // 	}else {
+            // 		serviceNature = dataJD.serviceNature;
+            // 	}
+            // 	var skills="";
+            // 	if(dataJD.skills!="" && dataJD.skills!=undefined && dataJD.skills.indexOf(",")!="-1"){
+            // 		skills = dataJD.skills.replace(/,/g, "、");
+            // 	}else if(dataJD.skills!=undefined){
+            // 		skills = dataJD.skills;
+            // 	}
+            // 	var html = "<div class='service_info_list'>"+
+            // 				"<p class='info_list_left service_item'>服务工种</p>"+
+            // 				"<div class='info_list_right'>"+dataJD.serviceItemName+"</div>"+
+            // 			"</div>"
+            // 			"<div class='service_info_list'>"+
+            // 				"<p class='info_list_left'>技能特点</p>"+
+            // 				"<div class='info_list_right'>"+skills+"</div>"+
+            // 			"</div>";
+            // 			$("#service-info").html(html);
+
+
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          console.log(data.msg);
+        }
+      }
+    });
+
+//			    证件信息
+    $.ajax({
+      url: publicPath + "/api/houseKeeping/StaffCertType",
+      headers: params,
+      type: "post",
+      data: {staffId: staffId},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            var html = "";
+            $.each(dataJD, function (i, item) {
+              var authenticatGrade = ""
+              if (item.authenticatGrade != "") {
+                authenticatGrade = "&nbsp;(" + item.authenticatGrade.split(",")[1] + ")";
+              }
+              html += "<p>" + item.certType + authenticatGrade + "</p>";
+            });
+            $("#certificate-info").append(html);
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+
+//			    视频
+    $.ajax({
+      url: publicPath + "/api/houseKeeping/StaffVideoImg",
+      headers: params,
+      type: "post",
+      data: {staffId: staffId, type: "01"},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            if (dataJD == "") {
+              $(".si-video").hide();
+            } else {
+              $(".si-video").show().html("<video controls='controls' src='" + dataJD[0].path + "'></video>");
+            }
+
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+
+//			    照片
+    $.ajax({
+      url: publicPath + "/api/houseKeeping/StaffVideoImg",
+      headers: params,
+      type: "post",
+      data: {staffId: staffId, type: "02"},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            if (dataJD == "") {
+              $("#photo").html("<p class='no_info'>该家政员没有留下相关信息~</p>");
+            } else {
+              var html = "";
+              $.each(dataJD, function (i, item) {
+                html += "<li class='img_box'></li>";
+              });
+              $("#photo ul").html(html);
+              for (var i = 0; i < dataJD.length; i++) {
+                $("#photo ul li").eq(i).css("backgroundImage", "url(" + dataJD[i].path + ")");
+              }
+            }
+
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+
+//			    获取门店号码
+    $.ajax({
+      url: publicPath + "/api/index/info",
+      headers: params,
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            $(".contact-pop .cp-content p").eq(1).text(dataJD.contactPhone);
+            $(".contact-pop .cp-btn .cpb-call").attr("href", "tel:" + dataJD.contactPhone)
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+  }
+  function phototop() {
+    //计算居中位置
+    var scrolltop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+    var top = scrolltop + ($(window).height() - $(".photo-div").height()) / 2;
+    $(".photo-panel").css({
+      "top": "" + top + "px"
+    });
+  }
+  //自适应预览
+  function photoView(obj, img_src) {
+    if ($(obj).width() >= $(obj).height()) {
+      $(".photo-panel .photo-div .photo-img .photo-view-h").attr("class", "photo-view-w");
+      $(".photo-panel .photo-div .photo-img .photo-view-w img").attr("src", img_src);
+    } else {
+      $(".photo-panel .photo-div .photo-img .photo-view-w").attr("class", "photo-view-h");
+      $(".photo-panel .photo-div .photo-img .photo-view-h img").attr("src", img_src);
+    }
+  }
+  //图片预览
+  var img_index = 0;
+  var img_src = "";
+  $(function () {
+    //图片预览
+    //关闭
+    $(".photo-mask").click(function () {
+      $(".photo-mask").hide();
+      $(".photo-panel").hide();
+    })
+    $(".photo-close").click(function () {
+      $(".photo-mask").hide();
+      $(".photo-panel").hide();
+    });
+    //下一张
+    $(".photo-panel .photo-div .arrow-next").click(function () {
+      img_index++;
+      if (img_index >= $(".photo_c li").length) {
+        img_index = 0;
+      }
+      var img_src = $(".photo_c li").eq(img_index).css('backgroundImage');
+      if (img_src.indexOf("\"") < 0) {
+        img_src = img_src.slice(4, -1);
+      } else {
+        img_src = img_src.slice(5, -2);
+      }
+      photoView($(".photo_c li"), img_src);
+    });
+    //上一张
+    $(".photo-panel .photo-div .arrow-prv").click(function () {
+      img_index--;
+      if (img_index < 0) {
+        img_index = $(".photo_c li").length - 1;
+      }
+      var img_src = $(".photo_c li").eq(img_index).css('backgroundImage');
+      if (img_src.indexOf("\"") < 0) {
+        img_src = img_src.slice(4, -1);
+      } else {
+        img_src = img_src.slice(5, -2);
+      }
+      photoView($(".photo_c li"), img_src);
+    });
+    //如何调用
+    $(".photo_c").on("click", "ul li", function () {
+      phototop();
+      img_index = $(this).index();
+      $(".photo-mask").show();
+      $(".photo-panel").show();
+      var img_src = $(".photo_c li").eq(img_index).css('backgroundImage');
+      if (img_src.indexOf("\"") < 0) {
+        img_src = img_src.slice(4, -1);
+      } else {
+        img_src = img_src.slice(5, -2);
+      }
+
+      photoView($(this), img_src);
+    });
+//				日期选择
+    // $('#expectedBirth').date();
+
+    var url = location.search;
+    if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      var arr = str.split("&");
+      // if (arr.length == 3) {
+      //   $(".reservation").hide();
+      // }
+      var staffId = arr[0].split("=")[1];
+      var serviceItemCode = arr[1].split("=")[1];
+      StaffPersonInfo(staffId, serviceItemCode);
+      $(".staff-info").attr("data-staffid", staffId);
+      $(".staff-info").attr("data-serviceitemcode", serviceItemCode);
+
+      
+    }
+
+//				联系
+    $(".contact").click(function () {
+      $("#layer,.contact-pop").show();
+    });
+
+    $(".cpb-cancel").click(function () {
+      $("#layer,.contact-pop").hide();
+    });
+
+//				预约面试
+    $(".reservation-btn").click(function () {
+      // $.ajax({
+			// 	    url: publicPath+"/api/common/isLogin",
+			// 		type: "post",
+			// 		data: {},
+			// 		dataType: "json",
+			// 		success: function success(data) {
+			// 			if(data.success) {
+      //         window.location.href="reservation.html?staffId="+staffId+"&serviceItemCode="+serviceItemCode;                
+						
+			// 			} else {
+			// 				window.location.href="login.html";
+			// 			}
+			// 		},
+			// 		error: function(err) {
+			// 			console.log(err);
+			// 		}
+      //  		});
+        
+
+      $.ajax({
+        url:window.global_config.getMemberInfo,
+        type: "post",
+        headers: params,
+        data: {},
+        dataType: "json",
+        async: false,
+        success: function success(data) {
+          if (data.success) {
+            window.location.href="reservation.html?staffId="+staffId+"&serviceItemCode="+serviceItemCode;
+          } else {
+            if (data.code = 999010) {
+              location.href = "login.html";
+            }
+            checkAuth(data.code);
+            console.log(data.msg);
+          }
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    });
+  
+
+// 个人信息展开
+    $(".more").click(function () {
+      if ($(this).hasClass("more_active")) {
+        $(this).removeClass("more_active").text("更多");
+        $(".bottom_info").hide();
+      } else {
+        $(this).addClass("more_active").text("收起");
+        $(".bottom_info").show();
+      }
+    })
+
+
+    $("body").on("click", "#dateconfirm", function () {
+      onSuccess();
+    })
+
+    var imgurl = "http://" + window.location.host + $(".top_info img").attr("src");
+    var staffInfo = $("#shareInfo").val();
+    var staffName = $(".top_right h1 b").html();
+    shareWechat.init_share_params = {
+      'onMenuShareTimeline.title': staffName + '的个人简历',
+      'onMenuShareTimeline.imgUrl': imgurl,
+      'onMenuShareAppMessage.title': staffName + '的个人简历',
+      'onMenuShareAppMessage.imgUrl': imgurl,
+      'onMenuShareAppMessage.desc': staffInfo
+    };
+    shareWechat.sharePage();
+  });
+
+  // function onError(msg, self) {
+  //   if ($(".validationFrame").hasClass("vf_on")) {
+  //     $(".validationFrame").text(msg);
+  //     return;
+  //   }
+  //   $(".validationFrame").addClass("vf_on").text(msg);
+  // }
+
+  // function onSuccess() {
+  //   $(".validationFrame").removeClass("vf_on").text("");
+  // }
+
+</script>
+</body>
+</html>

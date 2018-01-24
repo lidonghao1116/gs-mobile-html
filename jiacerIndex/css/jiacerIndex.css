@@ -1,0 +1,238 @@
+body{
+	position: relative;
+	background-color:#fff;
+	padding-top:4.9rem;
+	padding-bottom: 6rem;
+}
+.head {
+    z-index: 1001;
+    position: fixed;
+    height: 4.9rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #ff9900;
+	box-sizing: border-box;
+}
+.head .jiacerlogo {
+    height: 3.4rem;
+    margin-left: 0.8rem;
+    margin-top: 0.7rem;
+}
+.head .my{
+    display: inline-block;
+    float: right;
+    margin-right: 1.3rem;
+    padding-top: 1.8rem;
+    font-size: 1.2rem;
+    color: #6b6b6b;
+    background: url(../img/my.png) no-repeat;
+    background-position: center 0;
+    background-size: 1.4rem 1.6rem;
+    margin-top: 1.1rem;
+}
+.banner img {
+    width: 100%;
+    height: auto;
+}
+.search_tt {
+    padding: 1.9rem 0 1.6rem;
+    text-align: center;
+    color: #6b6b6b;
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 2.2rem;
+}
+.search_tt_fix{
+	margin-bottom:6rem;
+}
+.inquire_box {
+	position:relative;
+	width: 100%;
+}
+.inquire {
+    border-radius: 0.1rem;
+    height: 3.6rem;
+    background-color: #f5f5f5;
+    color: #6b6b6b;
+	padding:1.2rem 0;
+    margin: 0 0.7rem;
+}
+.inquire_box_fix{
+	z-index: 1001;
+	position: fixed;
+    top: 4.9rem;
+    left: 0;
+}
+.inquire_fix{
+	margin:0;
+	border-radius:0;
+}
+.sel_box_box {
+    padding: 0 7.4rem 0 5.3rem;
+}
+span.area_label {
+    width: 4.8rem;
+    color: #6b6b6b;
+    font-size: 1.5rem;
+    display: inline-block;
+    text-align: center;
+    padding: 0.8rem 0;
+    line-height: 2rem;
+    float: left;
+}
+input.inquire_bt {
+    position: absolute;
+    right: 1.8rem;
+    top: 1.2rem;
+    border: 0;
+    border-radius: 0.1rem;
+	background:url(../img/search.png) no-repeat;
+	background-size: 2rem 2rem;
+    background-position: center;
+    background-color: #ff9900;
+    width: 5.1rem;
+    height: 3.6rem;
+}
+.sel_box {
+    float: left;
+}
+.area {
+    width: 65%;
+}
+.city {
+    width: 35%;
+}
+.city_in {
+    margin-right: 1.2rem;
+}
+.city_in,.area_in{
+	 height: 1.6rem;
+    background-color: #fff;
+    border-radius: 0.1rem;
+    font-size: 1.4rem;
+	color: #cccccc;
+	line-height: 1.6rem;
+    padding: 1rem 0;
+	padding-left: 0.8rem;
+}
+.sel_con_box{
+display:none;
+	position: absolute;
+    left: 0;
+    top: 6.4rem;
+    background-color: #f5f5f5;
+    width: 100%;
+}
+.sel_con {
+	padding: 1.3rem 0 2rem 0.8rem;
+}
+.sel_con p {
+    font-size: 1.4rem;
+    color: #808080;
+    line-height: 1.8rem;
+    margin-bottom: 1.1rem;
+	padding-left: 0.2rem;
+}
+.sel_color{
+    color: #6b6b6b;
+}
+.local_city {
+    display: inline-block;
+    margin-bottom: 1.4rem;
+}
+.hot_area{
+
+}
+.sel_con ul {
+    overflow: hidden;
+}
+.local_city ,.sel_con ul li {
+	padding: 0 1.4rem;
+	text-align:center;
+    line-height: 3.6rem;
+    background-color: #fff;
+    border-radius: 0.2rem;
+	color: #4c4c4c;
+    font-size: 1.4rem;
+}
+.sel_con ul li {
+    margin-bottom: 1.1rem;
+    list-style-type: none;
+    float: left;
+    margin-right: 0.8rem;
+}
+.company_list {
+    padding: 0 0.8rem;
+}
+
+.company_list ul li {
+    margin-top: 1rem;
+    border: 1px solid #e5e5e5;
+    height: 12.8rem;
+    background-color: #f5f5f5;
+}
+.com_top {
+    padding-left: 1.2rem;
+    padding-top: 1.2rem;
+    overflow: hidden;
+    background-color: #fff;
+    height: 7rem;
+}
+.com_top img {
+    float: left;
+    width: 5.5rem;
+    height: 5.5rem;
+}
+.top_right {
+    padding-left: 7.2rem;
+}
+.top_right h2 {
+    color: #4c4c4c;
+    font-size: 1.7rem;
+    line-height: 1.7rem;
+    padding-top: 0.3rem;
+    height: 3.4rem;
+	padding-right: 0.4rem;
+}
+.top_right p {
+    background: url(../img/location.png) no-repeat;
+    background-position: left center;
+	background-size:1.2rem auto;
+    padding-left: 1.6rem;
+    line-height: 1.6rem;
+	color:#b2b2b2;
+	font-size:1.2rem;
+}
+.type {
+    height: 4.6rem;
+}
+.type p {
+    padding: 1.7rem 1.4rem;
+    color: #808080;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.type p span {
+    margin-right: 1rem;
+}
+.no_found {
+    padding-top: 21rem;
+    text-align: center;
+    background: url(../img/noresult.png) no-repeat;
+    background-size: 14rem 11rem;
+    background-position: center 7rem;
+}
+.no_found img {
+    width: 14rem;
+    height: auto;
+}
+.no_found p {
+    line-height: 2rem;
+    font-size: 1.2rem;
+    color: #6b6b6b;
+}

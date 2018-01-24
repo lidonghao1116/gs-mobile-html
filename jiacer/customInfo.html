@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>预约面试</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/LCalendar.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/LArea.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/customInfo.css"/>
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+
+<body>
+<div id="layer"></div>
+<div class="alert_div" id='address_tip'>
+  <input name='id' type='hidden' value=''/>
+  <div class="content">
+    <p>最多只能添加三个地址!</p>
+  </div>
+  <div class="confirm_bt">
+    <a class="confirm" id="ok">确定</a>
+  </div>
+</div>
+<!--预约成功弹窗-->
+<div class="alert_div" id="y_success">
+  <div class="content">
+    <p>预约信息已提交，工作人员稍后会通过电话联系您！</p>
+  </div>
+  <div class="confirm_bt">
+    <a class="confirm" href="myReservation.html?code=01">确定</a>
+  </div>
+</div>
+<!--预约单数超出弹窗-->
+<div class="alert_div" id="y_no">
+  <div class="content">
+    <p>您的预约列表中有5笔待处理的预约，<br/>请处理完成后再试。</p>
+  </div>
+  <div class="confirm_bt">
+    <a class="confirm" href="myReservation.html?code=01">确定</a>
+  </div>
+</div>
+<!-- 选择地址 -->
+<div id="alert_ad_list" class="address_alert" style="display:none">
+  <div class="head">
+    <a class="goBackSp close" ></a>
+    <h1>服务地址</h1>
+  </div>
+  <div id="add_content">
+  </div>
+  <!-- <div class="tip">提示：地址新增或修改，请前往地址管理</div> -->
+  <div class="submit_sp"><a>+新建地址</a></div>
+</div>
+<!-- 新增修改地址 -->
+<div id="add_add" class="address_alert" style="display:none">
+  <div class="head">
+    <a class="goBackSp close"></a>
+    <h1>新增地址</h1>
+    <!-- <a class="save_ad">保存</a> -->
+  </div>
+  <div class="ad_details">
+    <input type="hidden" value="" name="id">
+    <div class="per_info">
+      <div class="ad_info_list">
+        <label>姓名:</label>
+        <p><input name="userName" type="text" placeholder="请输入姓名"></p>
+      </div>
+      <div class="ad_info_list">
+        <label>联系电话:</label>
+        <p><input name="phone" type="text" placeholder="请输入电话"></p>
+      </div>
+      <div class="ad_info_list">
+        <label>服务区域:</label>
+        <p>
+          <input class="address name_id" name="serviceArea" type="text" readonly="readonly" placeholder="请选择地址">
+          <input type="hidden" name="serviceProvice" value="">
+          <input type="hidden" name="serviceCity" value="">
+          <input type="hidden" name="serviceCounty" value="">
+        </p>
+      </div>
+      <div class="ad_info_list">
+        <label>详细地址:</label>
+        <p><input name="address" type="text" placeholder="请输入地址"></p>
+      </div>
+    </div>
+  </div>
+  <div class="save_ad"><a>保存并使用</a></div>
+</div>
+
+<header>
+  <a class="goBack" id="goBack"></a>
+  <h1>预约面试</h1>
+</header>
+<div class="main_content">
+  <div class="content_list">
+    <h2>基本信息</h2>
+    <div class="info_box">
+      <!-- 月嫂 -->
+      <div class="info_list common">
+        <div class="info_lable">服务工种：</div>
+        <div class="info_r_enter">
+          <p class="dzgz"></p>
+        </div>
+      </div>
+      <div class="info_list no_common gz01 ">
+        <div class="info_lable">常规服务：</div>
+        <div class="info_r_enter">
+          <p class="">婴儿生活照料、婴儿健康护理、产妇卫生护理</p>
+        </div>
+      </div>
+      <!-- 育婴 育儿嫂 -->
+      <div class="info_list no_common gz02">
+        <div class="info_lable">常规服务：</div>
+        <div class="info_r_enter">
+          <p class="cgfw">科学喂养、健康护理</p>
+        </div>
+      </div>
+      <!-- baomu保姆 -->
+      <div class="info_list no_common gz03">
+        <div class="info_lable">常规服务：</div>
+        <div class="info_r_enter">
+          <p class="cgfw">家庭保洁、菜肴烹饪、洗涤熨烫</p>
+        </div>
+      </div>
+      <!-- yanglao老人陪护 -->
+      <div class="info_list no_common gz04">
+        <div class="info_lable">常规服务：</div>
+        <div class="info_r_enter">
+          <p class="cgfw">老人生活照料、生命体征测量、心理疏导、基础护理</p>
+        </div>
+      </div>
+      <div class="info_list no_common gz05 ">
+        <div class="info_lable">常规服务：</div>
+        <div class="info_r_enter">
+          <p class="">日常居家保洁、家居清洗和养护</p>
+        </div>
+      </div>
+      <div class="info_list no_common gz06 ">
+        <div class="info_lable">常规服务：</div>
+        <div class="info_r_enter">
+          <p class="">日常生活打理、衣食住行规划</p>
+        </div>
+      </div>
+      <!-- 医院护工 -->
+      <div class="info_list no_common gz07">
+        <div class="info_lable">常规服务：</div>
+        <div class="info_r_enter">
+          <p class="">老人生活照料、生命体征测量、心理疏导、基础护理</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content_list">
+    <h2>服务信息</h2>
+    <div class="info_box">
+      <!-- 分割线 -->
+      <h3 class="border"></h3>
+      <div class="info_list common">
+        <div class="info_lable">价格预算：</div>
+        <div class="info_r_enter">
+            <input type="text" name="salary" placeholder="请填写" value=""/>&nbsp;&nbsp;&nbsp;
+            <select name="salaryType" class="mini grey_se">
+            </select>
+        </div>
+      </div>
+      <!-- 月嫂预产期 -->
+      <div class="info_list no_common gz01">
+        <div class="info_lable">预产期：</div>
+        <div class="info_r_enter">
+          <input id="xdt" name="xdt" class="date" placeholder="请选择日期" type="text" readonly="readonly"/>
+          <div class="checkbox_box">
+            <input id="baby" class="baby" type="checkbox" name=""/>
+            <div class="check-box">
+            </div>
+            <label for="baby">宝宝已出生</label>
+          </div>
+        </div>
+      </div>
+      <!-- 服务时间 -->
+      <div class="info_list no_common gz01 gz02 gz06">
+        <div class="info_lable">服务时间：</div>
+        <div class="info_r_enter">
+          <input type="text" id="dpd1" name="dpd1" class="" placeholder="开始日期" readonly="readonly"/>&nbsp;-&nbsp;<input
+                type="text" id="dpd2" name="dpd2" class="date" placeholder="结束日期" readonly="readonly"/>
+        </div>
+      </div>
+      <!-- 精确到分秒的时间段 -->
+      <div class="info_list no_common gz03 gz04 gz05 gz07">
+        <div class="info_lable">服务时间：</div>
+        <div class="info_r_enter">
+          <input id="datesecond1" class=" datesecond" name="datesecond1" placeholder="开始日期" type="text"
+                 readonly="readonly"/>&nbsp;-&nbsp;<input id="datesecond2" class=" datesecond" name="datesecond2" placeholder="结束日期" type="text"
+                 readonly="readonly"/>
+        </div>
+      </div>
+      <!-- 养老 -->
+      <div class="info_list  no_common gz04">
+        <div class="info_lable">能否自理：</div>
+        <div class="info_r_enter select0">
+          <div class="oldSelf">
+            <div class="radio_box">
+              <input type="radio" id="" name="oldSelf" value="01">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>能</label>
+            </div>
+            <div class="radio_box">
+              <input type="radio" id="" name="oldSelf" value="02">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>否</label>
+            </div>
+          </div>
+          <!-- <ul class="home oldSelf">
+              <li class="active" data-serCode="01">能</li>
+              <li data-serCode="02">否</li>
+          </ul> -->
+        </div>
+      </div>
+      <!-- 服务类型 -->
+      <div class="info_list  no_common  gz07">
+        <div class="info_lable">服务类型</div>
+        <div class="info_r_enter select0">
+          <div class="sertype">
+            <div class="radio_box">
+              <input type="radio" id="" name="serType" value="05">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>24小时</label>
+            </div>
+            <div class="radio_box">
+              <input type="radio" id="" name="serType" value="06">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>白班</label>
+            </div>
+            <div class="radio_box">
+              <input type="radio" id="" name="serType" value="06">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>夜班</label>
+            </div>
+          </div>
+          <!-- <ul class="home serType">
+              <li data-serCode="05">24小时</li>
+              <li data-serCode="06">白班</li>
+              <li data-serCode="07">夜班</li>
+          </ul> -->
+        </div>
+      </div>
+      <div class="info_list  no_common  gz03 gz04">
+        <div class="info_lable">服务类型：</div>
+        <div class="info_r_enter select0">
+          <div class="sertype">
+            <div class="radio_box">
+              <input type="radio" id="" name="serType" value="01">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>住家型</label>
+            </div>
+            <div class="radio_box">
+              <input type="radio" id="" name="serType" value="02">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>不住家型</label>
+            </div>
+          </div>
+          <!-- <ul class="home serType">
+              <li data-serCode="01">住家型</li>
+              <li data-serCode="02">不住家型</li>
+          </ul> -->
+        </div>
+      </div>
+      <div class="info_list no_common gz05">
+        <div class="info_lable">服务类型：</div>
+        <div class="info_r_enter select0">
+          <div class="sertype">
+            <div class="radio_box">
+              <input type="radio" id="" name="serType" value="03">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>临时</label>
+            </div>
+            <div class="radio_box">
+              <input type="radio" id="" name="serType" value="03">
+              <div class="circle-box">
+                <span class="circle"></span>
+              </div>
+              <label>长期</label>
+            </div>
+          </div>
+          <!-- <ul class="home serType">
+              <li data-serCode="03">临时</li>
+              <li data-serCode="04">长期</li>
+          </ul> -->
+        </div>
+      </div>
+      <!-- 公共 -->
+      <div class="info_list common">
+        <div class="info_lable">服务内容：</div>
+        <div class="info_r_enter select_sp otherXQ">
+          <ul class="otherReq">
+          </ul>
+        </div>
+      </div>
+      <div class="info_list common">
+        <div class="info_lable">备注：</div>
+        <div class="info_r_enter">
+          <textarea name="special" rows="4" cols="20" class="textarea" placeholder="有其他需求请备注"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content_list">
+    <h2>服务地址</h2>
+    <div class="info_box" id="address">
+      <!-- <div class="address_s">
+            <h3>王小五<span>1300000000</span></h3>
+            <p>上海市-徐汇区-城区  南丹东路300号</p>
+      </div> -->
+    </div>
+  </div>
+</div>
+<div class="validationFrame"></div>
+<div class="submit"><input id="submit" type="button" value="提交预约"/></div>
+<!-- 日期 -->
+<div id="datePlugin"></div>
+<!--地区选择-->
+<div id="area">
+  <div class="provice">
+    <ul>
+    </ul>
+  </div>
+  <div class="city">
+    <ul>
+    </ul>
+  </div>
+  <div class="country">
+    <ul>
+    </ul>
+  </div>
+</div>
+<input type="hidden" name="serviceItemCode" value=""/>
+<script src="js/date.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+      if (document.referrer == '') {
+          $('#goBack').attr('href', 'index.html');
+      }else{
+        $('#goBack').attr('href', 'javascript:history.go(-1)');
+      }
+      var objct = GetRequest();
+      var serviceItemCode = objct.serviceCode;
+      $("input[name='serviceItemCode']").val(serviceItemCode);
+      pullSkills(serviceItemCode);
+      if (serviceItemCode == "01") {
+        $(".dzgz").text("月嫂");
+      } else if (serviceItemCode == "02") {
+        $(".dzgz").text("育儿嫂");
+      } else if (serviceItemCode == "03") {
+        $(".dzgz").text("保姆");
+      } else if (serviceItemCode == "04") {
+        $(".dzgz").text("老人陪护");
+      } else if (serviceItemCode == "05") {
+        $(".dzgz").text("钟点工");
+      } else if (serviceItemCode == "06"){
+        $(".dzgz").text("家庭管家");
+      }else if (serviceItemCode == "07") {
+        $(".dzgz").text("医院护工");
+      }
+      $(".info_list").hide();
+      $(".gz" + serviceItemCode).show();
+      $(".common").show();
+      getNewAddress();
+      // 初始化日期
+      $('#xdt').date();
+      $('#dpd1').date();
+      $('#dpd2').date();
+      $('#datesecond1').date({theme: "datetime"});
+      $('#datesecond2').date({theme: "datetime"});
+
+      					
+//				 薪资要求
+				$.ajax({
+					url:publicPath+"/api/common/getDictionaryData/c015",
+					type:"post",
+					data:{},
+					dataType:"json",
+					success:function success(data){
+						if(data.success){
+						var dataJD = data.jsonData;
+						var html = "";
+						$.each(dataJD, function(i,item) {
+							html += "<option value='"+item.code+"'>"+item.name+"</option>";
+						});
+						$("select[name='salaryType']").html("<option value=''>请选择</option>"+html);
+						console.log(data.msg);
+						}else{
+						console.log(data.msg);
+						}
+					},
+				});
+         //     价格预算
+      $(".info_r_enter").on("change", "select[name='salaryType']", function () {
+        if($(this).val()==""){
+          $(this).addClass("grey_se");
+        }else{
+          $(this).removeClass("grey_se");
+        }
+      });
+      //        宝宝是否出生
+      $(".info_r_enter").on("change", ".checkbox_box input", function () {
+        var state = $(this).prop("checked");
+        if (state) {
+          $(this).siblings(".check-box").addClass("active");
+          $(this).parent(".checkbox_box").siblings("#xdt").attr("disabled", "disabled").val('');
+          self = $("#xdt");
+          onSuccess();
+        } else {
+          $(this).siblings(".check-box").removeClass("active");
+          $(this).parent(".checkbox_box").siblings("#xdt").removeAttr("disabled");
+        }
+      });
+      // 服务类型
+      $(".info_r_enter").on("click", ".radio_box input[type='radio']", function () {
+        $(this).siblings(".circle-box").addClass("active");
+        $(this).parents(".radio_box").siblings(".radio_box").find(".circle-box").removeClass("active");
+      });
+
+      //筛选
+      $(".info_r_enter").on("click", "ul.otherReq li", function () {
+        if ($(this).hasClass("active")) {
+          $(this).removeClass("active");
+        } else {
+          $(this).addClass("active");
+        }
+      });
+    
+      // 展示地址弹窗
+      $("#address").on("click", ".address_s", function () {
+        var id = $(this).find("input[name='id']").val();
+        getAddress();
+        $("#alert_ad_list").show();
+        $(".add_list").each(function () {
+          if ($(this).children("input[name='id']").val() == id) {
+            $(this).addClass("active").siblings().removeClass("active");
+          }
+        });
+      });
+      // 关闭地址弹窗
+      $("#alert_ad_list").on("click",".close",function () {
+        $(".address_alert").hide();
+        getNewAddress();
+      });
+      // 关闭新增地址弹窗
+      $("#add_add").on("click",".close",function () {
+        $("#add_add").hide();
+      });
+      // 新增地址
+      $("#address,.submit_sp").on("click","a,.submit_sp a",function(){
+        $("#add_add .head h1").html("新增地址");
+        $("#add_add").show();
+        $(".ad_details input").val("");
+      });
+      // 修改地址
+      $("#add_content").on("click",".edit",function(){
+        var id = $(this).data("id");
+        $(".ad_details input[name='id']").val(id);
+        $("#add_add .head h1").html("修改地址");
+        $.ajax({
+          url: publicPathCmn + "/api/user/address/" + id,
+          type: "get",
+          data: {},
+          dataType: "json",
+          headers: params,
+          success: function (data) {
+            if (data.success) {
+              if (data.code == 0) {
+                var dataJD = data.jsonData;
+                $(".ad_details input[name='userName']").val(dataJD.userName || "");
+                $(".ad_details input[name='phone']").val(dataJD.phone || "");
+                $(".ad_details input[name='address']").val(dataJD.address);
+                $(".ad_details input[name='serviceArea']").val(dataJD.provinceValue + " " + dataJD.cityValue + " " + dataJD.districtValue);
+                $(".ad_details input[name='serviceProvice']").val(dataJD.province);
+                $(".ad_details input[name='serviceCity']").val(dataJD.city);
+                $(".ad_details input[name='serviceCounty']").val(dataJD.district);
+              } else {
+                checkAuth(data.code);
+              }
+            } else {
+              checkAuth(data.code);
+              console.log(data.msg);
+            }
+          },
+        });
+        $("#add_add").show();
+      })
+      // 提交保存地址
+    $(".save_ad a").click(function () {
+      // 表单验证
+      for (var i = 0; i < $(".per_info input").length; i++) {
+        $(".per_info input").eq(i).trigger("blur");
+        if ($(".validation").length > 0) {
+          return;
+          break;
+        }
+      }
+      var addressId = "";
+      if ($(".ad_details input[name='id']").val() != "") {
+        addressId = "/" + $(".ad_details input[name='id']").val();
+      }
+      var userName = $("input[name='userName']").val();
+      var phone = $("input[name='phone']").val();
+      var province = $("input[name='serviceProvice']").val();
+      var city = $("input[name='serviceCity']").val();
+      var district = $("input[name='serviceCounty']").val();
+      var address = $("input[name='address']").val();
+      $.ajax({
+        url: publicPathCmn + "/api/user/address" + addressId,
+        type: "post",
+        data: {
+          userName: userName,
+          phone: phone,
+          province: province,
+          city: city,
+          district: district,
+          address: address
+        },
+        dataType: "json",
+        headers: params,
+        success: function (data) {
+          if (data.success) {
+            if (data.code == 0) {
+                $(".address_alert").hide();
+                getNewAddress();
+              console.log(data.msg);
+            } else {
+              console.log(data.msg);
+            }
+          } else {
+            if (data.code == 90001) {
+              $("#layer,#address_tip").show();
+              console.log(data.msg);
+            }else {
+              checkAuth(data.code);
+            }
+            console.log(data.msg);
+          }
+        },
+      });
+
+    });
+    // 地址满三条
+    $("#ok").click(function(){
+      $("#layer,#address_tip,.address_alert").hide();
+      getNewAddress();
+    })
+    // 表单验证
+    var regTel = /^1(3|4|5|7|8)\d{9}$/; //电话
+    $(".per_info input").blur(function () {
+      var self = $(this);
+      var name = $(this).attr("name");
+      switch (name) {
+        case "userName":
+          if (self.val() == "") {
+            onErrorSp("请输入姓名", self);
+            return;
+          } else {
+            onSuccessSp(self);
+          }
+          break;
+        case "phone":
+          if (self.val() == "") {
+            onErrorSp("请输入电话", self);
+            return;
+          } else if (!regTel.test(self.val())) {
+            onErrorSp('请填写正确的电话', self);
+            return;
+          } else {
+            onSuccessSp(self);
+          }
+          break;
+        case "serviceProvice":
+          if (self.val() == "") {
+            onErrorSp("请选择地址", self);
+            return;
+          } else {
+            onSuccessSp(self);
+          }
+          break;
+        case "serviceCity":
+          if (self.val() == "") {
+            onErrorSp("请选择地址", self);
+            return;
+          } else {
+            onSuccessSp(self);
+          }
+          break;
+        case "serviceCounty":
+          if (self.val() == "") {
+            onErrorSp("请选择地址", self);
+            return;
+          } else {
+            onSuccessSp(self);
+          }
+          break;
+        case "address":
+          if (self.val() == "") {
+            onErrorSp("请填写地址", self);
+            return;
+          } else if (self.val().length >= 80) {
+            onErrorSp("不能超过80个汉字", self);
+            return;
+          } else {
+            onSuccessSp(self);
+          }
+          break;
+        default:
+          break;
+      }
+    });
+      // 选择地址
+      $("#add_content").on("click", ".info_ad", function () {
+        $(this).parents(".add_list").addClass("active").siblings().removeClass("active");
+        $("#alert_ad_list").hide();
+        var id = $(this).parents(".add_list").find("input[name='id']").val();
+        $.ajax({
+          url: publicPathCmn + "/api/user/address/" + id,
+          type: "get",
+          data: {},
+          dataType: "json",
+          headers: params,
+          success: function (data) {
+            if (data.success) {
+              if (data.code == 0) {
+                var dataJD = data.jsonData;
+                html0 = "<div class='address_s'>" +
+                    "<input name='id' type='hidden' value='" + dataJD.id + "'/>" +
+                    "<input type='hidden' name='phone' value='" + dataJD.phone + "'/>" +
+                    "<input type='hidden' name='userName' value='" + dataJD.userName + "'/>" +
+                    "<input type='hidden' name='province' value='" + dataJD.province + "'/>" +
+                    "<input type='hidden' name='city' value='" + dataJD.city + "'/>" +
+                    "<input type='hidden' name='district' value='" + dataJD.district + "'/>" +
+                    "<input type='hidden' name='address' value='" + dataJD.address + "'/>" +
+                    "<h3>" + dataJD.userName + "<span>" + dataJD.phone + "</span></h3>" +
+                    "<p>" + dataJD.provinceValue + "-" + dataJD.cityValue + "-" + dataJD.districtValue + "&nbsp;&nbsp;" + dataJD.address + "</p>" +
+                    "</div>";
+                $("#address").html(html0);
+              } else {
+                console.log(data.msg);
+              }
+            } else {
+              checkAuth(data.code);
+              console.log(data.msg);
+            }
+          },
+        });
+      });
+      //				表单验证
+      $(".info_r_enter input,.info_r_enter select").blur(function () {
+        var self = $(this);
+        var name = $(this).attr("name");
+        switch (name) {
+          case "dpd1":
+            if (self.val() == "") {
+              onError('服务开始时间不能为空');
+            } else {
+              onSuccess();
+            }
+            break;
+          case "dpd2":
+            if (self.val() == "") {
+              onError('服务结束时间不能为空');
+            }else if (self.val()<$("input[name='dpd1']").val()) {
+              onError('结束时间不能早于开始时间');
+            } else {
+              onSuccess();
+            }
+            break;
+          case "datesecond1":
+            if (self.val() == "") {
+              onError('服务开始时间不能为空');
+            } else {
+              onSuccess();
+            }
+            break;
+          case "datesecond2":
+            if (self.val() == "") {
+              onError('服务结束时间不能为空');
+            }else if(self.val()<$("input[name='datesecond1']").val()){
+              onError('结束时间不能早于开始时间');
+            }else{
+              onSuccess();
+            }
+            break;
+          case "xdt":
+            if (self.val() == "" && self.attr("disabled") != "disabled") {
+              onError('预产期不能为空');
+            } else {
+              onSuccess();
+            }
+            break;
+          case "serType":
+            if (!self.is(":checked") && !self.parent(".radio_box").siblings(".radio_box").children("input").is(":checked")) {
+              onError('请选择服务类型');
+            } else {
+              onSuccess();
+            }
+            break;
+          case "oldSelf":
+            if (!self.is(":checked") && !self.parent(".radio_box").siblings(".radio_box").children("input").is(":checked")) {
+              onError('请选择老人能否自理');
+            } else {
+              onSuccess();
+            }
+            break;
+          default:
+            break;
+        }
+      });
+      // 预约提交
+      $("#submit").click(function (e) {
+        var serviceItemCode = $("input[name='serviceItemCode']").val();
+        e.preventDefault();
+        if ($(".common input[name='salary']").val() == "") {
+          onError('价格预算不能为空');
+          return;
+        } else {
+          onSuccess();
+        }
+        if ($("select[name='salaryType']").val() == "") {
+          onError('请选择价格预算单位');
+          return;
+        } else {
+          onSuccess();
+        }
+        //提交验证
+        var $gz = $(".gz" + serviceItemCode);
+        for (var i = 0; i < $gz.find("input").length; i++) {
+          $gz.find("input").eq(i).trigger("blur");
+          if ($(".vf_on").length > 0) {
+            return;
+            break;
+          }
+        }
+        if ($(".textarea").val().length >= 200) {
+          onError('不能超过200个汉字');
+          return;
+        } else {
+          onSuccess();
+        }
+
+        if ($("#address input[name='id']").length < 1) {
+          onError('请添加服务地址');
+          return;
+        } else {
+          onSuccess();
+        }
+        var $input = $(".address_s");
+        var customerMobile = $input.find("input[name='phone']").val();
+        var customerName = $input.find("input[name='userName']").val();
+        var serviceProvice = $input.find("input[name='province']").val();
+        var serviceCity = $input.find("input[name='city']").val();
+        var serviceCounty = $input.find("input[name='district']").val();
+        var serviceAddress = $input.find("input[name='address']").val();
+        var remarks = $(".textarea").val();
+        var salary = $("input[name='salary']").val();
+        var salaryType = $("select[name='salaryType']").val();
+        var salarySkills = "";
+        $(".otherReq li").each(function () {
+          if ($(this).hasClass("active")) {
+            salarySkills += $(this).attr("data-skills") + ",";
+          }
+        })
+        if (salarySkills != "") {
+          salarySkills = salarySkills.substring(0, salarySkills.length - 1);
+        }
+        var params = {};
+        if (serviceItemCode == 01) {
+          if ($("#baby").is(":checked")) {
+            var isBabyBorn = "1"
+          } else {
+            var isBabyBorn = "0";
+            var expectedBirth = $("#xdt").val();
+          }
+          var serviceStart = $("#dpd1").val();
+          var serviceEnd = $("#dpd2").val();
+
+          params = {
+            salary: salary,
+            salaryType: salaryType,
+            customerMobile: customerMobile,
+            customerName: customerName,
+            serviceProvice: serviceProvice,
+            serviceCity: serviceCity,
+            serviceCounty: serviceCounty,
+            serviceAddress: serviceAddress,
+            remarks: remarks,
+            isBabyBorn: isBabyBorn,
+            expectedBirth: expectedBirth,
+            serviceStart: serviceStart,
+            serviceEnd: serviceEnd,
+            salarySkills: salarySkills,
+            serviceItemCode: "01",
+            serviceType: "01"
+          };
+        } else if (serviceItemCode == 02) {
+          var serviceStart = $("#dpd1").val();
+          var serviceEnd = $("#dpd2").val();
+          params = {
+            salary: salary,
+            salaryType: salaryType,
+            customerMobile: customerMobile,
+            customerName: customerName,
+            serviceProvice: serviceProvice,
+            serviceCity: serviceCity,
+            serviceCounty: serviceCounty,
+            serviceAddress: serviceAddress,
+            remarks: remarks,
+            serviceStart: serviceStart,
+            serviceEnd: serviceEnd,
+            salarySkills: salarySkills,
+            serviceItemCode: "02",
+            serviceType: "01"
+          };
+
+        } else if (serviceItemCode == 03) {
+          var serviceStart = $("#datesecond1").val();
+          var serviceEnd = $("#datesecond2").val();
+          var serviceType = $(".gz03 .sertype input:checked").val();
+          params = {
+            salary: salary,
+            salaryType: salaryType,
+            customerMobile: customerMobile,
+            customerName: customerName,
+            serviceProvice: serviceProvice,
+            serviceCity: serviceCity,
+            serviceCounty: serviceCounty,
+            serviceAddress: serviceAddress,
+            remarks: remarks,
+            serviceStart: serviceStart,
+            serviceEnd: serviceEnd,
+            salarySkills: salarySkills,
+            serviceItemCode: "03",
+            serviceType: serviceType
+          };
+
+        } else if (serviceItemCode == 04) {
+          var selfCares = $(".oldSelf input:checked").val();
+          var serviceType = $(".gz04 .sertype input:checked").val();
+          var serviceStart = $("#datesecond1").val();
+          var serviceEnd = $("#datesecond2").val();
+          params = {
+            salary: salary,
+            salaryType: salaryType,
+            customerMobile: customerMobile,
+            customerName: customerName,
+            serviceProvice: serviceProvice,
+            serviceCity: serviceCity,
+            serviceCounty: serviceCounty,
+            serviceAddress: serviceAddress,
+            remarks: remarks,
+            selfCares: selfCares,
+            serviceStart: serviceStart,
+            serviceEnd: serviceEnd,
+            salarySkills: salarySkills,
+            serviceType: serviceType,
+            serviceItemCode: "04"
+          };
+
+        } else if (serviceItemCode == 05) {
+          var serviceType = $(".gz05 .sertype input:checked").val();
+          var serviceStart = $("#datesecond1").val();
+          var serviceEnd = $("#datesecond2").val();
+          params = {
+            salary: salary,
+            salaryType: salaryType,
+            customerMobile: customerMobile,
+            customerName: customerName,
+            serviceProvice: serviceProvice,
+            serviceCity: serviceCity,
+            serviceCounty: serviceCounty,
+            serviceAddress: serviceAddress,
+            remarks: remarks,
+            serviceStart: serviceStart,
+            serviceEnd: serviceEnd,
+            salarySkills: salarySkills,
+            serviceType: serviceType,
+            serviceItemCode: "05"
+          };
+
+        } else if (serviceItemCode == 06) {
+          var serviceStart = $("#dpd1").val();
+          var serviceEnd = $("#dpd2").val();
+          params = {
+            salary: salary,
+            salaryType: salaryType,
+            customerMobile: customerMobile,
+            customerName: customerName,
+            serviceProvice: serviceProvice,
+            serviceCity: serviceCity,
+            serviceCounty: serviceCounty,
+            serviceAddress: serviceAddress,
+            remarks: remarks,
+            serviceStart: serviceStart,
+            serviceEnd: serviceEnd,
+            salarySkills: salarySkills,
+            serviceType: "01",
+            serviceItemCode: "06"
+          };
+
+        } else if (serviceItemCode == 07) {
+          var serviceType = $(".gz07 .sertype input:checked").val();
+          var serviceStart = $("#datesecond1").val();
+          var serviceEnd = $("#datesecond2").val();
+          params = {
+            salary: salary,
+            salaryType: salaryType,
+            customerMobile: customerMobile,
+            customerName: customerName,
+            serviceProvice: serviceProvice,
+            serviceCity: serviceCity,
+            serviceCounty: serviceCounty,
+            serviceAddress: serviceAddress,
+            remarks: remarks,
+            serviceStart: serviceStart,
+            serviceEnd: serviceEnd,
+            salarySkills: salarySkills,
+            serviceType: serviceType,
+            serviceItemCode: "07"
+          };
+        }
+
+        //提交
+        $.ajax({
+          url: publicPath + "/api/service/subreq",
+          type: "post",
+          data: params,
+          dataType: "json",
+          success: function success(data) {
+            if (data.success) {
+              if (data.code == 0) {
+                $(".alert_info").hide();
+                $("#layer,#y_success").show();
+              }
+            } else {
+              if (data.code == 999016) {
+                $("#layer,#y_no").show();
+              }
+              if (data.code == 999010) {
+                alert(data.msg);
+                window.location.href = "login.html";
+              }
+              checkAuth(data.code);
+              console.log(data.msg);
+            }
+          }
+        });
+      })
+      //地址
+    $("body").on("click",".newLayer",function(){
+      $(".newLayer").remove();
+			$("#area").animate({"bottom":"-30rem"});
+    });
+      
+    })
+    //           服务技能加载
+    function pullSkills(serviceItemCode) {
+      $.ajax({
+        url: publicPath + "/api/common/getSKillsData/c005",
+        type: "post",
+        data: {
+          itemCode: serviceItemCode,
+          level: "1"
+        },
+        dataType: "json",
+        headers: params,
+        success: function success(data) {
+          if (data.success) {
+            if (data.code == 0) {
+              var dataJD = data.jsonData;
+              var html = ""
+              $.each(dataJD, function (i, item) {
+                html += "<li data-skills='" + item.skillsKey + "'>" + item.skillsValue + "</li>"
+              });
+              $(".otherReq").html(html);
+            }
+          } else {
+            checkAuth(data.code);
+            console.log(data.msg);
+          }
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    }
+    //        获取地址
+    function getAddress() {
+      $.ajax({
+        url: publicPathCmn + "/api/user/address",
+        type: "get",
+        data: {},
+        dataType: "json",
+        headers: params,
+        async:false,
+        success: function (data) {
+          if (data.success) {
+            if (data.code == 0) {
+              var dataJD = data.jsonData;
+              if (dataJD == "") {
+                $("#add_content").html("<p class='no_address'>暂无服务地址~</p>");
+              } else {
+                var html = "";
+                $.each(dataJD, function (i, item) {
+                  html += "<div class='add_list'>" +
+                            "<input name='id' type='hidden' value='" + item.id + "'/>" +
+                            "<a>" +
+                            "<div class='info_ad'>" +
+                            "<h2>" + item.userName + "<span>" + item.phone + "</span></h2>" +
+                            "<h3>" + item.provinceValue + "-" + item.cityValue + "-" + item.districtValue + "&nbsp;&nbsp;" + item.address + "</h3>" +
+                            "</div>" +
+                            "</a>" +
+                            "<div class='operation'>" +
+                            "<p><a data-id='" + item.id + "' class='edit'>编辑</a></p>" +
+                            "</div>" +
+                          "</div>";
+                  
+                });
+                $("#add_content").html(html);
+              }
+              if(dataJD.length>2){
+                $(".submit_sp").hide();
+              }else{
+                $(".submit_sp").show();
+              }
+
+            } else {
+              console.log(data.msg);
+            }
+          } else {
+            checkAuth(data.code);
+            console.log(data.msg);
+          }
+        },
+      });
+    }
+    //        获取默认地址
+    function getNewAddress() {
+      $.ajax({
+        url: publicPathCmn + "/api/user/address/newOne",
+        type: "get",
+        data: {},
+        dataType: "json",
+        headers: params,
+        success: function (data) {
+          if (data.success) {
+            if (data.code == 0) {
+              var dataJD = data.jsonData;
+              if (dataJD == ""||dataJD == null) {
+                $("#address").html("<div class='no_ad'>暂无地址，<a>点击添加</a></div>");
+              } else {
+                var html = "<div class='address_s'>" +
+                          "<input name='id' type='hidden' value='" + dataJD.id + "'/>" +
+                          "<input type='hidden' name='phone' value='" + dataJD.phone + "'/>" +
+                          "<input type='hidden' name='userName' value='" + dataJD.userName + "'/>" +
+                          "<input type='hidden' name='province' value='" + dataJD.province + "'/>" +
+                          "<input type='hidden' name='city' value='" + dataJD.city + "'/>" +
+                          "<input type='hidden' name='district' value='" + dataJD.district + "'/>" +
+                          "<input type='hidden' name='address' value='" + dataJD.address + "'/>" +
+                          "<h3>" + dataJD.userName + "<span>" + dataJD.phone + "</span></h3>" +
+                          "<p>" + dataJD.provinceValue + "-" + dataJD.cityValue + "-" + dataJD.districtValue + "&nbsp;&nbsp;" + dataJD.address + "</p>" +
+                        "</div>";
+                $("#address").html(html);
+              }
+
+            } else {
+              console.log(data.msg);
+            }
+          } else {
+            checkAuth(data.code);
+            console.log(data.msg);
+          }
+        },
+      });
+    }
+    function onError(msg) {
+      if ($(".validationFrame").hasClass("vf_on")) {
+        $(".validationFrame").text(msg);
+        return;
+      }
+      $(".validationFrame").addClass("vf_on").text(msg);
+    }
+
+    function onSuccess() {
+      $(".validationFrame").removeClass("vf_on").text("");
+    }
+    function onErrorSp(msg, self) {
+      $(".validation").remove();
+      $(".ad_details").append("<p class='validation'>" + msg + "</p>");
+      return;
+    }
+
+    function onSuccessSp(self) {
+      $(".validation").remove();
+    }
+</script>
+</body>
+
+</html>

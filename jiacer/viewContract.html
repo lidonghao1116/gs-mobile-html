@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>查看合同</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+<header>
+  <a class="goBack" href="javascript:history.go(-1)"></a>
+  <h1>查看合同</h1>
+</header>
+<ul class="contractList">
+
+</ul>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function () {
+    var Url = location.search;
+    if (Url.indexOf("?") != -1) {
+      var orderNo = Url.substr(1);
+      $.ajax({
+        url: publicPath + "/api/orders/ordersdeails",
+        headers: params,
+        type: "post",
+        data: {orderNo: orderNo},
+        dataType: "json",
+        success: function success(data) {
+          if (data.success) {
+            if (data.code == 0) {
+              var contracts = data.jsonData.contracts;
+              //								合同信息
+              var html = "";
+              $.each(contracts, function (i, item) {
+                html += "<li><img src='" + item.contractUrl + "'/></li>";
+              })
+              $(".contractList").html(html);
+            }
+          } else {
+            checkAuth(data.code);
+            console.log(data.msg);
+          }
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    }
+
+  });
+</script>
+</body>
+</html>

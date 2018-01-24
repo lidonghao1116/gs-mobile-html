@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>职位发布</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/job.css"/>
+
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+
+<body>
+<input type="hidden" id="wesiteName" value=""/>
+<div id="layer"></div>
+<div id="jlb-layer"></div>
+<!-- 分享 -->
+<div class="share_l">
+  <p><img class="shareicon" src="img/shareicon.png"/></p>
+  <img class="shareinfo" src="img/shareinfo.png">
+</div>
+
+<!--联系电话弹窗-->
+<div class="contact-pop">
+  <div class="cp-content">
+    <h1>拨打家政老师电话</h1>
+    <p></p>
+  </div>
+  <div class="cp-btn">
+    <a class="cpb-cancel">取消</a>
+    <a class="cpb-call">呼叫</a>
+  </div>
+</div>
+<!-- <div class="link"><span></span>立即联系</div> -->
+<div class="fix_head">
+  <header>
+    <a class="goBackIndex" href="index.html">店铺</a>
+    <h1 class="wesiteName">天天家政</h1>
+    <a class="shareJob" href="#">分享职位</a>
+  </header>
+</div>
+<div class="Service_type">
+  <ul>
+    <li class="service_list1 service_li"><span data-sercode="01">月嫂</span></li>
+    <li class="service_list2 service_li"><span data-sercode="02">育儿嫂</span></li>
+    <li class="service_list3 service_li"><span data-sercode="03">保姆</span></li>
+    <li class="service_list4 service_li"><span data-sercode="05">钟点工</span></li>
+  </ul>
+  <ul>
+    <li class="service_list7 service_li"><span data-sercode="07">医院护工</span></li>
+    <li class="service_list5 service_li"><span data-sercode="04">老人陪护</span></li>
+    <li class="service_list6 service_li"><span data-sercode="06">家庭管家</span></li>
+    <li class="service_list8"><span data-sercode="">敬请期待</span></li>
+  </ul>
+</div>
+<div class="jlb-filter clearfix">
+  <div class="sort">
+    <a class="sortType"><span>工种</span><img src="img/down.png"/></a>
+    <a class="sortType"><span>薪资</span><img src="img/down.png"/></a>
+    <a class="sortType"><span>区域</span><img src="img/down.png"/></a>
+    <a class="sortType"><span>更多</span><img src="img/down.png"/></a>
+  </div>
+
+  <!--服务工种-->
+  <div class="sortCondition" id="sortService">
+    <!-- <p class="mf-on" data-sercode="">全部<img src="img/check.png" /></p>
+    <p data-sercode="01">月嫂<img src="img/check.png" /></p>
+    <p data-sercode="02">育儿嫂<img src="img/check.png" /></p>
+    <p data-sercode="03">保姆<img src="img/check.png" /></p>
+    <p data-sercode="04">老人陪护<img src="img/check.png" /></p>
+    <p data-sercode="05">钟点工<img src="img/check.png" /></p>
+    <p data-sercode="06">家庭管家<img src="img/check.png" /></p> -->
+  </div>
+  <!--薪资范围-->
+  <div class="sortCondition sortPrice" id="sortPrice">
+    <div class="price_tab">
+      <ul id="salaryType">
+        <!-- <li class="active">按月</li>
+        <li>按天</li>
+        <li>按小时</li> -->
+      </ul>
+    </div>
+    <div class="price_content_box">
+      <div class="price_content">
+        <!-- <p class="mf-on" data-sercode="">全部<img src="img/check.png"/></p>
+        <p data-salary="">4000元以下<img src="img/check.png"/></p>
+        <p data-salary="">4000-7000元<img src="img/check.png"/></p>
+        <p data-salary="">7000-10000元<img src="img/check.png"/></p>
+        <p data-salary="">10000-15000元<img src="img/check.png"/></p>
+        <p data-salary="">15000元以上<img src="img/check.png"/></p> -->
+      </div>
+      <div class="price_content">
+        <!-- <p class="mf-on" data-sercode="">全部<img src="img/check.png"/></p>
+        <p data-salary="">200元以下<img src="img/check.png"/></p>
+        <p data-salary="">200-500元<img src="img/check.png"/></p>
+        <p data-salary="">500-800元<img src="img/check.png"/></p>
+        <p data-salary="">800-100元<img src="img/check.png"/></p>
+        <p data-salary="">1000元以上<img src="img/check.png"/></p> -->
+      </div>
+      <div class="price_content">
+        <!-- <p class="mf-on" data-sercode="">全部<img src="img/check.png"/></p>
+        <p data-salary="">60元以下<img src="img/check.png"/></p>
+        <p data-salary="">60-90元<img src="img/check.png"/></p>
+        <p data-salary="">90-120元<img src="img/check.png"/></p>
+        <p data-salary="">120-150元<img src="img/check.png"/></p>
+        <p data-salary="">150元以上<img src="img/check.png"/></p> -->
+      </div>
+    </div>
+  </div>
+  <!--地区选择-->
+  <div class="sortCondition area_sp" id="sortArea">
+    <input type="hidden" name="serviceProvice" value="">
+    <input type="hidden" name="serviceCity" value="">
+    <div id="area_sp">
+      <div class="provice">
+        <ul>
+        </ul>
+      </div>
+      <div class="city">
+        <ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--年龄要求-->
+  <div class="sortCondition" id="more">
+    <div class="more_list" id="sortAge">
+      <h1>年龄</h1>
+      <ul>
+        <li data-age="1">29岁以下</li>
+        <li data-age="2">29-39岁</li>
+        <li data-age="3">39-49岁</li>
+        <li data-age="4">50岁以上</li>
+      </ul>
+    </div>
+    <div class="button_box">
+      <div>
+        <a class="clear">清除</a>
+      </div>
+      <div>
+        <a class="confirm">确定</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="job_list_box">
+  <ul class="job_list">
+    <!-- <li>
+  <h2>张三00<i>急</i><span class="price">10000元/月</span></h2>
+  <p>
+    <span class="age">30岁</span>
+    <span class="location">山东-日照市</span>
+  </p>
+  <h3>辅食、早教、年纪小于50岁，会普通话，性格开朗，喜欢小孩，育儿经验5年以上</h3>
+  <div class="bottom_info">
+    <span class="wesite_name">天天家政</span>
+    <span class="link">张老师</sapn>
+  </div>
+</li> -->
+    <!-- <li>
+  <h2>上海客户找高级育婴师<span>8999-12999元/月</span></h2>
+  <h3>辅食、早教、年纪小于50岁，会普通话，性格开朗，喜欢小孩，育儿经验5年以上</h3>
+  <p>29-39岁<span>2017-04-23</span></p>
+</li>
+<li>
+  <h2>上海客户找高级育婴师<span>8999-12999元/月</span></h2>
+  <h3>辅食、早教、年纪小于50岁，会普通话，性格开朗，喜欢小孩，育儿经验5年以上</h3>
+  <p>29-39岁<span>2017-04-23</span></p>
+</li>
+<li>
+  <h2>上海客户找高级育婴师<span>8999-12999元/月</span></h2>
+  <h3>辅食、早教、年纪小于50岁，会普通话，性格开朗，喜欢小孩，育儿经验5年以上</h3>
+  <p>29-39岁<span>2017-04-23</span></p>
+</li> -->
+  </ul>
+</div>
+
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+  //获取门店
+  $.ajax({
+    url: publicPath + "/api/index/info",
+    headers: params,
+    type: "post",
+    data: {},
+    dataType: "json",
+    async: false,
+    success: function success(data) {
+      if (data.success) {
+        if (data.code == 0) {
+          var dataJD = data.jsonData;
+          $("#wesiteName").val(dataJD.wesiteName);
+          $(".wesiteName").text(dataJD.wesiteName);
+          console.log(data.msg);
+        } else {
+          console.log(data.msg);
+        }
+      } else {
+        checkAuth(data.code);
+        console.log(data.msg);
+      }
+    }
+  });
+  var imgurl = "http://" + window.location.host + "/images/zhaopin.jpg";
+  var wesiteName = $("#wesiteName").val();
+  shareWechat.init_share_params = {
+    'onMenuShareTimeline.title': wesiteName + '-职位发布啦',
+    'onMenuShareTimeline.imgUrl': imgurl,
+    'onMenuShareAppMessage.title': wesiteName + '-职位发布啦',
+    'onMenuShareAppMessage.imgUrl': imgurl,
+    'onMenuShareAppMessage.desc': '好多家政服务的新职位，等你来应聘哦！'
+  };
+  shareWechat.sharePage();
+
+  //获取总条数
+  function records(serviceType, serviceProvince, serviceCity, age, salaryType, salary) {
+    $.ajax({
+      url: publicPath + "/api/jobRecruit/getTenantsJobsListInfo",
+      headers:params,
+      type: "post",
+      data: {
+        serviceType: serviceType,
+        serviceProvince: serviceProvince,
+        serviceCity: serviceCity,
+        age: age,
+        salaryType: salaryType,
+        salary: salary
+      },
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            getTenantsJobsListInfo("1", dataJD.records, serviceType, serviceProvince, serviceCity, age, salaryType, salary);
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+
+  }
+
+  function getTenantsJobsListInfo(pageNumber, pageSize, serviceType, serviceProvince, serviceCity, age, salaryType, salary) {
+    $.ajax({
+      url: publicPath + "/api/jobRecruit/getTenantsJobsListInfo",
+      headers:params,
+      type: "post",
+      async: false,
+      data: {
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        serviceType: serviceType,
+        serviceProvince: serviceProvince,
+        serviceCity: serviceCity,
+        age: age,
+        salaryType: salaryType,
+        salary: salary
+      },
+      dataType: "json",
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData.rows;
+            var html = "";
+            if (dataJD == "") {
+              html = "<div class='no_found'><p>没有找到你想要的职位~</p></div>";
+            } else {
+              $.each(dataJD, function (i, item) {
+                var emsSign = "";
+                if (item.emsSign == "01") {
+                  emsSign = "<i>急</i>";
+                }
+                var addTime = item.addTime.substring(0, 11);
+               
+                var address = "";
+                if (item.serviceArea == "") {
+                  if (item.serviceCity != "") {
+                    address = item.serviceProvince + "-" + item.serviceCity;
+                  } else {
+                    var address = item.serviceProvince;
+                  }
+                } else {
+                  address = item.serviceProvince + "-" + item.serviceCity + "-" + item.serviceArea;
+                }
+                var loginName = "";
+                if(item.loginName!="" && item.loginName!=null){
+                    loginName = item.loginName.substr(0,1)+"老师";
+                }
+                
+                var salary = "";
+                if(item.salary != null){
+                    salary = RetainedDecimalPlacesNF(item.salary);
+                }
+                    
+                html += "<li>" +
+                    "<h2><a>" + item.positionName + "</a>" + emsSign + "<span class='price'>" + salary + item.salaryTypeValue + "</span></h2>" +
+                    "<h3>" +
+                    "<span class='age'>" + item.age + "</span>" +
+                    "<span class='location'>" + address + "</span>" +
+                    "</h3>" +
+                    "<div class='demand'>" + item.demand + "</div>" +
+                    "<div class='bottom_info'>" +
+                    "<span class='wesite_name'>" + $("#wesiteName").val() + "</span>" +
+                    "<a href='tel:"+item.telephone+"' class='link'>" + loginName + "</a>" +
+                    "<input type='hidden' value='" + item.telephone + "'>" +
+                    "</div>" +
+                    "</li>";
+              });
+            }
+            $(".job_list").html(html);
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+  }
+  ;
+  //			区域选择
+  function serviceProvinceSp() {
+    $.ajax({
+      url: publicPath + "/api/common/getAreaData/c001",
+      headers:params,
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            var html = "";
+            $.each(dataJD, function (i, item) {
+              html += "<li data-code='" + item.areaCode + "'>" + item.areaName + "</li>";
+            });
+            $("#area_sp .provice ul").html("<li data-code=''>全部</li>" + html);
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+  }
+
+  function serviceCitySp(pcode) {
+    $.ajax({
+      url: publicPath + "/api/common/getAreaData/c002",
+      headers:params,
+      type: "post",
+      data: {
+        pcode: pcode
+      },
+      dataType: "json",
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            var html = "";
+            $.each(dataJD, function (i, item) {
+              html += "<li data-code='" + item.areaCode + "'>" + item.areaName + "</li>";
+            });
+            $("#area_sp .city ul").html("<li data-code=''>全部</li>" + html);
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+  }
+
+  $(function () {
+    //工种查询
+    $.ajax({
+      url: publicIndex + "/fbeeWebConsole_web/api/custServer/getServiceType",
+      headers:params,
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            proObj = data.jsonData;
+            var html = "<p data-sercode=''>全部<img src='img/check.png' /></p>";
+            $.each(proObj, function (i, item) {
+              html += "<p data-sercode='" + item.code + "'>" + item.serviceType + "<img src='img/check.png' /></p>";
+            });
+            $("#sortService").html(html);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+    //年龄
+    $.ajax({
+      url: publicIndex + "/fbeeWebConsole_web/api/custServer/getAgeRange",
+      headers:params,
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          proObj = data.jsonData;
+          var html = "";
+          $.each(proObj, function (i, item) {
+            if (item.value == "不限") {
+              html += "";
+            } else {
+              html += "<li data-age='" + item.id + "'>" + item.value + "</li>";
+            }
+          });
+          $("#sortAge ul").html(html);
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+    //薪资
+    $.ajax({
+      url: publicIndex + "/fbeeWebConsole_web/api/custServer/getServiceIncome",
+      headers:params,
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          dataJD = data.jsonData;
+          var html = "";
+          $.each(dataJD, function (i, item) {
+            if (i == "0") {
+              html += "<li class='active' data-sercode='" + item.id + "'>" + item.value + "</li>";
+            } else {
+              html += "<li data-sercode='" + item.id + "'>" + item.value + "</li>";
+            }
+
+            var dataPrie = item.ceList;
+            var html0 = "<p data-sercode=''>全部<img src='img/check.png' /></p>";
+            $.each(dataPrie, function (j, item0) {
+              html0 += "<p data-sercode='" + item0.id + "'>" + item0.value + "<img src='img/check.png' /></p>";
+            })
+            $(".price_content").eq(i).html(html0);
+          });
+          $("#salaryType").html(html);
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+    $("body").scrollTop("0");
+    //滚动页面
+    var headHeight = $("header").outerHeight(true);
+    var serviceHeight = $(".Service_type").outerHeight(true);
+    var ttHeight = $(".jlb-filter").outerHeight(true);
+    var fixHeight = serviceHeight;
+    var windowHeight = $(window).height();
+    var bodyHeight = $("body").outerHeight(true);
+    var companyMinHeight = windowHeight - ttHeight - headHeight;
+    $(".job_list_box").css("minHeight", companyMinHeight);
+    $(window).scroll(function () {
+      if ($("body").scrollTop() < fixHeight) {
+        $(".jlb-filter").removeClass("jlb-filter_fix");
+        $(".Service_type").removeClass("Service_type_fix");
+        // $(".job_list_box").css("minHeight","0");
+      } else {
+        $(".jlb-filter").addClass("jlb-filter_fix");
+        $(".Service_type").addClass("Service_type_fix");
+        // $(".job_list_box").css("minHeight",companyMinHeight);
+      }
+      ;
+    });
+
+    //获取所有数据
+    records("", "", "", "", "", "");
+
+    //				地区选择
+    $("#area_sp").on("click", "li", function () {
+      $(this).addClass("area-on").siblings().removeClass("area-on");
+      var pcode = $(this).data("code");
+      if ($(this).parents("div").hasClass("provice")) {
+        if (pcode != "") {
+          serviceCitySp(pcode);
+          $("#area_sp .city").show();
+        } else {
+          $("#area_sp .city").hide();
+          $("#area_sp .city ul li").removeClass("area-on");
+          $("input[name='serviceProvice']").val("");
+          $("input[name='serviceCity']").val("");
+          $(".sortCondition").slideUp();
+          $(".sortType span").css("color", "#333333");
+          $("#jlb-layer").hide();
+          $(".sortType").children("img").attr("src", "img/down.png");
+          $(".sortType span").eq("1").text("区域");
+          var serviceType = "";
+          if ($("#sortService p.mf-on").length > 0) {
+            serviceType = $("#sortService p.mf-on").data("sercode");
+          }
+          var serviceProvince = "";
+          var serviceCity = "";
+          var age = "";
+          if ($("#sortAge ul li.mf-on").length > 0) {
+            age = $("#sortAge ul li.mf-on").data("age");
+          }
+          var salaryType = "";
+          var salary = "";
+          if ($(".price_content p.mf-on").length > 0) {
+            salary = $(".price_content p.mf-on").data("sercode");
+            salaryType = $("#salaryType li.active").data("sercode");
+          }
+
+          records(serviceType, serviceProvince, serviceCity, age, salaryType, salary);
+        }
+
+      } else if ($(this).parents("div").hasClass("city")) {
+        $(".sortCondition").slideUp();
+        $("#jlb-layer").hide();
+        $(".sortType").children("img").attr("src", "img/down.png");
+        $(".sortType span").css("color", "#333333");
+        $("input[name='serviceProvice']").val($("#area_sp .provice .area-on").data("code"));
+        $("input[name='serviceCity']").val($("#area_sp .city .area-on").data("code"));
+        if ($("#area_sp .city .area-on").data("code") == "") {
+          $(".sortType span").eq("2").text($("#area_sp .provice .area-on").text());
+        } else {
+          $(".sortType span").eq("2").text($("#area_sp .city .area-on").text());
+        }
+        var serviceType = $("#sortService p.mf-on").data("sercode");
+        var serviceProvince = $("input[name='serviceProvice']").val();
+        var serviceCity = $("input[name='serviceCity']").val();
+        var age = "";
+        if ($("#sortAge ul li.mf-on").length > 0) {
+          age = $("#sortAge ul li.mf-on").data("age");
+        }
+        var salaryType = "";
+        var salary = "";
+        if ($(".price_content p.mf-on").length > 0) {
+          salary = $(".price_content p.mf-on").data("sercode");
+          salaryType = $("#salaryType li.active").data("sercode");
+        }
+        records(serviceType, serviceProvince, serviceCity, age, salaryType, salary);
+
+      }
+    });
+
+    var jlbH = $(".job_list_box").offset().top;
+    $("#jlb-layer").css("top", jlbH);
+    $(document).scroll(function () {
+      var sTop = $(document).scrollTop();
+      var layH = jlbH - sTop;
+      if (layH >= 0) {
+        layH = layH;
+      } else {
+        layH = 0;
+      }
+      $("#jlb-layer").css("top", layH);
+    });
+    // var $sortType = $(".sortType");
+    // 	$sortType.click(function(){
+    // 		var index =  $sortType.index(this);
+    // 		if($(this).hasClass("active")){
+    // 				$("#jlb-layer").hide();
+    // 			$(".sortCondition").eq(index).slideUp();
+    // 			$(this).removeClass("active");
+    // 			$(this).children("img").attr("src","img/down.png");
+    // 		}else {
+    // 			$("#jlb-layer").show();
+    // 			$(".sortCondition").slideUp();
+    // 			$(".sortCondition").eq(index).slideDown();
+    // 			$(this).addClass("active")
+    // 						.children("img").attr("src","img/up.png");
+    // 		$(this).siblings().removeClass("active");
+    // 		$(this).siblings().children("img").attr("src","img/down.png");
+    // 		}
+    //
+    // });
+
+
+    $(".sortType").click(function () {
+      $(".job_list_box").css("minHeight", companyMinHeight);
+      $("body").scrollTop(fixHeight);
+      if ($(this).children("img").attr("src") == "img/up.png") {
+        $(".sortCondition").slideUp();
+        $("#jlb-layer").hide();
+        $(".sortType").children("img").attr("src", "img/down.png");
+        var i = $(this).index();
+        $(".sortType span").css("color", "#333");
+      } else {
+        $(".sortCondition").slideUp();
+        $("#jlb-layer").show();
+        $(this).children("span").css("color", "#FF9900");
+        $(this).siblings().children("span").css("color", "#333");
+        $(this).children("img").attr("src", "img/up.png");
+        $(this).siblings().children("img").attr("src", "img/down.png");
+        var i = $(this).index();
+        switch (i) {
+          case 0:
+            $("#sortService").slideDown();
+            break;
+          case 1:
+            $("#sortPrice").slideDown();
+            break;
+          case 2:
+            $("#sortArea").slideDown();
+            if ($(".provice ul li.area-on").length < 1 || $(".provice ul li.area-on").data("code") == "") {
+              serviceProvinceSp();
+              $("#area_sp .provice").show().siblings().hide();
+            }
+            break;
+          case 3:
+            $("#more").slideDown();
+            break;
+          default:
+            break;
+        }
+      }
+      event.preventDefault();
+    });
+
+    var $sortCondition = $(".sortCondition");
+    var $text_tt = $(".sortType");
+    var $price_content = $(".price_content");
+    $(".sortCondition p").click(function () {
+      var index = $sortCondition.index($(this).parents(".sortCondition"));
+      if ($(this).text() == "全部" && index != "1") {
+        if (index == "0") {
+          $(".sortType span").eq(index).text("工种");
+        } else if (index == "2") {
+          $(".sortType span").eq(index).text("区域");
+        }
+        // else if(index=="3"){
+        // 	$(".sortType span").eq(index).text("更多");
+        // }
+      } else if (index == "1") {
+        var index0 = $price_content.index($(this).parent())
+        $(".sortType span").eq(index).text($("#salaryType li").eq(index0).text());
+      } else {
+        // $(".sortType span").eq(index).css("color","#FF9900");
+        $(".sortType span").eq(index).text($(this).text());
+      }
+      if (index == "1") {
+        $(this).siblings("p").css("color", "#333333").children("img").hide();
+        $(this).parent().siblings().children("p").css("color", "#333333").children("img").hide();
+      } else {
+        $(this).siblings("p").css("color", "#333333").children("img").hide();
+      }
+      // $(this).siblings("p").css("color", "#333333").children("img").hide();
+      $(this).css("color", "#FF9900").children("img").show();
+      $(this).addClass("mf-on");
+      $(this).siblings("p").removeClass("mf-on");
+      var serviceType = "";
+      if ($("#sortService p.mf-on").length > 0) {
+        serviceType = $("#sortService p.mf-on").data("sercode");
+      }
+      var serviceProvince = $("input[name='serviceProvice']").val();
+      var serviceCity = $("input[name='serviceCity']").val();
+      var age = "";
+      if ($("#sortAge ul li.mf-on").length > 0) {
+        age = $("#sortAge ul li.mf-on").data("age");
+      }
+      var salaryType = "";
+      var salary = "";
+      if ($(".price_content p.mf-on").length > 0) {
+        salary = $(".price_content p.mf-on").data("sercode");
+        salaryType = $("#salaryType li.active").data("sercode");
+      }
+
+      records(serviceType, serviceProvince, serviceCity, age, salaryType, salary);
+      $(".sortCondition").slideUp();
+      $(".sortType").children("img").attr("src", "img/down.png");
+      $(".sortType span").css("color", "#333333");
+      $("#jlb-layer").hide();
+    });
+    // 服务工种
+    $(".Service_type").on("click", ".service_li span", function () {
+      $(".job_list_box").css("minHeight", companyMinHeight);
+      $("body").scrollTop(fixHeight);
+      var sercode = $(this).data("sercode");
+      var serviceTypeName = $(this).text();
+      $("#sortService p").each(function () {
+        if ($(this).data("sercode") == sercode) {
+          $(this).trigger("click");
+          return;
+        }
+      })
+      event.preventDefault();
+    })
+
+    // 更多 年龄的筛选
+    $("#sortAge").on("click", "ul li", function () {
+      if ($(this).hasClass("mf-on")) {
+        $(this).removeClass("mf-on");
+      } else {
+        $(this).addClass("mf-on").siblings().removeClass("mf-on");
+      }
+    })
+    // 确认筛选
+    $(".button_box").on("click", ".confirm", function () {
+      var serviceType = "";
+      if ($("#sortService p.mf-on").length > 0) {
+        serviceType = $("#sortService p.mf-on").data("sercode");
+      }
+      var serviceProvince = $("input[name='serviceProvice']").val();
+      var serviceCity = $("input[name='serviceCity']").val();
+      var age = "";
+      if ($("#sortAge ul li.mf-on").length > 0) {
+        age = $("#sortAge ul li.mf-on").data("age");
+      }
+      var salaryType = "";
+      var salary = "";
+      if ($(".price_content p.mf-on").length > 0) {
+        salary = $(".price_content p.mf-on").data("sercode");
+        salaryType = $("#salaryType li.active").data("sercode");
+      }
+
+      $(".sortType span").css("color", "#333");
+      records(serviceType, serviceProvince, serviceCity, age, salaryType, salary);
+      $(".sortCondition").slideUp();
+      $(".sortType").children("img").attr("src", "img/down.png");
+      $("#jlb-layer").hide();
+    })
+
+    // 清除筛选
+    $(".button_box").on("click", ".clear", function () {
+      $("#sortAge ul li,.sortCondition p").removeClass("mf-on");
+      $(".sortCondition p").css("color", "#333333").children("img").hide();
+      $("#area_sp li").removeClass("area-on");
+      $("input[name='serviceProvice']").val("");
+      $("input[name='serviceCity']").val("");
+      $(".sortType span").css("color", "#333333");
+      $(".sortType span").eq(0).text("工种");
+      $(".sortType span").eq(1).text("薪资");
+      $(".sortType span").eq(2).text("区域");
+      var serviceType = "";
+      var serviceProvince = "";
+      var serviceCity = "";
+      var age = "",
+          salaryType = "",
+          salary = "";
+
+      records(serviceType, serviceProvince, serviceCity, age, salaryType, salary);
+      $(".sortCondition").slideUp();
+      $(".sortType").children("img").attr("src", "img/down.png");
+      $("#jlb-layer").hide();
+    })
+
+    $("#jlb-layer").click(function () {
+      $(".sortCondition").slideUp();
+      $(".sortType span").css("color", "#333333");
+      $(".sortType img").attr("src", "img/down.png");
+      $(this).hide();
+    });
+    $(".shareJob").click(function () {
+      $(".share_l,#layer").show();
+    })
+    $("#layer,.share_l").click(function () {
+      $(".share_l,#layer,.contact-pop").hide();
+    })
+    /*$(".job_list").on("click", ".link", function () {
+      var contactPhone = $(this).siblings("input").val();
+      $(".contact-pop .cp-content p").text(contactPhone);
+      $(".contact-pop .cp-btn .cpb-call").attr("href", "tel:" + contactPhone);
+      $(".contact-pop,#layer").show();
+    })*/
+
+   /* $(".cpb-cancel").click(function () {
+      $(".contact-pop,#layer").hide();
+    });*/
+
+    $div_li = $("div.price_tab ul li");
+    $div_li.click(function () {
+      $(this).addClass("active").siblings().removeClass("active");
+      var index = $div_li.index(this);
+      $(".price_content_box .price_content").eq(index).show().siblings().hide();
+      $(".price_content_box .price_content").eq(index).siblings().children("p").removeClass("mf-on").css("color", "#333333").children("img").hide();
+      if ($(".price_content p.mf-on").length < 1) {
+        $(".sortType span").eq("1").text("薪资");
+      }
+    })
+  });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>我的预约</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/myReservation.css"/>
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    $(function () {
+      if (isEmpty(params.uid)) {
+        window.location.href = "login.html";
+        return;
+      }
+    })
+  </script>
+</head>
+<body>
+<div id="layer"></div>
+<div id="rl-layer"></div>
+<div class="cancelReservation-pop">
+  <div class="top_title">
+    <h2>温馨提示：</h2>
+    <p>确定要取消预约吗？取消预约后不能恢复。</p>
+  </div>
+  <h3 class="alert_bg"></h3>
+  <div class="reason">
+    <h4>请选择取消预约的原因（必选）：</h4>
+    <ul>
+      <li>
+        <input type="radio" name="cancel" value="01" >
+        <div class="radio_box">
+          <div class="circle-box"> <span class="circle"></span> </div>
+        </div>
+        <p>不想要了</p>
+      </li>
+      <li>
+        <input type="radio" name="cancel" value="02" >
+        <div class="radio_box">
+          <div class="circle-box"> <span class="circle"></span> </div>
+        </div>
+        <p>没有合适的阿姨</p>
+      </li>
+      <li>
+        <input type="radio" name="cancel" value="03" >
+        <div class="radio_box">
+          <div class="circle-box"> <span class="circle"></span> </div>
+        </div>
+        <p>家政公司不能满足需求</p>
+      </li>
+      <li>
+        <input type="radio" name="cancel" value="04">
+        <div class="radio_box">
+          <div class="circle-box"> <span class="circle"></span> </div>
+        </div>
+        <p>已经找到阿姨</p>
+      </li>
+      <li>
+        <input type="radio" name="cancel" value="05" >
+        <div class="radio_box">
+          <div class="circle-box"> <span class="circle"></span> </div>
+        </div>
+        <p>需求填错，重新下单</p>
+      </li>
+      <li>
+        <input type="radio" name="cancel" value="06" >
+        <div class="radio_box">
+          <div class="circle-box"> <span class="circle"></span> </div>
+        </div>
+        <p>其他原因</p>
+      </li>
+      <li class="last_r">
+        <div class="other_reason">
+          <textarea name="other_reason" placeholder="请输入具体原因"></textarea>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="crp-btn">
+    <a class="crpb-cancel">取消</a>
+    <a class="orange crpb-confirm">确定</a>
+  </div>
+</div>
+
+<header>
+  <a class="goBack" href="center.html"></a>
+  <h1>
+    <a>我的预约<img src="img/down2.png"/></a>
+  </h1>
+  <div class="reservationFilter">
+    <ul>
+      <li><a href="myOrder.html">我的订单</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="reservationList">
+  <ul>
+    <li>
+      <div class='li_top'><a>家策家政（徐汇店）</a><span>2017-01-21 10:21:07</span></div>
+      <div class='li_mid'>
+        <div class='staff_info'>
+          <img src='img/dzstaff.png'/>
+          <div class='r_staff_info'>
+              <h3>月嫂</h3>
+              <h4>服务定制</h4>
+              <p>根据您的需求，正在挑选家政员</p>
+          </div>
+        </div>
+        <p class='statu'>待处理</p>
+      </div>
+      <h2>价格预算：¥8000</h2>
+      <div class='li_bottom'>
+        <a class='rl-cancel'>取消预约</a>
+      </div>
+    </li>
+    <li>
+      <div class='li_top'><a>家策家政（徐汇店）</a><span>2017-01-21 10:21:07</span></div>
+      <div class='li_mid'>
+        <div class='staff_info'>
+          <img src='img/dzstaff.png'/>
+          <div class='r_staff_info'>
+              <h3>月嫂</h3>
+              <h4>张阿姨</h4>
+              <p>40岁|属羊|上海人|处女座|高中</p>
+          </div>
+        </div>
+        <p class='statu'>待处理</p>
+      </div>
+      <h2>价格预算：¥8000</h2>
+      <div class='li_bottom'>
+        <a class='rl-cancel'>取消预约</a>
+      </div>
+    </li>
+    <!--<li class="pending">
+      <div class="rl-title">
+        <p class="rl-name">家策家政（徐汇店）</p>
+        <p class="rl-status">待处理</p>
+      </div>
+      <div class="rl-content">
+        <div class="rlc-l clearfix">
+          <div class="rlc-pic">
+            <img src="img/housekeepingstaff.jpg"/>
+          </div>
+          <div class="rlc-detail">
+            <h1>张春梅</h1>
+            <p class="rlc-price">￥10888<span>元/26天</span></p>
+            <p class="rlc-time">预约时间：<span>2017-01-21 10:21:07</span></p>
+          </div>
+        </div>
+        <div class="rlc-r">
+          <p>月嫂</p>
+        </div>
+      </div>
+      <div class="rl-cancel clearfix">
+        <a>取消预约</a>
+      </div>
+    </li>-->
+  </ul>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $("header h1 a").click(function () {
+      if ($(".reservationFilter").css("display") == "none") {
+        $(".reservationFilter").slideDown();
+        $(this).children("img").attr("src", "img/up2.png");
+        $("#rl-layer").show();
+      } else {
+        $(".reservationFilter").slideUp();
+        $(this).children("img").attr("src", "img/down2.png");
+        $("#rl-layer").hide();
+      }
+
+    });
+      // 取消原因选择
+      $(".reason ul li").on("click","input[type='radio']",function(){
+            $(this).parent("li").find(".circle-box").addClass("active");
+            $(this).parent("li").siblings("li").find(".circle-box").removeClass("active");
+            if($(this).val()=="06"){
+              $(".other_reason").show();
+            }else{
+              $(".other_reason").hide().val("");
+            }
+         });
+
+//				遮盖层
+    var rlH = $(".reservationList").offset().top;
+    $("#rl-layer").css("top", rlH);
+    $(document).scroll(function () {
+      var sTop = $(document).scrollTop();
+      var layH = rlH - sTop;
+      if (layH >= 0) {
+        layH = layH;
+      } else {
+        layH = 0;
+      }
+      $("#rl-layer").css("top", layH);
+    })
+
+    // $(".reservationFilter ul li").click(function () {
+    //   $(this).addClass("rf-on").siblings().removeClass("rf-on");
+    //   var orderstatus = $(this).attr("data-code");
+    //   $.ajax({
+    //     url: publicPath + "/api/reserveorders/reserveorders",
+    //     headers: params,
+    //     type: "post",
+    //     data: {orderstatus: "01"},
+    //     dataType: "json",
+    //     async: false,
+    //     success: function success(data) {
+    //       if (data.success) {
+    //         if (data.code == 0) {
+    //           var dataJD = data.jsonData;
+    //           var records = dataJD.records
+    //           reserveorders(pageNumber, records, orderstatus)
+    //           $(".reservationFilter").slideUp();
+    //           $("header h1 a img").attr("src", "img/down2.png");
+    //           $("#rl-layer").hide();
+    //           console.log(data.msg);
+    //         } else {
+    //           console.log(data.msg);
+    //         }
+    //       }else {
+    //         checkAuth(data.code);
+    //       }
+    //     }
+    //   });
+
+    // });
+
+
+    $("#rl-layer").click(function () {
+      $(".reservationFilter").slideUp();
+      $("header h1 a img").attr("src", "img/down2.png");
+      $(this).hide();
+    })
+    var pageNumber
+    //总数查询
+    $.ajax({
+      url: publicPath + "/reserveorders/api/reserveorders/reserve/list",
+      headers: params,
+      type: "get",
+      data: {orderstatus: "01"},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            var records = dataJD.records;
+            reserveorders(pageNumber, records)
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        }else {
+          checkAuth(data.code);
+        }
+      }
+    });
+  });
+
+  //			取消预约
+  $(".reservationList ul").on("click", ".rl-cancel", function (e) {
+    e.stopPropagation();
+    orderNo = $(this).attr("data-orderNo");
+    $("#layer,.cancelReservation-pop").show();
+    $(".cancelReservation-pop").attr("data-on", orderNo);
+  })
+
+  $(".crpb-cancel,#layer").click(function () {
+    $("#layer,.cancelReservation-pop").hide();
+    $(".reason .promt").remove();
+  })
+
+  $(".crpb-confirm").click(function () {
+    var orderNo = $(".cancelReservation-pop").data("on");
+    var cancelReason ="";
+    if($("input[name='cancel']:checked").length<1){
+      $(".reason .promt").remove();
+      $(".reason ul").append("<p class='promt'>原因不能为空</p>");
+      return;
+    }else if($("input[name='cancel']:checked").val()=="06" && $(".other_reason textarea").val().trim()==""){
+        $(".reason .promt").remove();
+        $(".reason ul").append("<p class='promt'>原因不能为空</p>");
+        return;
+    }else if($("input[name='cancel']:checked").val()=="06" && $(".other_reason textarea").val().trim().length > 200){
+        $(".reason .promt").remove();
+        $(".reason ul").append("<p class='promt'>原因不能超过200字</p>");
+        return;
+    }else{
+      $(".reason .promt").remove();
+    }
+    if($("input[name='cancel']:checked").val()=="06"){
+      cancelReason = $(".other_reason textarea").val();
+    }else{
+      cancelReason = $("input[name='cancel']:checked").parents("li").find("p").text();
+    }
+    $.ajax({
+      url: publicPath + "/reserveorders/api/reserveorders/cancelreserveorders",
+      headers: params,
+      type: "post",
+      data: {
+        orderNo: orderNo,
+        cancelReason: cancelReason
+      },
+      dataType: "json",
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            window.location.reload();
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+  })
+
+  // $(".reservationList").on("click", "ul li", function () {
+  //   orderNo = $(this).attr("data-orderNo");
+  //   location.href = "http://" + window.location.host + "/" + domain + "/reservationDetail.html?orderNo=" + orderNo;
+  // })
+  $(".reservationList ul").on("click", ".li_location", function () {
+    var orderNo = $(this).parent("li").attr("data-orderNo");
+    var domain = $(this).parent("li").data("domain");
+    location.href = "http://" + window.location.host + "/" + domain + "/reservationDetail.html?orderNo=" + orderNo;
+  })
+
+  function reserveorders(pageNumber, pageSize) {
+    $.ajax({
+      url: publicPath + "/reserveorders/api/reserveorders/reserve/list",
+      headers: params,
+      type: "get",
+      data: {pageNumber: pageNumber, pageSize: pageSize, orderstatus: "01"},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            if (pageSize == 0) {
+              $(".reservationList ul").html("<div class='noContent'>" +
+                  "<img src='img/noContent.png'/>" +
+                  "<p>暂无内容，去看看其他的吧~</p>" +
+                  "</div>");
+              return;
+            }
+            var dataJD = data.jsonData.rows;
+            var html = "";
+            $.each(dataJD, function (i, item) {
+              var headImage = "";
+              var staffName = "";
+              var basicinfo = "";
+              if(item.staffId!=""&&item.staffId!=null){
+                headImage = item.staffInfo.headImage;
+                if (item.staffInfo.sex == "01") {
+                  staffName = item.staffInfo.staffName.split("")[0] + "师傅";
+                } else if (item.staffInfo.sex == "02") {
+                  staffName = item.staffInfo.staffName.split("")[0] + "阿姨";
+                }
+                basicinfo = item.staffInfo.age+"岁 | 属"+item.staffInfo.zodiacValue+" | "+item.staffInfo.nativePlaceValue+"人 | "+item.staffInfo.constellationValue+" | "+item.staffInfo.educationValue;
+              }else{
+                headImage = "img/dzstaff.png";
+                staffName = "服务定制";
+                basicinfo = "根据您的需求，正在挑选家政员";
+              }
+              
+              var salary = "";
+              if(item.orderCustomer.salary!=null && item.orderCustomer.salary!=undefined){
+               salary = RetainedDecimalPlacesNF(item.orderCustomer.salary);
+              }
+              
+              html +="<li data-orderNo='" + item.orderNo + "' data-domain='" + item.tenantInfo.domain + "'>"+
+                      "<div class='li_top'><a href='http://" + window.location.host + "/" + item.tenantInfo.domain + "/index.html" + "'>" + item.tenantInfo.websiteName + "</a><span>" + item.orderTime + "</span></div>"+
+                      "<div class='li_location'>"+ 
+                        "<div class='li_mid'>"+
+                          "<div class='staff_info'>"+
+                            "<img src='" + headImage + "'/>"+
+                            "<div class='r_staff_info'>"+
+                                "<h3>"+item.serviceItemCodeValue+"</h3>"+
+                                "<h4>" + staffName + "</h4>"+
+                                "<p>"+basicinfo+"</p>"+
+                            "</div>"+
+                          "</div>"+
+                          "<p class='statu'>待处理</p>"+
+                        "</div>"+
+                        "<h2>价格预算：¥"+salary+item.orderCustomer.salaryTypeValue+"</h2>"+
+                      "</div>"+
+                      "<div class='li_bottom'>"+
+                        "<a data-orderNo='" + item.orderNo + "' class='rl-cancel'>取消预约</a>"+
+                      "</div>"+
+                    "</li>";
+            })
+            $(".reservationList ul").html(html);
+
+          } else {
+            console.log(data.msg);
+          }
+        }else {
+          checkAuth(data.code);
+        }
+      }
+
+    });
+  }
+</script>
+</body>
+</html>

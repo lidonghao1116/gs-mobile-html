@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>家策好服务</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/custom.css"/>
+
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+
+<body>
+<input type="hidden" id="wesiteName" value=""/>
+<header>
+  <a class="jiacerIndex" href="#"><img src="img/jiacerlogo.png"/></a>
+  <h1>定制</h1>
+</header>
+<div class="work_box">
+  <ul>
+    <li data-sercode="01" class="work_list01 work_list">
+      <a>
+        <p>月嫂</p>
+      </a>
+    </li>
+    <li data-sercode="02" class="work_list02 work_list">
+      <a>
+        <p>育儿嫂</p>
+      </a>
+    </li>
+    <li data-sercode="03" class="work_list03 work_list">
+      <a>
+        <p>保姆</p>
+      </a>
+    </li>
+    <li data-sercode="05" class="work_list05 work_list">
+      <a>
+        <p>钟点工</p>
+      </a>
+    </li>
+    <li data-sercode="04" class="work_list04 work_list">
+      <a>
+        <p>老人陪护</p>
+      </a>
+    </li>
+    <li data-sercode="07" class="work_list07 work_list">
+      <a>
+        <p>医院护工</p>
+      </a>
+    </li>
+    <li data-sercode="06" class="work_list06 work_list">
+      <a>
+        <p>家庭管家</p>
+      </a>
+    </li>
+    <li class="more">
+      <a>
+        <p>敬请期待</p>
+      </a>
+    </li>
+  </ul>
+</div>
+<!--  <div class="progress_box">
+     &lt;!&ndash; <div class="progress">
+          <p class="progress_tt">服务流程</p>
+          <img src="img/progress.png" />
+      </div>&ndash;&gt;
+  </div>-->
+<div class="height">
+</div>
+<footer>
+  <a class="homePage" href="index.html">首页</a>
+  <a class="customization" href="custom.html">定制</a>
+  <a class="mine" href="center.html">我的</a>
+</footer>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+  $(function () {
+    //获取门店
+    $.ajax({
+      url: publicPath + "/api/index/info",
+      headers: params,
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            $("#wesiteName").val(dataJD.wesiteName);
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+    //微信分享
+    var wesiteName = $("#wesiteName").val();
+    var imgurl = "http://" + window.location.host + "/images/fxlogo.jpeg";
+    shareWechat.init_share_params = {
+      'onMenuShareTimeline.title': wesiteName,
+      'onMenuShareTimeline.imgUrl': imgurl,
+      'onMenuShareAppMessage.title': wesiteName,
+      'onMenuShareAppMessage.imgUrl': imgurl,
+      'onMenuShareAppMessage.desc': '家策好服务，家庭有托付'
+    };
+    shareWechat.sharePage();
+    $(".work_box").on("click",".work_list",function(){
+        var serviceCode = $(this).data("sercode");
+        if (params.uid == "" || params.uid == null || params.uid == "null") {
+          location.href="login.html"
+        } else {
+          $.ajax({
+            url: window.global_config.getMemberInfo,
+            headers: params,
+            type: "post",
+            data: {},
+            dataType: "json",
+            success: function success(data) {
+              if (data.success) {
+                if (data.code == 0) {
+                  location.href = "customInfo.html?serviceCode=" + serviceCode;
+                }
+              } else {
+                checkAuth(data.code);
+                console.log(data.msg);
+              }
+            },
+            error: function (err) {
+              console.log(err);
+            }
+          });
+        }
+    });
+    $(".jiacerIndex").click(function () {
+      var location = window.location.href;
+      if (location.indexOf("wxcs.jiacer.com") != -1) {
+        window.location.href = "http://wxcs.jiacer.com/";
+      } else if (location.indexOf("ysc-wx.jiacer.com") != -1) {
+        window.location.href = "http://ysc-wx.jiacer.com/";
+      } else {
+        window.location.href = "http://wx.jiacer.com/";
+      }
+    })
+
+  });
+</script>
+</body>
+
+</html>

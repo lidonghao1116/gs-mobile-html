@@ -1,0 +1,505 @@
+body {
+    background-color: #efeff4;
+}
+ ::-webkit-input-placeholder {
+
+    color: #ccc;
+
+}
+    :-moz-placeholder {/* Firefox 18- */
+
+    color: #ccc;
+}
+
+::-moz-placeholder{/* Firefox 19+ */
+
+    color: #ccc;
+
+}
+
+:-ms-input-placeholder {
+
+    color: #ccc;
+
+}
+input{
+        -webkit-appearance: none;
+}
+.content_list h2 {
+    font-size: 1.5rem;
+    line-height: 3.7rem;
+}
+
+.main_content {
+    padding: 0 1rem 2.5rem;
+}
+
+.info_box {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: .4rem;
+    padding: 1.5rem 1rem 0.6rem;
+}
+.info_list {
+    margin-bottom: 1.2rem;
+    color: #4c4c4c;
+}
+.info_list .info_lable {
+    width: 7rem;
+    float: left;
+    font-size: 1.4rem;
+    color: #888888;
+    padding: .6rem 0;
+    line-height: 2rem;
+}
+
+.info_list .info_r_enter {
+    padding-left: 7rem;
+}
+
+.info_r_enter ul li {
+    border: 1px solid #b2b2b2;
+    background-color: #fafafa;
+    border-radius: .4rem;
+    padding: 0 1.3rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    float: left;
+    margin-right: .7rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: #4c4c4c;
+}
+
+.info_r_enter ul {
+    overflow: hidden;
+    margin-bottom: -.5rem;
+}
+.info_r_enter ul.gzlist {
+    margin-bottom: -1.5rem;
+}
+ul.gzlist li.active {
+    border: 1px solid #ff9900;
+    color: #ff9900;
+    background-color: #fff;
+}
+ul.otherReq li.active {
+    color: #ff9900;
+    border-color: #ff9900;
+    background: url(../img/xuzhongli.png) no-repeat;
+    background-position: right bottom;
+    background-size: 1.1rem auto;
+}
+.info_r_enter p {
+    color: #4c4c4c;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    padding: .6rem 0 0;
+}
+
+.info_r_enter input[type='text'] {
+    height: 3.5rem;
+    border: 1px solid #e5e5e5;
+    background-color: #fafafa;
+    border-radius: .4rem;
+    width: 37%;
+    padding: 0 .5rem;
+    font-size: 1.3rem;
+}
+.info_r_enter input[disabled='disabled'] {
+    background-color: #f0f0f0;
+}
+.checkbox_box {
+    display: inline-block;
+    height: 1.5rem;
+    position: relative;
+    margin-left: .4rem;
+    border-radius: .2rem;
+    vertical-align: top;
+    line-height: 1.5rem;
+    padding: 1rem 0;
+    padding-left: 1.8rem;
+}
+
+.checkbox_box input {
+    -moz-opacity: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    width: 1.4rem;
+    height: 1.4rem;
+    position: absolute;
+    left: 0px;
+    top: 1rem;
+    z-index: 3;
+    margin: 0 !important;
+    cursor: pointer;
+}
+
+.check-box {
+    background-color: #fff;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 1px solid #e5e5e5;
+    position: absolute;
+    left: 0px;
+    top: 1rem;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.checkbox_box .active {
+    border-color: #ff9900;
+    background: url(../img/input.png) no-repeat;
+    background-position: center center;
+    background-size: .9rem auto;
+}
+
+.info_r_enter textarea {
+    height: 6rem;
+    border: 1px solid #e5e5e5;
+    background-color: #fafafa;
+    width: 90%;
+    border-radius: .4rem;
+    resize: none;
+    font-size: 1.3rem;
+    outline: none;
+    line-height: 2rem;
+    padding: .5rem;
+}
+div#address {
+    padding-top: 0;
+}
+.address_s h3 {
+    color: #333333;
+    font-size: 1.4rem;
+}
+
+.address_s h3 span {
+    margin-left: 2.3rem;
+}
+
+.address_s p {
+    color: #888888;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    padding: .8rem 0 .8rem 1.6rem;
+    background: url(../img/locationgr.png) no-repeat;
+    background-position:0 1rem;
+        background-size: 1.1rem;
+}
+
+.address_s {
+    background: url(../img/goarr.png) no-repeat;
+    background-position: right center;
+    padding-top: 1.5rem;
+    padding-right: 1.5rem;
+}
+.submit {
+    padding: 0 1.5rem;
+    height: 4.4rem;
+    margin-bottom: 1rem;
+}
+
+.submit input {
+    height: 100%;
+    width: 100%;
+    background-color: #ff9900;
+    color: #fff;
+    border: 0;
+    -webkit-appearance: none;
+    border-radius: .4rem;
+    font-size: 1.8rem;
+}
+.no_ad {
+    padding: 2rem 0;
+    text-align: center;
+    color: #cccccc;
+}
+
+.no_ad a {
+    color: #ff9900;
+}
+.radio_box {
+    position: relative;
+    float: left;
+    margin-right: 4rem;
+    height: 1.8rem;
+    padding-left: 2.7rem;
+    margin-bottom: 1rem;
+}
+.radio_box input[type='radio'] {
+    -moz-opacity: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    width: 1.8rem;
+    height: 1.8rem;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    z-index: 3;
+    margin: 0 !important;
+    cursor: pointer;
+}
+.circle-box {
+    background-color: #fff;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 1px solid #e5e5e5;
+    position: absolute;
+    left: 0;
+    box-sizing: border-box;
+    z-index: 2;
+    border-radius: 100%;
+    cursor: pointer;
+    top: 0;
+    border-radius: 100%;
+}
+
+.radio_box .active {
+    background:url(../img/radioinput.png) no-repeat;
+    background-position: center;
+    background-size: contain;
+    border:0;
+}
+
+.sertype {
+    overflow: hidden;
+    padding: .7rem 0;
+    margin-bottom: -1rem;
+}
+.oldSelf {
+    overflow: hidden;
+    padding: .7rem 0;
+    margin-bottom: -1rem;
+}
+/* 弹窗地址 */
+.no_address {
+    text-align: center;
+    padding: 5rem 0;
+}
+.address_alert {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #efeff4;
+    z-index: 5;
+    padding-bottom: 7rem;
+    overflow: scroll;
+}
+
+.head {
+    height: 4.4rem;
+    font-size: 1.6rem;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #E6E6E6;
+    position: relative;
+}
+.head .goBackSp {
+    display: block;
+    background: url(../img/goback.png) no-repeat;
+    width: .8rem;
+    height: 100%;
+    background-size: .8rem 1.4rem;
+    background-position: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0 1rem;
+}
+.head h1 {
+    text-align: center;
+    line-height: 4.4rem;
+}
+#add_content {
+    padding: 1.2rem 1rem;
+}
+.add_list {
+    background-color: #fff;
+    border-radius: .4rem;
+    border: 1px solid #e5e5e5;
+    margin-bottom: .8rem;
+}
+.info_ad {
+    padding: 1.3em 1rem 1rem;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.info_ad h2 {
+    font-size: 1.6rem;
+}
+.info_ad h2 span {
+    font-size: 1.4rem;
+    float: right;
+}
+.info_ad h3 {
+    color: #888888;
+    font-size: 1.4rem;
+    margin-top: .9rem;
+}
+.operation {
+    height: 3.6rem;
+    text-align: right;
+    padding-right: 1.4rem;
+}
+.operation p a {
+    padding-left: 2.1rem;
+    margin-left: 3.5rem;
+    display: inline-block;
+    line-height: 3.5rem;
+        color: #333;
+}
+
+.operation .edit {
+    background: url(../img/edit.png) no-repeat;
+    background-position: left center;
+        background-size: 1.4rem auto;
+}
+div#add_content {
+    padding: 1.2rem 1rem;
+    border-color: #ff9900;
+}
+
+#add_content .active {
+    border: 1px solid #ff9900;
+}
+
+.tip {
+    padding: 0 1rem;
+    font-size: 1.3rem;
+    color: #999999;
+    margin-top: -1rem;
+}
+
+.submit_sp ,.save_ad{
+     padding: 0 1.5rem;
+     height: 4.4rem;
+     margin-bottom: 1rem;
+     margin-top:1rem; 
+     /* position: absolute;
+     right: 0;
+     left: 0;
+     bottom: 1rem; */
+}
+
+.submit_sp a ,.save_ad a{
+    height: 100%;
+    width: 100%;
+    background-color: #ff9900;
+    color: #fff;
+    border: 0;
+    -webkit-appearance: none;
+    border-radius: .4rem;
+    font-size: 1.8rem;
+    display: block;
+    line-height: 4.4rem;
+    text-align: center;
+}
+.validationFrame {
+    text-align: center;
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem;
+}
+/* 新增修改地址弹窗 */
+.ad_details p.validation {
+    color: red;
+    line-height: 2rem;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+    padding-left: 8.5rem;
+}
+
+#add_add {
+    z-index: 6;
+}
+.ad_details {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.per_info {
+    background-color: #fff;
+    border-top: 1px solid #e5e5e5;
+}
+.ad_info_list {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1.4rem 0 1.4rem 1.5rem;
+    line-height: 2rem;
+}
+.ad_info_list label {
+    float: left;
+    width: 8rem;
+    display: block;
+    font-size: 1.6rem;
+}
+.ad_info_list p {
+    padding-left: 8.5rem;
+    padding-right: 1rem;
+}
+.ad_info_list p input {
+    font-size: 1.6rem;
+    width: 100%;
+    border: 0;
+}
+.ad_info_list input.address {
+    background: url(../img/arrow.png) no-repeat;
+    background-position: right center;
+}
+a.save_ad {
+    position: absolute;
+    right: 1.6rem;
+    top: 0px;
+    font-size: 1.6rem;
+    display: block;
+    height: 100%;
+    line-height: 4.4rem;
+    color: #ff9900;
+}
+/* 弹窗提示 */
+.alert_div {
+     display: none; 
+    width: 31rem;
+    background-color: #FFFFFF;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -15.5rem;
+    margin-top: -5.9rem;
+    z-index: 110;
+    border-radius: 5px;
+}
+.alert_div .content {
+    text-align: center;
+    height: 5.2rem;
+    padding-top: 2.3rem;
+}
+.alert_div .content p {
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+}
+.alert_div .confirm_bt {
+    height: 4.2rem;
+    display: flex;
+    display: -webkit-flex;
+    border-top: 1px solid #E6E6E6;
+}
+.alert_div .confirm_bt a {
+    display: block;
+    flex: 1;
+    height: 100%;
+    line-height: 4.2rem;
+    text-align: center;
+    font-size: 1.6rem;
+}
+.alert_div .confirm_bt .cancel {
+    border-right: 1px solid #E6E6E6;
+}
+.alert_div .confirm_bt .confirm {
+    color: #FF9900;
+}

@@ -1,0 +1,324 @@
+/* .staff-tab {height: 4rem;background-color: #FFFFFF;display: flex;display: -webkit-flex;justify-content: center;width: 100%;z-index: 10;top: 0;left: 0;}
+.staff-tab p {flex: 1;text-align: center;padding: .6rem 0;}
+.staff-tab p span {line-height: 2.8rem;display: block;font-size: 1.4rem;}
+.staff-tab p span:first-child {border-right: 1px solid #F0F0F0;}
+.staff-tab .st-on {color: #FF9900;} */
+.staff-info .si-video {padding: 0; height: 20rem;}
+.staff-info .si-video video {width: 100%;height: 20rem;}
+
+/*.staff-info .infoCard #basic-info .bi-intro .bi-b {height: 2.4rem;margin-top: 0.8rem;width: 100%;color: #FF681E;line-height: 2.4rem;background-color: #FAFAFA;}*/
+.staff-info .infoCard_update #basic-info .bi-intro .bi-b {
+  width: 100%;
+height: 2rem;
+margin-top: .8rem;
+color: #FF681E;
+line-height: 2rem;
+font-size: 1.6rem;
+padding: .5rem 0;
+background-color: #fafafa;
+position: relative;
+}
+.staff-info .infoCard_update #basic-info .bi-intro .bi-b span {font-size: 1rem;}
+
+.staff-info .infoCard_update #reservation-info p {margin-top: 1.6rem;color: #808080;}
+.staff-info .infoCard_update #reservation-info p:first-child{margin-top: 0;}
+
+.staff-info .infoCard_update #certificate-info p {padding: 0 .5rem 0 3rem;background: url(../img/certificate.png) no-repeat;background-size: 1.2rem 1.2rem;background-position-x: 1rem;background-position-y: center;float: left;font-size: 1.2rem;line-height: 2rem;margin-bottom: .8rem;}
+
+.staff-info .infoCard_update #photo ul li {border-radius: .4rem; border: 1px solid #f0edf0;float: left;width: 32%;height:10rem;margin-right: 1%;box-sizing: border-box;margin-bottom: .3rem;    border: 1px solid #e5e5e5;background-size: cover;background-position: center;}
+.staff-info .infoCard_update #photo img {width: 100%;height: auto; border-radius: .4rem;}
+
+.reservation {border-top: 1px solid #E6E6E6;width: 100%; height: 4.9rem;background-color: #FFFFFF;position: fixed;bottom: 0;left: 0;display: flex;display: -webkit-flex;z-index: 10;}
+.reservation div {display: inherit;flex: 3;justify-content: center;padding-top: .4rem;}
+.reservation div a {flex: 1;display: block;padding-top: 2.5rem;background-position: top center;text-align: center;background-size: 2rem 2rem;color: #333333;background-repeat: no-repeat;}
+.reservation div .store {background-image: url(../img/store.png);}
+.reservation div .contact {background-image:url(../img/contact.png);}
+.reservation div .reserved {background-image:url(../img/reserved.png);}
+.reservation .reservation-btn {flex: 2;display:block;background-color: #FF9900;line-height: 4.9rem;text-align: center;font-size: 1.6rem;color: #FFFFFF;}
+
+.contact-pop {display: none; width: 31rem;background-color: #FFFFFF;position: fixed;left: 50%;top: 50%;margin-left: -15.5rem;margin-top: -5.9rem;z-index: 110;border-radius: 5px;}
+.contact-pop .cp-content {text-align: center;height: 5.2rem;padding-top: 2.3rem;}
+.contact-pop .cp-content p:first-child {margin-bottom: 1rem;}
+.contact-pop .cp-btn {height: 4.2rem;display: flex;display: -webkit-flex;border-top: 1px solid #E6E6E6;}
+.contact-pop .cp-btn a {display: block;flex: 1;height: 100%;line-height: 4.2rem;text-align: center;font-size: 1.6rem;}
+.contact-pop .cp-btn .cpb-cancel {border-right: 1px solid #E6E6E6;}
+.contact-pop .cp-btn .cpb-call {color: #FF9900;}
+
+.reservation-pop {display: none; width: 30rem;height: 39rem;background-color: #FFFFFF;position: fixed;left: 50%;top: 50%;margin-left: -15rem;margin-top: -19.5rem;z-index: 110;}
+.reservation-pop .close-btn {position: absolute;right: -.7rem;top: -.7rem;background-color: #FFFFFF;border-color:#FFFFFF ;}
+.reservation-pop .rp-title {height: 4.2rem;color: #808080;line-height: 4.2rem;text-align: center;border-bottom: .3rem solid #F0F0F0;font-size: 1.2rem;}
+.reservation-pop .rp-content {padding: 0 1.1rem;}
+.reservation-pop .rp-content p {height: 2.4rem;padding: .9rem 0; border-bottom: 1px solid #E6E6E6;line-height: 2.4rem;display: flex;display: -webkit-flex;}
+.reservation-pop .rp-content p label {display: block;flex: 1;color: #808080;}
+.reservation-pop .rp-content p span {display: inherit;flex: 3;}
+.reservation-pop .rp-content p span input[type="text"] {height: 100%;border: none;width: 100%;line-height: 2.4rem;}
+.reservation-pop .rp-content p span .dueDate {height: 100%;display: block;flex: 3;}
+.reservation-pop .rp-content p span .dueDate input[type="text"] {flex: 3;}
+.reservation-pop .rp-content p span .born {display: block;flex: 2; height: 100%;border-left: 2px solid #CCCCCC;font-size: 1rem;}
+.reservation-pop .rp-content p span .born input[type="checkbox"] {margin-left: 1.1rem;}
+.reservation-pop .rp-content p .sel-arrow {position: relative;}
+.reservation-pop .rp-content p .sel-arrow:after {position: absolute; display: block;content: '';width: .7rem;height: 1.2rem;background: url(../img/arrow.png) no-repeat;background-size: 100% 100%;right: 0;top: .6rem;}
+.reservation-pop .rp-btn {position: absolute;bottom: 0;left: 0; display: block;width: 100%;height: 4.2rem;line-height: 4.2rem;font-size: 1.5rem;text-align: center;background-color: #FF9900;margin: 2.1rem auto 0 auto;color: #FFFFFF;}
+.reservation-pop .validationFrame {border: none!important;}
+
+
+.otherRequirements {width:100%; height: 31.5rem;background-color: #FFFFFF;position: fixed;bottom: -31.5rem;left: 0; z-index: 120;overflow: hidden;}
+.otherRequirements .close-btn {position: absolute;right: .3rem;top: .6rem;}
+.otherRequirements .or-title {height: 4.2rem;line-height: 4.2rem;border-bottom: 1px solid #E6E6E6;text-align: center;margin-bottom: 2.5rem;}
+.otherRequirements ul li {float: left;margin-bottom: 1rem;}
+.otherRequirements ul li a {display: block;height: 3.5rem;border: 1px solid #F5F5F5; background-color: #F5F5F5;text-align: center;line-height: 3.7rem;border-radius: 4px;margin: 0 .6rem;padding: 0 1rem; font-size: 1.2rem;}
+.otherRequirements .or-btn {width: 24rem;height: 4.2rem;display: block;position: absolute;bottom: 2.2rem;left: 50%;margin-left: -12rem;background-color: #FF9900;color: #FFFFFF;font-size: 1.6rem;text-align: center;line-height: 4.2rem;}
+.or-on {border-color: #FF9900!important;color: #FF9900;background-color: #FFFFFF!important;}
+.photo-mask {
+    position: fixed;
+    z-index: 1010;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    filter: alpha(opacity=20);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    display: none;
+}
+.photo-panel {
+    position: absolute;
+    display: none;
+    clear: both;
+    top: 100px;
+    left: 50%;
+    z-index: 1010;
+    width: 29rem;
+    height: 40rem;
+    margin-left: -14.5rem;
+}
+.photo-panel .photo-div {
+    width: 29rem;
+    height: 40rem;
+    z-index: 11;
+    margin: auto;
+    position: relative;
+}
+.photo-panel .photo-left, .photo-panel .photo-right {
+    width: 3rem;
+}
+.photo-panel .photo-left{
+  position: absolute;
+  left: .2rem;
+  top: 50%;
+  margin-top: -1.5rem;
+}
+.photo-panel .photo-right {
+  position: absolute;
+  right: .2rem;
+  top: 50%;
+  margin-top: -1.5rem;
+  width: 6rem;
+}
+.photo-panel .arrow-prv {
+    background: url(../img/l_ch.png) no-repeat;
+    width: 6rem;
+    height: 6rem;
+    cursor: pointer;
+    background-size: auto 4rem;
+    background-position: left;
+}
+.photo-panel .arrow-next {
+  background: url(../img/r_ch.png) no-repeat;
+  width: 6rem;
+  height: 6rem;
+  cursor: pointer;
+  background-size: auto 4rem;
+  background-position: right;
+}
+.photo-panel .photo-img {
+    width: 27rem;
+    /*float: left;*/
+    height: 38rem;
+    background: #fff;
+    position: relative;
+    padding: 1rem;
+}
+.photo-panel .photo-close {
+    background: url(../img/yulanclose.png) no-repeat;
+        background-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.photo-panel .photo-view-w {
+    width: 27rem;
+    height: 38rem;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+.photo-panel .photo-view-w img {
+    max-width:  27rem;
+    height: auto;
+    vertical-align: middle;
+    text-align: center;
+    max-height: 38rem;
+}
+.photo-panel .photo-view-h {
+	width: 27rem;
+	height: 38rem;
+	text-align: center;
+	vertical-align: middle;
+  display: table-cell;
+}
+.photo-panel .photo-view-h img {
+	width:auto;
+	max-width: 27rem;
+	max-height: 38rem;
+  vertical-align: middle;
+  text-align: center;
+}
+.infoCard_update {
+    margin-bottom: 1.2rem;
+    background-color: #FFFFFF;
+    padding: 0 1.5rem;
+}
+.personal_info {
+    background-color: #FFFFFF;
+}
+.top_info {
+    padding: 1rem 1.5rem 1rem;
+    height: 8rem;
+    background: url(../img/infotopbg.png) no-repeat;
+    background-size:100% 100%; 
+        position: relative;
+
+}
+.top_info span.more {
+    font-size: 1.2rem;
+    color: #868686;
+    position: absolute;
+    right: 1.5rem;
+    bottom: .2rem;
+    display: block;
+    line-height: 1.5rem;
+   padding: 8rem 1rem 0 10rem;
+    background: url(../img/moredown.png) no-repeat;
+    background-position: right 8.4rem;
+    background-size: .6rem;
+}
+.top_info span.more_active{
+    background: url(../img/moreup.png) no-repeat;
+    background-position: right 8.4rem;
+    background-size: .6rem;
+}
+.top_info img {
+    float: left;
+    width: 6.5rem;
+    height: 8rem;
+    border-radius: .3rem;
+}
+.top_right_box {
+    padding-left: 8rem;
+    padding-right: 4.5rem;
+}
+.top_right h1 {
+    font-size: 1.8rem;
+    padding-top: 1.6rem;
+    line-height: 1.8rem;
+}
+.top_right h1 span {
+    color: #8c8c8c;
+    font-size: 1.2rem;
+    margin-left: 2.1rem;
+}
+.top_right {
+    height: 8rem;
+    border-bottom: 1px dashed #fff;
+}
+.top_right p {
+    color: #6e6e6e;
+    font-size: 1.2rem;
+    margin-top: 1.3rem;
+    margin-right: -4.5rem;
+}
+.bottom_info {
+    display: none;
+    background: url(../img/botinfobg.png) no-repeat;
+    background-size: 100% 100%;
+    padding: 0 1.5rem;
+    margin-top: -1px;
+}
+.bottom_info ul {
+    overflow: hidden;
+       padding: .4rem 0 .3rem 8rem;
+}
+.bottom_info ul li {
+       width: 50%;
+    float: left;
+    font-size: 1.2rem;
+    color: #808080;
+    line-height: 1.9rem;
+    margin-bottom: 1rem;
+}
+.bottom_info ul li span {
+    color: #4c4c4c;
+}
+.infoCard_update .ic-title {
+    line-height: 4.2rem;
+    padding-left: 3.1rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 1.4rem;
+    background-size: 2rem auto;
+    background-position: left center;
+}
+.title_bg01{
+    background: url(../img/infolist01.png) no-repeat;
+}
+.title_bg02{
+    background: url(../img/infolist02.png) no-repeat;
+}
+.title_bg03{
+    background: url(../img/infolist03.png) no-repeat;
+}
+.title_bg04{
+    background: url(../img/infolist04.png) no-repeat;
+}
+.title_bg05{
+    background: url(../img/infolist05.png) no-repeat;
+}
+div#photo ul {
+ padding: .4rem 0 1.2rem;
+}
+.ic-content {
+    padding: 1.4rem 0 .6rem;
+}
+.no_info{
+    margin-bottom: .8rem;
+    color: #c7c7c7;
+    font-size: 1.2rem;
+        padding-left: 1rem;
+}
+.info_list_right span {
+    font-size: 1.1rem;
+}
+.service_info_list {
+    line-height: 2.2rem;
+    margin-bottom: .8rem;
+        overflow: hidden;
+}
+.service_info_list p.info_list_left {
+    float: left;
+    width: 6.5rem;
+    font-size: 1.4rem;
+    color: #808080;
+    text-align: right;
+}
+.info_list_right {
+    padding-left: 9rem;
+}
+.infoCard_update .ic-pp{
+  line-height: 2rem;
+  padding: 1.3rem 0;
+  color: #7f7f7f;
+}

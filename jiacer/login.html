@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="Cache-Control" CONTENT="no-cache">
+		<meta http-equiv="Pragma" CONTENT="no-cache">
+
+		<title>家策好服务</title>
+		<link rel="stylesheet" type="text/css" href="css/globalLogin.css"/>
+		<link rel="stylesheet" type="text/css" href="css/login.css"/>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mapping.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+      (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+              var clientWidth = docEl.clientWidth;
+              if (!clientWidth) return;
+              docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+            };
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+        // 一物理像素在不同屏幕的显示效果不一样。要根据devicePixelRatio来修改meta标签的scale,要注释上面的meta标签
+        /*(function(){
+          var dpr = scale =1;
+          var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+          var devicePixelRatio = win.devicePixelRatio;
+          if (isIPhone) {
+            // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+            if (devicePixelRatio >= 3 ) {
+              dpr = 3;
+            } else if (devicePixelRatio >= 2){
+              dpr = 2;
+            } else {
+              dpr = 1;
+            }
+          } else {
+            // 其他设备下，仍旧使用1倍的方案
+            dpr = 1;
+          }
+          scale = 1 / dpr;
+          //
+          var metaEl = "";
+          metaEl = doc.createElement('meta');
+          metaEl.setAttribute('name', 'viewport');
+          metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+          if (docEl.firstElementChild) {
+            docEl.firstElementChild.appendChild(metaEl);
+          } else {
+            var wrap = doc.createElement('div');
+            wrap.appendChild(metaEl);
+            doc.write(wrap.innerHTML);
+          }
+        })();*/
+      })(document, window);
+		</script>
+		<!--<script src="js/common.js"></script>-->
+	</head>
+	<body>
+
+		<!--<header>
+			<a class="goBack" href="javascript:history.go(-1)"></a>
+			<h1>登录</h1>
+		</header>-->
+	<!--	<div class="height">
+		</div>-->
+		<div class="info_enter">
+			<div class="info_list phone_num">
+				<span class="txt">手机号</span>
+				<input id="phone" type="text" name="phone" placeholder="请输入手机号码" maxlength="11"/>
+			</div>
+			<div class="info_list yan">
+				<span class="txt">图形码</span>
+				<input type="text" name="imgCode" placeholder="请输入右侧图形码" maxlength="8" id="iptImgCode"/>
+				<img src="" class="rtBox"/>
+			</div>
+			<div class="info_list sms">
+				<span class="txt">验证码</span>
+				<input type="text" name="code" placeholder="请输入短信验证码" maxlength="8" id="message"/>
+				<button class="rtBox smsBtn count" disabled="disabled" id="captcha">获取验证码</button>
+			</div>
+			<div class="validationFrame">
+			</div>
+			<div class="login_bt"><input id="login" type="button" value="开始" disabled="disabled"/></div>
+			<p class="agreement">点击开始，即表示已阅读并同意 <a href="agreement.html">《用户使用协议》</a></p>
+		</div>
+		<!--<div id="layer"></div>-->
+		<!--<div class="code">
+			<div class="verification"><input type="text" name="code" placeholder="请输入短信验证码"/><button class="count">获取验证码</button></div>
+			<input class="ok" type="button" value="确定"/>
+		</div>-->
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+      var phone_state = false;
+      var img_state = false;
+      var sms_count= false;
+      var sms_state = false;
+//      是否为空
+      function isEmpty(param) {
+        if ($.trim(param) != "" && $.trim(param) != null) {
+          return false;
+        } else {
+          return true;
+        }
+      };
+			//获取图片验证码
+			function getCaptcha(){
+					$.ajax({
+						url: publicPath+"/api/member/getCaptcha",
+            headers:params,
+						type: "post",
+						data: {},
+						dataType: "json",
+						success: function success(data) {
+							if(data.success) {
+								if(data.code==0){
+									var img = "data:image/jpeg;base64," + data.jsonData.captcha;
+									$(".yan img").attr("src",img);
+								}
+
+							} else {
+								console.log(data.msg);
+							}
+						},
+						error: function(err) {
+							console.log(err);
+						}
+					});
+				}
+
+
+			//重发短信按钮
+			var countdown = 60;
+			function settime() {
+				if(countdown == 0) {
+          sms_count=false;
+					$(".count").removeAttr("disabled").addClass('clickable');
+					$(".count").html("获取验证码");
+					countdown = 60;
+					return;
+				} else {
+          sms_count=true;
+					$(".count").attr("disabled","disabled").removeClass('clickable');
+					$(".count").html(countdown);
+					countdown--;
+				}
+				setTimeout(function() {
+					settime()
+				}, 1000)
+			}
+
+      // 提交验证
+      function bindInfo() {
+        //登录提交
+        var mobile = $("input[name='phone']").val();
+        var captcha = $("input[name='imgCode']").val();
+        var code = $("input[name='code']").val();
+        $.ajax({
+          url: publicPath+"/api/member/login",
+          type: "post",
+          headers:params,
+          data: {
+            mobile:mobile,
+            code:code,
+            captcha:captcha
+          },
+          dataType: "json",
+          success: function success(data) {
+            if(data.success) {
+              if(data.code==0){
+                localStorage.setItem("uid",data.jsonData.id)
+                location.href="center.html";
+                console.log(data.msg);
+              }
+            }else{
+              alert(data.msg);
+              getCaptcha();
+            }
+          },
+          error: function(err) {
+            alert(err);
+          }
+        });
+      }
+			function onError (msg,self) {
+				if($(".validationFrame").hasClass("vf_on")){
+					$(".validationFrame").text(msg);
+					return;
+				}
+				$(".validationFrame").addClass("vf_on").text(msg);
+			}
+
+			function onSuccess() {
+				$(".validationFrame").removeClass("vf_on").text("");
+			}
+
+      //开始加载
+      $(function(){
+        getCaptcha();
+        $(".yan img").click(function(){
+          getCaptcha();
+        })
+
+        $("#login").click(function(){
+          for (var i=0;i<$(".info_enter input").length;i++) {
+            $(".info_enter input").eq(i).trigger("blur");
+            if ($(".vf_on").length>0){
+              return;
+              break;
+            }
+          }
+          bindInfo();
+//					$(".code,#layer").show();
+        })
+
+        $(".count").click(function() {
+          var mobile = $("input[name='phone']").val();
+          var captcha = $("input[name='imgCode']").val();
+          $.ajax({
+            url: publicPath+"/api/member/sendSms",
+            headers:params,
+            type: "post",
+            data: {
+              mobile:mobile,
+              captcha:captcha
+            },
+            dataType: "json",
+            success: function success(data) {
+              if(data.success) {
+                if(data.code==0){
+                  settime();
+                  console.log(data.msg);
+                }
+              } else{
+                if(data.code==100013){
+                  self=$("#message");
+                  onError("*"+data.msg,self);
+                }else {
+                  alert(data.msg);
+                }
+                getCaptcha();
+              }
+            },
+            error: function(err) {
+              console.log(err);
+            }
+          });
+        })
+        //    获取焦点
+        $('.info_enter input').on('keyup', function (e) {
+          var sms = $('#message').val();
+          var phone = $('#phone').val();
+          var imgCode = $('#iptImgCode').val();
+
+          if (phone_state && !isEmpty(phone) && !isEmpty(imgCode)&&!sms_count) {
+						console.log($(this).attr('name'));
+						if($(this).attr('name')=="imgCode"){
+              var regExp = /^\w{4,8}$/;
+              if (regExp.test(imgCode)) {
+                img_state=true;
+                $("#captcha").removeAttr('disabled').addClass('clickable');
+              } else {
+                img_state=false;
+                $("#captcha").attr('disabled', true).removeClass('clickable');
+              }
+						}
+          }
+
+          if (phone_state && img_state && !isEmpty(sms) && !isEmpty(phone) && !isEmpty(imgCode)) {
+            $('#login').removeAttr('disabled').addClass('clickable');
+          } else {
+            $('#login').attr('disabled', true).removeClass('clickable');
+          }
+        })
+
+
+
+// 表单验证
+        var regPhone=/^1[3|4|5|7|8][0-9]{9}$/;	//手机号码
+        $(".info_enter input").blur(function(){
+          var self = $(this);
+          var name = $(this).attr("name");
+          switch (name){
+            case "phone":
+              if (self.val()=="") {
+                onError('请填写手机号码',self);
+                phone_state = false;
+              } else if(!regPhone.test(self.val())){
+                onError('请填写正确的手机号码',self);
+                phone_state = false;
+              }else{
+                onSuccess(self);
+                phone_state = true;
+              }
+              break;
+            case "imgCode":
+              if (self.val() == "") {
+                onError('请填图形验证码',self);
+                img_state = false;
+              } else {
+                onSuccess(self);
+                img_state = true;
+              }
+              break;
+            case "code":
+              if (self.val() == "") {
+                onError('请填短信验证码',self);
+                sms_state = false;
+              } else {
+                onSuccess(self);
+                sms_state = true;
+              }
+              break;
+            default:
+              break;
+          }
+        });
+      })
+		</script>
+	</body>
+</html>

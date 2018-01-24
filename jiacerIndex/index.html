@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <script src="js/jquery-3.1.1.min.js"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/jq.extend.js"></script>
+  <title>家策好服务</title>
+</head>
+<body>
+</body>
+<script>
+  $(function () {
+    localStorage.clear();
+  //  var token ="2FVn7iYizaJRwvlUKgVZPjs4jWA0C9QxwQRttZiGG6ou577ehTF3RXG9-yhYCUPcKiajfAgp13jven4jy6-7sQ";
+    var token=$.getUrlParam('token');
+    var uid=$.getUrlParam('uid');
+    // var uid=68;
+    localStorage.setItem("token",token);
+    localStorage.setItem("uid",uid);
+    console.log(token)
+    console.log(uid)
+    auth(token,uid);
+  })
+
+  function auth(token,uid) {
+//    window.location.href="jiacerIndex.html"
+    $.ajax({
+      url: window.global_config.auth,
+      async: false,
+      dataType: "json",
+      headers:{
+        'token':token,
+        'uid':uid
+      },
+      type: "get",
+      success: function success(data) {
+        if (data.code==0) {
+          location.href="jiacerIndex.html";
+        }  else {
+          console.log(data.msg)
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  }
+</script>
+</html>
+

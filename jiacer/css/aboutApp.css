@@ -1,0 +1,36 @@
+body{
+	background-color:#efeff4;
+}
+input{
+	-webkit-appearance:none;
+
+}
+.version{
+	height:18rem;
+	box-sizing: border-box;
+	padding-top:13rem;
+	background:url(../img/aboutlogo.png) no-repeat;
+	background-position:center center;
+	background-size: 70% auto;
+	 text-align: center;
+}
+.version_info{
+	padding: 0 1rem;
+}
+.version_info p{
+	background-color: #fff;
+	padding:0 1rem;
+	border-bottom:1px solid #e4e4e9;
+	font-size:1.5rem;
+	height:4.4rem;
+	line-height:4.4rem;
+	border-radius:.4rem; 
+	color: #333;
+}
+.version_info p:last-child{
+	border: 0;
+}
+.version_info p span{
+	float:right;
+	font-size:1.5rem;
+}

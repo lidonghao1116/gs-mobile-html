@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body style="background-color: #FFFFFF;">
+<img style="width: 100%;height: auto;margin-top: 10rem;" src="img/loading.gif"/>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function () {
+    var orderNo = sessionStorage.getItem("orderNo");
+    var payAmount = sessionStorage.getItem("payAmount");
+    var transDesc = sessionStorage.getItem("transDesc");
+    var domain = sessionStorage.getItem("domain");
+    var Url = location.search;
+    var str = Url.substr(1).split("&")[1];
+    var code = str.split("=")[1];
+    $.ajax({
+      url: publicPath + "/" + domain + "/api/orders/beforeWechat.do?state=" + orderNo + " " + payAmount + "&code=" + code,
+      type: "post",
+      headers: params,
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data1) {
+        if (data1.success) {
+          var serialNumber = data1.jsonData.orderNo;
+          var openId = data1.jsonData.openId;
+          $.ajax({
+            url: publicPath + "/" + domain + "/api/orders/sendBeforeWechatPayRequest.do",
+            type: "post",
+            headers: params,
+            data: {
+              orderNo: serialNumber,
+              payAmount: payAmount,
+              transDesc: transDesc,
+              payType: "P01",
+              openId: openId
+            },
+            dataType: "json",
+            async: false,
+            success: function success(data2) {
+              var callbackUrl = "http://" + location.host + "/" + location.pathname.split("/")[1];
+              $.ajax({
+                url: publicPath + "/" + domain + "/api/orders/sendWechatPayRequest.do",
+                type: "post",
+                headers: params,
+                data: {pay_data: data2.pay_data, sign_msg: data2.sign_msg, callbackUrl: callbackUrl},
+                dataType: "json",
+                async: false,
+                success: function success(data3) {
+                  location.href = "https://pay.swiftpass.cn/pay/jspay?token_id=" + data3.token_id + "&showwxtitle=1"
+                },
+                error: function error(XMLHttpRequest, textStatus, errorThrown) {
+                  alert(XMLHttpRequest.status);
+                  alert(XMLHttpRequest.readyState);
+                  alert(textStatus);
+                }
+              });
+
+            },
+            error: function error(XMLHttpRequest, textStatus, errorThrown) {
+              alert(XMLHttpRequest.status);
+              alert(XMLHttpRequest.readyState);
+              alert(textStatus);
+            }
+          });
+
+        }else {
+          checkAuth(data1.code)
+        }
+      },
+      error: function error(XMLHttpRequest, textStatus, errorThrown) {
+        alert(XMLHttpRequest.status);
+        alert(XMLHttpRequest.readyState);
+        alert(textStatus);
+      }
+    });
+  })
+</script>
+</body>
+</html>

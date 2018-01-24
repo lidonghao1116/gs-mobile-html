@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>订单详情</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/orderDetail.css"/>
+
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+<div id="layer"></div>
+
+<input type="hidden" name="co-on" id=""/>
+<!--取消订单弹窗-->
+<!-- <div class="cancelOrder-pop" id="cancelOrder1">
+  <p>确定要取消订单吗？取消订单后不能恢复。</p>
+  <textarea name="cancleReason" placeholder="请输入取消原因"></textarea>
+  <div class="cop-btn">
+    <a class="copb-cancel">取消</a>
+    <a class="copb-confirm">确定</a>
+  </div>
+</div>
+
+
+<div class="cancelOrder-pop" id="cancelOrder2">
+  <textarea name="cancleReason" placeholder="请输入取消原因"></textarea>
+  <div class="cop-refund">
+    <p>实际到账：￥<span></span></p>
+    <p>退款手续费：￥<span>0</span></p>
+  </div>
+  <p class="cop-hint">取消订单后，系统将扣取已支付金额的0%作为手续费，剩余金额将按原路径退回。</p>
+  <div class="cop-btn">
+    <a class="copb-cancel">取消</a>
+    <a class="copb-confirm">确定</a>
+  </div>
+</div> -->
+
+<!--更换阿姨弹窗-->
+<!-- <div class="changehs-pop">
+  <p>确定要更换阿姨吗？</p>
+  <textarea name="remark" placeholder="请输入更换原因"></textarea>
+  <div class="cp-btn">
+    <a class="cpb-cancel">取消</a>
+    <a class="cpb-confirm">确定</a>
+  </div>
+</div> -->
+
+<div class="cancelReservation-pop">
+			<div class="top_title">
+				<!-- <h2>温馨提示：</h2>
+				<p class='cancelOrder0'>确定要取消订单吗？取消订单后不能恢复。</p>
+				<p class='cancelOrder1'>取消订单后，系统将扣取已支付金额的0%作为手续 费，剩余金额将按原路径退回。</p>
+				<h4 class='refund'><span>实际到账：<a>￥300</a></span><span class='tui'>退款手续费：<a>￥0</a></span></h4> -->
+			</div>
+			<h3 class="alert_bg"></h3>
+			<div class="reason">
+				<h4>请选择取消订单的原因（必选）：</h4>
+				<ul>
+				<li>
+					<input type="radio" name="cancel" value="01" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>不想要了</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="02" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>没有合适的阿姨</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="03" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>家政公司不能满足需求</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="04">
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>已经找到阿姨</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="05" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>需求填错，重新下单</p>
+				</li>
+				<li>
+					<input type="radio" name="cancel" value="06" >
+					<div class="radio_box">
+					<div class="circle-box"> <span class="circle"></span> </div>
+					</div>
+					<p>其他原因</p>
+				</li>
+				<li class="last_r">
+					<div class="other_reason">
+            <textarea name="other_reason" placeholder="请输入具体原因"></textarea>
+          </div>
+				</li>
+				</ul>
+			</div>
+			<div class="crp-btn">
+				<a class="crpb-cancel">取消</a>
+				<a class="orange crpb-confirm">确定</a>
+			</div>
+		</div>
+<header>
+  <a class="goBack" href="javascript:history.go(-1)"></a>
+  <h1>订单详情</h1>
+</header>
+
+<input type="hidden" name="time" value=""/>
+<!-- <div class="infoCard">
+  <p class="ic-title">
+    订单信息
+    <i>订单编号：<b></b></i>
+    <span></span>
+  </p>
+  <div class="ic-content clearfix" id="process-info">
+    <div class="pi-status">
+      <p class="pis-info">支付定金</p>
+      <p class="pis-price"></p>
+      <span></span>
+    </div>
+    <div></div>
+    <div class="pi-status">
+      <p class="pis-info">预约面试</p>
+      <span></span>
+    </div>
+    <div></div>
+    <div class="pi-status">
+      <p class="pis-info">支付尾款</p>
+      <p class="pis-price"></p>
+      <span></span>
+    </div>
+  </div>
+  <p class="orderPrice">
+    订单总额：￥<i></i><span></span>
+  </p>
+  <div class="viewContract clearfix">
+    <a>查看合同</a>
+  </div>
+</div>
+
+<div class="infoCard">
+  <p class="ic-title">家政员信息</p>
+  <div class="ic-content" id="basic-info">
+    <div class="bi-pic">
+      <img src="img/housekeepingstaff.jpg"/>
+    </div>
+    <div class="bi-intro">
+      <div class="bi-t">
+        <h1>
+          <b>张春梅</b>
+          <span>30岁/属羊/上海人</span>
+        </h1>
+        <p><b></b><span>从业3年|本科学历|双鱼座</span></p>
+      </div>
+      <p class="bi-b"></p>
+    </div>
+  </div>
+</div>
+
+<div class="infoCard">
+  <p class="ic-title">服务信息</p>
+  <div class="ic-content" id="service-info">
+    <p class="telephone">
+      <label>手机号：</label>
+      <span></span>
+    </p>
+    <p class="name">
+      <label>姓名：</label>
+      <span></span>
+    </p>
+    <p class="serviceItemName">
+      <label>服务工种：</label>
+      <span></span>
+    </p>
+    <p class="serviceTime">
+      <label>服务时间：</label>
+      <span></span>
+    </p>
+    <p class="serviceType">
+      <label>服务类型：</label>
+      <span></span>
+    </p>
+    <p class="expectedBirthTime" style="display: none;">
+      <label>预产期：</label>
+      <span></span>
+    </p>
+    <p class="petRaising">
+      <label>饲养宠物：</label>
+      <span></span>
+    </p>
+    <p class="salaryRange">
+      <label>薪酬范围：</label>
+      <span></span>
+    </p>
+    <p class="ageRequirement">
+      <label>年龄要求：</label>
+      <span></span>
+    </p>
+    <p class="workExp">
+      <label>服务经验：</label>
+      <span></span>
+    </p>
+    <p class="workAddress">
+      <label>服务地址：</label>
+      <span></span>
+    </p>
+    <p class="workContent">
+      <label>服务内容：</label>
+      <span></span>
+    </p>
+    <p class="otherRequirement">
+      <label>其他需求：</label>
+      <span></span>
+    </p>
+  </div>
+</div>
+
+<a class="ca-btn">更换阿姨</a>
+
+<div class="reservation">
+  <div>
+    <p>
+      <b>付款剩余时间</b>
+      <span></span>
+    </p>
+    <a class="cancelOrder-btn">取消订单</a>
+  </div>
+  <a class="reservation-btn">完成支付</a>
+</div> -->
+
+<!--确认付款-->
+<!-- <div class="paymentDetail">
+
+  <a class="close-btn"></a>
+  <p class="pd-title">付款详情</p>
+  <p class="pd-amount">需付款<span></span></p>
+  <div class="pd-method">
+    <p class="pdm-w">微信支付</p>
+  </div>
+  <a class="payment-btn">确认付款</a>
+</div> -->
+<div class="content">
+  <div class="order_statu">
+    <p><span>编号：</span><span class="right"></span></p>
+    <h3><span></span><span class="count"></span></h3>
+  </div>
+  <div class="order_process">
+    <h4>订单金额<span></span></h4>
+    <div class="process"><a class="left">定金</a><a>面试</a><a class="right">尾款</a></div>
+    <div class="process_t">
+      <!-- <p class="left xi_orange"></p><p class="left"></p>
+      <a class="l_a al_orange"></a><a class="m_a al_orange"></a><a class="right r_a"></a> -->
+    </div>
+    <div class="process_b"><a class="left payment">¥300</a><a class=""></a><a class="right orderBalance"></a></div>
+  </div>
+  <div class="shop_box card">
+    <a class="shop" href=""></a>
+    <a class="right phone" href="1367487654">联系</a>
+  </div>
+  <div class='staff_info card'>
+    <!-- <img src='img/dzstaff.png'/>
+    <div class='r_staff_info'>
+        <h3>月嫂</h3>
+        <h4>张阿姨</h4>
+        <p>40岁|属羊|上海人|处女座|高中</p>
+    </div> -->
+  </div>
+  <div class="order_info card">
+      <ul>
+        <li class="serviceItemName"><label>服务工种</label><p></p></li>
+        <li class="expectedBirthTime"><label>预产期</label><p></p></li>
+        <li class="isSelf"><label>能否自理</label><p></p></li>
+        <li class="serviceTime"><label>服务时间</label><p></p></li>
+        <li class="serviceSalary"><label>价格预算</label><p></p></li>
+        <li class="serviceAge"><label>年龄要求</label><p></p></li>
+        <li class="serviceExperience"><label>经验要求</label><p></p></li>
+        <li class="serviceContent"><label>服务内容</label><p></p></li>
+        <li class="remark"><label>其他需求</label><p></p></li>
+      </ul>
+  </div>
+  <div class="address_s card">
+      <!-- <h3>王小五<span>1300000000</span></h3>
+      <p>上海市-徐汇区-城区  南丹东路300号</p> -->
+  </div> 
+</div>
+<div class="bottom_bt">
+    <a class="bt_cancel" style="display:none">取消订单</a>
+    <a class="bt_pay right" style="display:none">立即支付</a>
+</div>
+  <input type="hidden" name="tradeAmount" value="">
+<input type="hidden" name="orderNo" id="" value=""/>
+<input type="hidden" name="payAmount" id="" value=""/>
+<input type="hidden" name="transDesc" id="" value=""/>
+<input type="hidden" name="orderDeposit" id="" value=""/>
+  <input type="hidden" value="" name="orderStatus">
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+function newDate(strdate) {  
+    var arr = strdate.split(/[- : \/]/);  
+    date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]); 
+    return date;  
+}  
+    var myTime ;
+    function countdown(addTime,DateNow){
+      
+      var afterDate = newDate(addTime).getTime() + 24*3600000;
+      var DateNow = newDate(DateNow).getTime();
+      myTime = window.setInterval(function(){ 
+        if((afterDate - DateNow)<24*3600000 && (afterDate - DateNow)>0){
+          var interval = Math.abs(afterDate - DateNow)/1000;
+          var h = Math.floor(interval / 3600);
+          var m = Math.floor(interval % 3600 / 60);
+          var s = Math.floor(interval % 3600 % 60);
+            if (m <= 9) m = '0' + m;  
+            if (s <= 9) s = '0' + s;  
+          $(".count").text("支付剩余："+h+"小时"+m+"分钟").show();
+          DateNow = DateNow+1000;
+            console.log(DateNow);
+        }else{
+            window.location.reload();
+            console.log(DateNow);
+          }
+        }, 1000);
+    }
+  
+  function ordersdeails(orderNo) {
+    $.ajax({
+      url: publicPath + "/api/orders/deails",
+      headers: params,
+      type: "get",
+      data: {orderNo: orderNo},
+      dataType: "json",
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+              var dataJD = data.jsonData;
+              var dataJDOC = data.jsonData.orderCustomer;
+              var dataJDSI = data.jsonData.staffInfo;
+              var dataJDTI = data.jsonData.tenantInfo;
+              $(".order_statu p span").eq(0).text("编号："+dataJD.orderNo);
+              $(".order_statu p span").eq(1).text(dataJD.orderTime);
+              var orderStatus = dataJD.orderStatus;
+              $("input[name='orderStatus']").val(orderStatus);
+              $("input[name='orderDeposit']").val(dataJD.orderDeposit||"");
+             
+              $("input[name='orderNo']").val(dataJD.orderNo||"");
+              var htmlProcess = "";
+              if(orderStatus=="01"){
+                $(".order_statu h3 span").eq(0).text("待支付定金");
+                $(".process_b a").eq(0).text("¥"+RetainedDecimalPlacesNF(dataJD.orderDeposit)||"");
+                 htmlProcess="<p class='left'></p>"+
+                              "<p class='left'></p>"+
+                              "<a class='l_a'></a>"+
+                              "<a class='m_a'></a>"+
+                              "<a class='r_a'></a>";
+                $(".bt_pay,.bt_cancel").show();
+                 $("input[name=payAmount]").val(dataJD.orderDeposit||"");
+                 $("input[name=transDesc]").val("定金");
+                 $(".process_b a").eq(0).addClass("active");
+                var _addTime = dataJD.addTime;
+                $.ajax({
+                    url: publicPath+"/api/common/now",
+                    type: "get",
+                    data: {},
+                    dataType: "text",
+                    success: function success(data0) {
+                        addTime = newDate(_addTime);
+                        DateNow = newDate(data0);
+                      if((DateNow-addTime)<24*3600000 && (DateNow-addTime)>0){
+                        countdown(_addTime,data0);
+                      }else{
+                        $(".count").hide();
+                      }
+                    }
+                  });
+              }else if(orderStatus=="02"){
+                $(".process_b a").eq(0).text("¥"+RetainedDecimalPlacesNF(dataJD.orderDeposit)||"");
+                $(".process_b a").eq(1).text(staffName);
+                $(".order_statu h3 span").eq(0).text("待面试");
+                $(".bt_cancel").show();
+                $(".process_b a").eq(1).addClass("active");
+                htmlProcess="<p class='left'></p>"+
+                              "<p class='left'></p>"+
+                              "<a class='l_a al_orange'></a>"+
+                              "<a class='m_a'></a>"+
+                              "<a class='r_a'></a>";
+
+              }else if(orderStatus=="03"){
+                $(".process_b a").eq(0).text("¥"+RetainedDecimalPlacesNF(dataJD.orderDeposit)||"");
+                $(".process_b a").eq(1).text(staffName);
+              $(".process_b a").eq(2).text("¥"+RetainedDecimalPlacesNF(dataJD.orderBalance)||"");
+                $(".order_statu h3 span").eq(0).text("待支付尾款");
+                htmlProcess="<p class='left xi_orange'></p>"+
+                              "<p class='left'></p>"+
+                              "<a class='l_a al_orange'></a>"+
+                              "<a class='m_a al_orange'></a>"+
+                              "<a class='r_a'></a>";
+                $(".bt_pay,.bt_cancel").show();
+                 $("input[name=payAmount]").val(dataJD.orderBalance||"");
+                 $("input[name=transDesc]").val("尾款");
+                 $(".process_b a").eq(2).addClass("active");
+              }else if(orderStatus=="04"){
+                $(".bottom_bt").hide();
+                $(".order_statu h3 span").eq(0).text("已完成");
+              }else if(orderStatus=="05"){
+                 $(".bottom_bt").hide();
+                $(".order_statu h3 span").eq(0).text("已取消");
+              }else if(orderStatus=="06"){
+                 $(".bottom_bt").hide();
+                $(".order_statu h3 span").eq(0).text("待退款");
+              }
+              $(".process_t").html(htmlProcess);
+              
+              if(orderStatus=="01" || orderStatus=="02" ||orderStatus=="03"){
+                  $(".order_process").show()
+                  if(dataJD.serviceCharge!=null && dataJD.serviceCharge!="" && dataJD.amount!=null && dataJD.amount!=""){
+                      $(".order_process h4").html("订单金额 ¥"+RetainedDecimalPlacesNF(dataJD.totalPrice)+"<span>（阿姨工资¥"+RetainedDecimalPlacesNF(dataJD.amount)+"，服务费¥"+RetainedDecimalPlacesNF(dataJD.serviceCharge)+"）</span>");
+                  }else if(dataJD.serviceCharge!=null && (dataJD.amount==null || dataJD.amount=="")){
+                      $(".order_process h4").html("订单金额 ¥"+RetainedDecimalPlacesNF(dataJD.totalPrice)+"<span>（服务费¥"+RetainedDecimalPlacesNF(dataJD.serviceCharge)+"）</span>");
+                  }else if((dataJD.serviceCharge==null || dataJD.serviceCharge=="")&& dataJD.amount!=null){
+                        $(".order_process h4").html("订单金额 ¥"+RetainedDecimalPlacesNF(dataJD.totalPrice)+"<span>（阿姨工资¥"+RetainedDecimalPlacesNF(dataJD.amount)+"）</span>");
+                  }else{
+                      $(".order_process h4").html("订单金额 ¥"+RetainedDecimalPlacesNF(dataJD.totalPrice));
+                  }
+              }else{
+                 $(".order_process").hide()
+              }
+             
+              
+              if(dataJD.staffId!="" && dataJD.staffId!=null){
+                  var staffName = "";
+                if (dataJDSI.sex == "01") {
+                  staffName = dataJDSI.staffName.split("")[0] + "师傅";
+                } else if (dataJDSI.sex == "02") {
+                  staffName = dataJDSI.staffName.split("")[0] + "阿姨";
+                }
+                
+                var html = "<img src='"+dataJDSI.headImage+"'/>"+
+                            "<div class='r_staff_info'>"+
+                                "<h3>"+dataJD.serviceItemCodeValue+"</h3>"+
+                                "<h4>"+staffName+"</h4>"+
+                                "<p>"+dataJDSI.age+"岁 | 属"+dataJDSI.zodiacValue+" | "+dataJDSI.nativePlaceValue+"人 | "+dataJDSI.constellationValue+" | "+dataJDSI.educationValue+"</p>"+
+                            "</div>";
+                      $(".staff_info").html(html).show();
+              }else{
+                $(".staff_info").hide()
+              }
+               $(".shop_box a").eq(0).text(dataJDTI.websiteName).attr("href","http://" + window.location.host + "/" + dataJDTI.domain + "/index.html" )
+              $(".shop_box a").eq(1).attr("href","tel:"+dataJDTI.tenantsPhone);
+              $(".serviceItemName p").text(dataJD.serviceItemCodeValue+" - "+dataJD.serviceTypeValue);
+
+              $(".expectedBirthTime,.isSelf").hide();
+              if(dataJD.serviceItemCode=="01"){
+                  if(dataJDOC.isBabyBorn==1){
+                      $(".expectedBirthTime").show().find("p").text("宝宝已出生");
+                  }else{
+                    $(".expectedBirthTime").show().find("p").text(dataJDOC.expectedBirth.split(" ")[0]);
+                  }
+              }else if(dataJD.serviceItemCode=="04"){
+                var selfCares ="";
+                if(dataJDOC.selfCares!=null){
+                  if(dataJDOC.selfCares==01){
+                      selfCares = "能";
+                  }else if(dataJDOC.selfCares==02){
+                      selfCares = "否";  
+                  }
+                }
+                  $(".isSelf").show().find("p").text(selfCares);
+              }
+                var serviceStart = "";
+                if(dataJDOC.serviceStart!=null){
+                  serviceStart = dataJDOC.serviceStart.split(" ")[0];
+                }
+                var serviceEnd = "";
+                if(dataJDOC.serviceEnd!=null){
+                  serviceEnd = dataJDOC.serviceEnd.split(" ")[0];
+                }
+              $(".serviceTime p").text(serviceStart+" 至 "+serviceEnd);
+              $(".serviceSalary p").text(RetainedDecimalPlacesNF(dataJDOC.salary)+dataJDOC.salaryTypeValue);
+              $(".serviceAge p").text(dataJD.wageRequirementsValue||"不限");
+              $(".serviceExperience p").text(dataJD.experienceRequirementsValue||"不限");
+              $(".serviceContent p").text(dataJD.salarySkillsValue||"");
+              $(".remark p").text(dataJDOC.specialNeeds||"");
+              var phone0 = dataJDOC.memberMobile.substr(0,3);
+              var phone1 = dataJDOC.memberMobile.substr(7,11);
+              var htm1 = "<h3>"+dataJDOC.memberName+"<span>"+phone0+" **** "+phone1+"</span></h3>"+
+                            "<p>"+dataJD.serviceProviceValue+"-"+dataJD.serviceCityValue+"-"+dataJD.serviceCountryValue+"  "+dataJDOC.serviceAddress+"</p>";
+                        $(".address_s").html(htm1);
+
+
+//             var contracts = data.jsonData.contracts;
+//             var customermap = data.jsonData.customermap;
+//             var itemsmap = data.jsonData.itemsmap;
+//             var orderMap = data.jsonData.orderMap;
+//             var servicePrice = data.jsonData.servicePrice;
+//             var staffmap = data.jsonData.staffmap;
+//             var surplusTime = data.jsonData.surplusTime;
+//             $(".ic-title i b").text(orderNo);
+//             $("input[name='co-on']").val(orderNo);
+//             $("#process-info").attr("data-status", orderMap.ORDER_STATUS);
+//             var amount = parseInt(orderMap.AMOUNT);
+//             var serviceCharge = parseInt(orderMap.SERVICE_CHARGE);
+//             $(".orderPrice i").text(RetainedDecimalPlacesNF(amount + serviceCharge));
+//             $(".orderPrice span").text("(服务价格￥" + RetainedDecimalPlacesNF(amount) + "+服务费￥" + RetainedDecimalPlacesNF(serviceCharge) + ")")
+//             if (orderMap.ORDER_STATUS == "01") {
+//               $(".ic-title span").text("待支付定金");
+//               $("#process-info .pi-status").eq(0).find(".pis-price").text("￥" + orderMap.ORDER_DEPOSIT);
+//               $("#process-info .pi-status").eq(0).find("span").text("待支付");
+// //									倒计时
+//               $(".reservation,.reservation div p b,.reservation div p span,.reservation .reservation-btn").show();
+//               var surplus = parseInt(60 * 60 * 24) - parseInt(surplusTime) / 1000;
+//               timer(surplus);
+//               $("input[name=orderNo]").val(orderNo);
+//               $("input[name=payAmount]").val(orderMap.ORDER_DEPOSIT);
+//               $(".paymentDetail .pd-amount span").text("￥" + orderMap.ORDER_DEPOSIT);
+//               $("input[name=transDesc]").val("定金");
+//             } else if (orderMap.ORDER_STATUS == "02") {
+//               $(".ic-title span").text("待面试");
+//               $("#process-info .pi-status").eq(0).find(".pis-price").text("￥" + orderMap.ORDER_DEPOSIT);
+//               $("#process-info .pi-status").eq(0).find("span").text("已完成").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(1).find("span").text("待面试");
+//               $(".reservation").show();
+
+//             } else if (orderMap.ORDER_STATUS == "03") {
+//               $(".ic-title span").text("待支付尾款");
+//               $("#process-info .pi-status").eq(0).find("span").text("已完成").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(1).find("span").text("已面试").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(0).find(".pis-price").text("￥" + orderMap.ORDER_DEPOSIT);
+//               $("#process-info .pi-status").eq(2).find(".pis-price").text("￥" + orderMap.ORDER_BALANCE);
+//               $("#process-info .pi-status").eq(2).find("span").text("待支付");
+// //									倒计时
+//               $(".reservation,.reservation .reservation-btn").show();
+//               $("input[name=orderNo]").val(orderNo);
+//               $("input[name=payAmount]").val(orderMap.ORDER_BALANCE);
+//               $(".paymentDetail .pd-amount span").text("￥" + orderMap.ORDER_BALANCE);
+//               $("input[name=transDesc]").val("尾款");
+//             } else if (orderMap.ORDER_STATUS == "04") {
+//               $(".ic-title span").text("已完成");
+//               $("#process-info .pi-status").eq(0).find("span").text("已完成").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(1).find("span").text("已面试").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(2).find("span").text("已完成").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(0).find(".pis-price").text("￥" + orderMap.ORDER_DEPOSIT);
+//               $("#process-info .pi-status").eq(2).find(".pis-price").text("￥" + orderMap.ORDER_BALANCE);
+// //								        更换阿姨
+//               var time = new Date().getTime();
+//               $("input[name='time']").val(time);
+//               var stime = new Date(customermap.SERVICE_END).getTime();
+//             } else if (orderMap.ORDER_STATUS == "05") {
+//               $(".ic-title span").text("已取消");
+//               if (orderMap.IDEPOSIT_OVER == "02" && orderMap.IS_INTERVIEW == "01" && orderMap.BALANCE_OVER == "01") {
+//                 $("#process-info .pi-status").eq(0).find(".pis-price").text("￥" + orderMap.ORDER_DEPOSIT);
+//               } else if (orderMap.IDEPOSIT_OVER == "02" && orderMap.IS_INTERVIEW == "02" && orderMap.BALANCE_OVER == "01") {
+//                 $("#process-info .pi-status").eq(0).find(".pis-price").text("￥" + orderMap.ORDER_DEPOSIT);
+//                 $("#process-info .pi-status").eq(2).find(".pis-price").text("￥" + orderMap.ORDER_BALANCE);
+//               }
+//             } else if (orderMap.ORDER_STATUS == "08") {
+//               $(".ic-title span").text("阿姨更换处理");
+//               $("#process-info .pi-status").eq(0).find("span").text("已完成").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(1).find("span").text("已面试").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(2).find("span").text("已完成").css("color", "#CCCCCC");
+//               $("#process-info .pi-status").eq(0).find(".pis-price").text("￥" + orderMap.ORDER_DEPOSIT);
+//               $("#process-info .pi-status").eq(2).find(".pis-price").text("￥" + orderMap.ORDER_BALANCE);
+//             } else {
+//               $(".ic-title span").text("待处理");
+//               $("#process-info .pi-status").eq(0).find(".pis-price").text("￥" + orderMap.ORDER_DEPOSIT);
+//               $("#process-info .pi-status").eq(0).find("span").text("退款中");
+//             }
+
+// //								合同信息
+//             if (contracts != "") {
+//               $(".viewContract").css("height", "4.2rem");
+//               $(".viewContract a").show().attr("href", "viewContract.html?" + orderNo);
+//             }
+
+// //								家政员信息
+//             if (typeof(orderMap.STAFF_ID) == "undefined" || orderMap.STAFF_ID == null) {
+//               $("#basic-info").parent().hide();
+//             } else {
+//               var STAFF_NAME = "";
+//               if (staffmap.SEX == "01") {
+//                 STAFF_NAME = staffmap.STAFF_NAME.split("")[0] + "师傅";
+//               } else if (staffmap.SEX == "02") {
+//                 STAFF_NAME = staffmap.STAFF_NAME.split("")[0] + "阿姨";
+//               }
+//               $("#basic-info").parent().show();
+//               $("#basic-info .bi-pic img").attr("src", staffmap.HEAD_IMAGE);
+//               $("#basic-info .bi-intro .bi-t h1 b").text(STAFF_NAME);
+//               $("#basic-info .bi-intro .bi-t h1 span").text(staffmap.AGE + "岁/属" + staffmap.ZODIAC_NAME + "/" + staffmap.NATIVE_PLACE_NAME + "人");
+//               var html1 = "<span class='gongzhong'>" + customermap.SERVICE_ITEM_CODE_NAME + "</span>" +
+//                   "<span class='congye'>从业" + itemsmap.EXPERIENCE_NAME.split(",")[1] + "年</span>" +
+//                   "<span class='xueli'>" + staffmap.EDUCARION_NAME + "学历</span>" +
+//                   "<span class='xingzuo'>" + staffmap.CONSTELLATION_NAME + "</span>";
+//               $(".bi-t p").html(html1);
+//             }
+//             var servicePriceUnit = "";
+//             if (orderMap.servicePriceUnit == "01") {
+//               servicePriceUnit = "元/月";
+//             } else if (orderMap.servicePriceUnit == "02") {
+//               servicePriceUnit = "元/小时";
+//             } else if (orderMap.servicePriceUnit == "03") {
+//               servicePriceUnit = "元/26天";
+//             } else if (orderMap.servicePriceUnit == "04") {
+//               servicePriceUnit = "元/次";
+//             }
+//             $(".bi-intro .bi-b").html("￥" + RetainedDecimalPlacesNF(data.jsonData.servicePrice) + "<span>" + servicePriceUnit + "</span>")
+
+// //								服务信息
+//             $("#service-info .telephone").find("span").text(customermap.MEMBER_MOBILE);
+//             $("#service-info .name").find("span").text(customermap.MEMBER_NAME);
+//             $("#service-info .serviceItemName").find("span").text(customermap.SERVICE_ITEM_CODE_NAME);
+//             $("#service-info .serviceTime").find("span").text(customermap.SERVICE_START.split(" ")[0] + "至" + customermap.SERVICE_END.split(" ")[0]);
+
+//             if (orderMap.SERVICE_ITEM_CODE == "01") {
+//               $(".expectedBirthTime").show();
+//               if (customermap.IS_BABY_BORN == 1) {
+//                 $(".expectedBirthTime span").text("宝宝已出生");
+//               } else {
+//                 $(".expectedBirthTime span").html(customermap.EXPECTED_BIRTH);
+//               }
+//             }
+
+//             $("#service-info .serviceType").find("span").text(customermap.SERVICE_TYPE_NAME);
+//             if (customermap.PET_RAISING == 1) {
+//               $("#service-info .petRaising").find("span").text("有");
+//             } else {
+//               $("#service-info .petRaising").find("span").text("无");
+//             }
+//             //服务信息
+// 						var salary="";
+// 						if(customermap.salary!=null && typeof(customermap.salary)!="undefined"){
+// 							salary = customermap.salary+customermap.salaryTypeValue;
+// 						}
+
+//             // var price = "";
+//             // if (typeof(customermap.SALARY_MIN) != 'undefined' && typeof(customermap.SALARY_MAX) != 'undefined') {
+//             //   price = customermap.SALARY_MIN + "-" + customermap.SALARY_MAX + "元";
+//             // } else if (typeof(customermap.SALARY_MIN) == 'undefined' && typeof(customermap.SALARY_MAX) != 'undefined') {
+//             //   price = customermap.SALARY_MAX + "元以下";
+//             // } else if (typeof(customermap.SALARY_MIN) != 'undefined' && typeof(customermap.SALARY_MAX) == 'undefined') {
+//             //   price = customermap.SALARY_MIN + "元以上";
+//             // } else if (typeof(customermap.SALARY_MIN) == 'undefined' && typeof(customermap.SALARY_MAX) == 'undefined') {
+//             //   price = "不限";
+//             // }
+
+//             $("#service-info .salaryRange").find("span").text(salary);
+//             $("#service-info .ageRequirement").find("span").text(customermap.WAGE_REQUIREMENTS_NAME);
+//             $("#service-info .workExp").find("span").text(customermap.EXPERIENCE_REQUIREMENTS);
+//             var address = "";
+//             if (typeof(customermap.SERVICE_ADDRESS) != 'undefined') {
+//               address = customermap.SERVICE_ADDRESS;
+//             }
+//             $("#service-info .workAddress").find("span").text(customermap.SERVICE_PROVICE_NAME + customermap.SERVICE_CITY_NAME + customermap.SERVICE_COUNTY_NAME + address);
+//             $("#service-info .workContent").find("span").text(customermap.SALARY_SKILLS_NAME);
+//             $("#service-info .otherRequirement").find("span").text(customermap.SPECIAL_NEEDS);
+
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  }
+
+//   function timer(intDiff) {
+//     window.setInterval(function () {
+//       var hour = 0;
+//       var minute = 0;
+//       var second = 0;
+//       if (intDiff > 0) {
+//         hour = Math.floor(intDiff / (60 * 60))
+//         minute = Math.floor(intDiff / 60) - (hour * 60);
+//         second = Math.floor(intDiff) - (hour * 60 * 60) - (minute * 60);
+//       }
+//       if (minute <= 9) minute = '0' + minute;
+//       if (second <= 9) second = '0' + second;
+//       $(".reservation div p span").text(hour + ":" + minute + ":" + second);
+//       if (hour == "0" && minute == "00" && second == "00") {
+// //				    	location.reload();
+//       }
+//       intDiff--;
+//     }, 1000);
+//   }
+
+  $(function () {
+
+    if (document.referrer == '') {
+        // 没有来源页面信息的时候，改成首页URL地址
+        $('.goBack').attr('href', 'index.html');
+    }
+    var url = location.search;
+    if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      var orderNo = str.split("=")[1];
+      ordersdeails(orderNo);
+    }
+
+
+//				取消订单
+    $(".bottom_bt").on("click", ".bt_cancel", function () {
+      var orderStatus = $("input[name='orderStatus']").val();
+      var title = "";
+      if (orderStatus=="01"){
+        title = "<h2>温馨提示：</h2>"+
+            "<p class='cancelOrder0'>确定要取消订单吗？取消订单后不能恢复。</p>";
+      } else {
+        var OrderDeposit = $("input[name='orderDeposit']").val();
+        title = "<h2>温馨提示：</h2>"+
+            "<p class='cancelOrder1'>取消订单后，系统将扣取已支付金额的0%作为手续费，剩余金额将按原路径退回。</p>"+
+            "<h4 class='refund'><span>实际到账：<a>￥"+OrderDeposit+"</a></span><span class='tui'>退款手续费：<a>￥0</a></span></h4>";
+      }
+      $(".cancelReservation-pop .top_title").html(title);
+      $("#layer,.cancelReservation-pop").show();
+    });
+
+    $(".crpb-cancel,#layer").click(function () {
+      $("#layer,.cancelReservation-pop").hide();
+      $(".reason .promt").remove();
+    })
+
+    $(".cancelReservation-pop .crpb-confirm").click(function () {
+      var orderStatus = $("input[name='orderStatus']").val();
+      var orderNo = $("input[name='orderNo']").val();
+      var cancelReason ="";
+      if($("input[name='cancel']:checked").length<1){
+        $(".reason .promt").remove();
+        $(".reason ul").append("<p class='promt'>原因不能为空</p>");
+        return;
+      }else if($("input[name='cancel']:checked").val()=="06" && $(".other_reason textarea").val().trim()==""){
+        $(".reason .promt").remove();
+        $(".reason ul").append("<p class='promt'>原因不能为空</p>");
+        return;
+      }else if($("input[name='cancel']:checked").val()=="06" && $(".other_reason textarea").val().trim().length > 200){
+        $(".reason .promt").remove();
+        $(".reason ul").append("<p class='promt'>原因不能超过200字</p>");
+        return;
+      }else{
+        $(".reason .promt").remove();
+      }
+      if($("input[name='cancel']:checked").val()=="06"){
+        cancelReason = $(".other_reason textarea").val();
+      }else{
+        cancelReason = $("input[name='cancel']:checked").parents("li").find("p").text();
+      }
+      var params0 = "";
+      if(orderStatus=="01"){
+        params0 = {
+          orderNo:orderNo,
+          cancleReason:cancelReason,
+          counterFee:"",
+          tradeAmount:""
+        }
+      }else{
+        var tradeAmount = $("input[name='orderDeposit']").val();
+        var counterFee = 0;
+        params0 = {
+          orderNo:orderNo,
+          cancleReason:cancelReason,
+          counterFee:counterFee,
+          tradeAmount:tradeAmount
+        }
+      }
+      $.ajax({
+        url: publicPath+"/api/orders/cancelorder",
+              headers:params,
+        type: "post",
+        data: params0,
+        dataType: "json",
+        success: function success(data) {
+          if(data.success) {
+            if(data.code == 0) {
+              window.location.reload();
+              console.log(data.msg);
+            } else {
+              console.log(data.msg);
+            }
+          } else {
+            console.log(data.msg);
+          }
+        }
+      });
+    })
+
+    
+
+
+    // $(".ca-btn").click(function () {
+    //   $("#layer,.changehs-pop").show();
+    // })
+
+    // $(".cpb-cancel").click(function () {
+    //   $("#layer,.changehs-pop").hide();
+    // })
+
+    // $(".cpb-confirm").click(function () {
+    //   var orderNo = $("input[name='co-on']").val();
+    //   var remark = $(".changehs-pop textarea").val();
+    //   $.ajax({
+    //     url: publicPath + "/api/orders/changehs",
+    //     headers: params,
+    //     type: "post",
+    //     data: {
+    //       orderNo: orderNo,
+    //       type: "01",
+    //       remark: remark
+    //     },
+    //     dataType: "json",
+    //     success: function success(data) {
+    //       if (data.success) {
+    //         if (data.code == 0) {
+    //           window.location.reload();
+    //           console.log(data.msg);
+    //         } else {
+    //           console.log(data.msg);
+    //         }
+    //       } else {
+    //         checkAuth(data.code);
+    //         console.log(data.msg);
+    //       }
+    //     }
+    //   });
+    // })
+
+
+//				确认支付
+    $(".bt_pay").click(function () {
+      var orderNo = $("input[name='orderNo']").val();
+      var payAmount = $("input[name='payAmount']").val();
+      var transDesc = $("input[name='transDesc']").val();
+      sessionStorage.setItem("orderNo", orderNo);
+      sessionStorage.setItem("payAmount", payAmount);
+      sessionStorage.setItem("transDesc", transDesc);
+      var url = "http://" + window.location.host;
+      window.location.href = url+"/pay.html"
+    });
+
+    // 取消原因选择
+				$(".reason ul li").on("click","input[type='radio']",function(){
+					$(this).parent("li").find(".circle-box").addClass("active");
+					$(this).parent("li").siblings("li").find(".circle-box").removeClass("active");
+					if($(this).val()=="06"){
+						$(".other_reason").show();
+					}else{
+						$(".other_reason").hide().val("");
+					}
+				});
+    // $(".payment-btn").click(function(){
+    // 	var orderNo = $(".paymentDetail input[name='orderNo']").val();
+    // 	var payAmount = $(".paymentDetail input[name='payAmount']").val();
+    // 	var transDesc = $(".paymentDetail input[name='transDesc']").val();
+    // 	sessionStorage.setItem("orderNo",orderNo);
+    // 	sessionStorage.setItem("payAmount",payAmount);
+    // 	sessionStorage.setItem("transDesc",transDesc);
+    // 	var Url = "http://"+location.host+"/"+location.pathname.split("/")[1];
+    // 	location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3ba7ee60b26f2955&redirect_uri="+Url+"/transitionPage.html?response_type=code&scope=snsapi_base#wechat_redirect"
+    // });
+
+    // $(".paymentDetail .close-btn").click(function(){
+    // 	$("#layer").hide();
+    // 	$(".paymentDetail").animate({"bottom":"-35.4rem"});
+    // });
+
+  });
+</script>
+</body>
+</html>

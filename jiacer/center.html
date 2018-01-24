@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <title>家策好服务</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/center.css"/>
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+<!-- <header>
+  <a class="goBack" href="index.html"></a>
+  <h1>我的</h1>
+</header> -->
+<div class="account">
+  <!-- <a class="back_index" href="index.html"></a> -->
+  <a class="personal" href="">
+    <span class="photo"><img src="img/logopic.png"/></span>
+    <p>查看个人详情</p>
+  </a>
+</div>
+<!-- <div class="reservation">
+  <p>我的预约</p>
+  <ul class="myReservation">
+    <li class="first"><a href="">待处理</a></li>
+    <li class="second"><a href="">已处理</a></li>
+    <li class="third"><a href="">全部预约<img class="icon" src="img/righticon.png"/></a></li>
+  </ul>
+</div>
+<div class="order">
+  <p>我的订单</p>
+  <ul class="myOrder">
+    <li class="first"><a href="">待支付</a></li>
+    <li class="second"><a href="">已完成</a></li>
+    <li class="third"><a href="">全部订单<img class="icon" src="img/righticon.png"/></a></li>
+  </ul>
+</div> -->
+<div class="order_h">
+  <p class="order_all">我的订单 <a class="order_new" href="">预约订单</a></p>
+  <ul class="order_statu clearfx">
+    <li class="order_pay"><a href="">待支付</a></li>
+    <li class="order_m"><a href="">待面试</a></li>
+    <li class="order_com"><a href="">已完成</a></li>
+    <li class="order_qu"><a href="">全部订单</a><span></span></li>
+  </ul>
+</div>
+<div class="mine_list">
+  <a class="personalInfo"  href="">
+    <p><span><img src="img/minelist0.png"></span>我的资料</p>
+  </a>
+  <a class="address" href="">
+    <p><span><img src="img/minelist1.png" class="record"></span>我的地址</p>
+  </a>
+  <a class="border_n" href="aboutApp.html">
+    <p><span><img src="img/minelist2.png"></span>关于家策</p>
+  </a>
+</div>
+<footer>
+  <a class="homePage" href="index.html">首页</a>
+  <a class="customization" href="custom.html">定制</a>
+  <a class="mine" href="center.html">我的</a>
+</footer>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+  var imgurl = "http://" + window.location.host + "/images/fxlogo.jpeg";
+  shareWechat.init_share_params = {
+    'onMenuShareTimeline.title': '家策好服务，家庭有托付',
+    'onMenuShareTimeline.imgUrl': imgurl,
+    'onMenuShareAppMessage.title': '家策好服务，家庭有托付',
+    'onMenuShareAppMessage.imgUrl': imgurl,
+    'onMenuShareAppMessage.desc': '给生活添一份色彩！'
+  };
+  shareWechat.sharePage();
+  function getWeChatInfo(params) {
+    $.ajax({
+      url: window.global_config.weChatInfo,
+      type: "get",
+      data: {},
+      dataType: "json",
+      headers: params,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            console.log(data);
+            var avatar = data.jsonData.headImgUrl;
+            $(".account .photo img").attr("src", avatar)
+          }else {
+            checkAuth(data.code);
+          }
+        } else {
+          console.log(data.msg);
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  }
+  $(function () {
+    getWeChatInfo(params);
+    //			用户登录信息
+    if (params.uid == "" || params.uid == null || params.uid == "null") {
+      $(".account .personal").attr("href", "login.html");
+      $(".account p").html("请登录");
+      console.log(data.msg);
+    } else {
+      getMemberInfo();
+    }
+  })
+  $(".personalInfo,.address,.order_statu li a,.order_all a").click(function (e) {
+    e.preventDefault();
+    var that=$(this);
+    if (params.uid == "" || params.uid == null || params.uid == "null") {
+      location.href = "login.html";
+    } else {
+      $.ajax({
+        url:window.global_config.getMemberInfo,
+        type: "post",
+        headers: params,
+        data: {},
+        dataType: "json",
+        async: false,
+        success: function success(data) {
+          if (data.success) {
+            if (data.code == 0) {
+              // $(".myOrder .first a").attr("href","myOrder.html?code=01");
+              // $(".myOrder .second a").attr("href","myOrder.html?code=03");
+              // $(".myOrder  .third a").attr("href","myOrder.html?code=05");
+              // $(".myReservation .first a").attr("href","myReservation.html?code=01");
+              // $(".myReservation .second a").attr("href","myReservation.html?code=02");
+              // $(".myReservation .third a").attr("href","myReservation.html?code=");
+              $(".order_qu a").attr("href","myOrder.html?code=");
+              $(".order_all .order_new").attr("href","myReservation.html?code=");
+              $(".order_statu .order_pay a").attr("href","myOrder.html?code=01");
+              $(".order_statu .order_m a").attr("href","myOrder.html?code=02");
+              $(".order_statu .order_com a").attr("href","myOrder.html?code=03");
+              $(".personalInfo").attr("href","personalInfo.html");
+              $(".address").attr("href","address.html");
+              var H = that.attr("href");
+              location.assign(H);
+            }
+          } else {
+            if (data.code = 999010) {
+              location.href = "login.html";
+            }
+            console.log(data.msg);
+          }
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      });
+    }
+  })
+  function getMemberInfo() {
+    $.ajax({
+      url: window.global_config.getMemberInfo,
+      type: "post",
+      dataType: "json",
+      headers: params,
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            // if (dataJD[0].name != null && dataJD[0].name != "") {
+            //   $(".account p").html("<span class=''>" + dataJD[0].name + "</span>");
+            // } else {
+            //   $(".account p").html("<span class=''>" + dataJD[0].mobile + "</span>");
+            // }
+            $(".account .personal").attr("href", "personalInfo.html");
+          }
+        } else {
+          if (data.code == 999010) {
+            location.href = "login.html";
+          }
+          console.log(data.msg);
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>家策好服务</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/base.css"/>
+  <link rel="stylesheet" type="text/css" href="css/index.css"/>
+  <!--<script src="https://unpkg.com/vue"></script>-->
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/vue.js"></script>
+</head>
+<body>
+  <div id="layer"></div>
+  <div class="contact-pop">
+    <div class="cp-content">
+      <p>拨打家政门店电话</p>
+      <p></p>
+    </div>
+    <div class="cp-btn">
+      <a class="cpb-cancel">取消</a>
+      <a class="cpb-call">呼叫</a>
+    </div>
+  </div>
+<header>
+  <a class="jiacerIndex" href="#"><img src="img/jiacerlogo.png"/></a>
+  <h1></h1>
+</header>
+<div class="company-intro fix">
+  <div class="ci-banner">
+     <img src="" alt=""> 
+  </div>
+  <div class="iconWrapper">
+    <a href="serviceTypes.html?serviceItemCode=01">
+      <dl>
+        <dt><img src="img/jzfw.png" alt=""></dt>
+        <dd>家政服务</dd>
+      </dl>
+    </a>
+    <a href="custom.html">
+      <dl>
+        <dt><img src="img/dz.png" alt=""></dt>
+        <dd>自由定制</dd>
+      </dl>
+    </a>
+    <a href="aboutUs.html">
+      <dl class="iconAboutUs rel">
+        <dt><img src="img/home.png" alt=""></dt>
+        <dd>关于我们</dd>
+        <div class="frameSmSel abs" id="" name="showAboutUs"></div>
+      </dl>
+    </a>
+  </div>
+</div>
+<div class="ci-info">
+  <p><span></span></p>
+  <a href="" class="phone"></a>
+</div>
+
+<div class="hotService">
+  <h4><img src="img/indexgz.png"/>优质服务</h4>
+  <div id="app">
+    <!--<ul class="hs-list clearfix">-->
+    <div class="showContent">
+      <div class="box_big">
+        <div class="showBoxBig f0 rel item" data-index="01" :data-sercode="siteObj.jobs[0].serviceItemCode"
+            @click="routerService">
+          <img :src="siteObj.jobs[0].imageUrl" alt="">
+          <div class="r ctnRtBox">
+            <h5><span class="rel dib">{{siteObj.jobs[0].serviceItemName}} <i class="hot"
+                                                                                        v-show="siteObj.jobs[0].isHot"></i></span>
+            </h5>
+            <p>{{siteObj.jobs[0].serviceDesc}}</p>
+            <div class="dib priceBox">
+              <span class="price">{{siteObj.jobs[0].servicePrice}}</span>
+              {{siteObj.jobs[0].servicePriceUnit}}
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      <div class="box_box" v-for="(job,idx) in siteObj.jobs" v-if="idx>0">
+        <div class="showBoxSm item"  :data-sercode="job.serviceItemCode"
+            @click="routerService" >
+          <div class="descR dib">
+            <h6><span>{{job.serviceItemName}}<i v-if="idx=0"></i></span></h6>
+            <div class="priceWrapper">
+              <span class="price">{{job.servicePrice}}</span> {{job.servicePriceUnit}}
+            </div>
+          </div>
+          <img :src="job.imageUrl" alt="" class="r">
+        </div>
+      </div>
+      <div class="box_box more_gz"  v-if="siteObj.jobs.length%2==0">
+        <div class="showBoxSm item" data-sercode="01"
+            @click="routerService" :class="">
+            <p>更多服务</p>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+<div class="serviceFlow fix">
+  <h4><img src="img/liuchengbg.png"/>服务流程</h4>
+  <div class="servicePannel"><img src="img/flow.png"/></div>
+</div>
+<div class="security">
+  <img src="img/security.png"/>家策好服务提供技术服务平台
+</div>
+
+<footer>
+  <a class="homePage" href="index.html">首页</a>
+  <a class="customization" href="custom.html">定制</a>
+  <a class="mine" href="center.html">我的</a>
+</footer>
+
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+ 
+  $(function () {
+  //   var token ="qJwkpvY-FxH6uTGjeWSEyFgflIliOnc4P58sLa0yZGgotKwB9Oxk4yXtfGodSRnTAh3AG6W_SDJfkPrYj1sL9w";
+  // var uid=68;
+  // var params ={'token':token,'uid':uid};
+    //租户站点信息
+    $.ajax({
+      url: publicPath + "/api/index/info",
+      type: "post",
+      headers:params,
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            var html = "";
+            var url = dataJD.bannerUrl;
+            // var i = url.lastIndexOf("_");
+            // console.log(i);
+            // if (i != -1) {
+            //   url = url.slice(0, i) + "_374x130";
+            // } else {
+            //   url = url;
+            // }
+          //  $(".ci-banner").css("backgroundImage", "url(" + url + ")");
+            $(".ci-banner img").attr("src", url);
+            $("header h1").text(dataJD.wesiteName);
+            $(".ci-info p span").text(dataJD.contactAddress);
+            $(".contact-pop .cp-content p").eq(1).text(dataJD.contactPhone);
+//            $(".contact-pop .cp-btn .cpb-call").attr("href", "tel:" + dataJD.contactPhone);
+            $(".phone").attr("href", "tel:" + dataJD.contactPhone);
+
+            console.log(data.msg);
+          } else {
+            console.log(data.msg);
+          }
+        } else {
+          checkAuth(data.code);
+          console.log(data.msg);
+        }
+      }
+    });
+
+    var Height = $(".ci-info p span").height();
+    var pHeight = $(".ci-info").height();
+    if(Height < pHeight){
+      var top =(pHeight - Height)/2;
+      $(".ci-info p").css("padding-top",top);
+    }
+
+    //微信分享
+    var wesiteName = $("header h1").text();
+    var address = $(".ci-info").find("span").text();
+    var imgurl = "http://" + window.location.host + "/images/fxlogo.jpeg";
+    shareWechat.init_share_params = {
+      'onMenuShareTimeline.title': "欢迎走进" + wesiteName,
+      'onMenuShareTimeline.imgUrl': imgurl,
+      'onMenuShareAppMessage.title': wesiteName,
+      'onMenuShareAppMessage.imgUrl': imgurl,
+      'onMenuShareAppMessage.desc': address
+    };
+    shareWechat.sharePage();
+
+    $(".jiacerIndex").click(function () {
+      var location = window.location.href;
+      if (location.indexOf("wxcs.jiacer.com") != -1) {
+        window.location.href = "http://wxcs.jiacer.com/";
+      } else if (location.indexOf("ysc-wx.jiacer.com") != -1) {
+        window.location.href = "http://ysc-wx.jiacer.com/";
+      } else {
+        window.location.href = "http://wx.jiacer.com/";
+      }
+    })
+    //				联系
+   /* $(".phone").click(function () {
+      $("#layer,.contact-pop").show();
+    });*/
+
+    /*$(".cpb-cancel").click(function () {
+      $("#layer,.contact-pop").hide();
+    });*/
+  });
+
+  function fomateValue(value) {
+    value = value == "0" ? false : true;
+    return value;
+  }
+</script>
+<script>
+  //  var token ="qJwkpvY-FxH6uTGjeWSEyFgflIliOnc4P58sLa0yZGgotKwB9Oxk4yXtfGodSRnTAh3AG6W_SDJfkPrYj1sL9w";
+  // var uid=68;
+  var app = new Vue({
+    el: '#app',
+    data: {
+      showJobs: [],
+      siteObj: {},
+      list:{},
+    },
+    created(){
+      this.serviceItems();
+    },
+    methods: {
+      serviceItems: function () {
+        var _this = this;
+        console.log("service");
+        $.ajax({
+          url: publicPath + "/api/index/serviceItems",
+          headers: params,
+          type: "post",
+          data: {},
+          dataType: "json",
+          success: function success(data) {
+            if (data.success) {
+              if (data.code == 0) {
+                var dataJD = data.jsonData;
+                var n = 0;
+                console.log(dataJD);
+                _this.showJobs = dataJD;
+                var arrList = [];
+                var classList = [];
+                for (var idx in dataJD) {
+                  if(idx<7){
+                    n++;
+                    var obj = dataJD[idx];
+                    var isHot = fomateValue(obj.isHot);
+                    var isShow = fomateValue(obj.isShow);
+                    var url = obj.imgUrl;
+                    if (url.indexOf("http") == -1) {
+                      url = "/images" + url;
+                    }
+                    console.log(isHot)
+                    var temp = {
+                      imageUrl: url,
+                      isDefault: obj.isDefault,
+                      serviceDesc: obj.serviceDesc,
+                      isHot: isHot,
+                      serviceItemCode: obj.serviceItemCode,
+                      serviceItemName: obj.serviceItemName,
+                      servicePrice: obj.servicePrice,
+                      servicePriceUnit: obj.servicePriceUnit,
+                    }
+                    var itemp = "list"+idx;
+                    arrList.push(temp);
+                    classList.push(itemp);
+                    _this.siteObj = {
+                      jobs: arrList
+                    }
+                    _this.list = classList;
+                  }
+                  
+                }
+               
+              } else {
+                console.log(data.msg)
+              }
+            }else {
+              checkAuth(data.code);
+            }
+          },
+          error: function (err) {
+            console.log(err);
+          }
+        });
+      },
+      routerService: function (e) {
+        console.log("succ");
+        var el = e.currentTarget;
+        var serviceItemCode = $(el).data("sercode");
+        console.log(serviceItemCode);
+        var Url = "serviceTypes.html" + "?" + "serviceItemCode=" + serviceItemCode;
+        location.assign(Url);
+      }
+    }
+  })
+</script>
+</body>
+</html>

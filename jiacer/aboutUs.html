@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>家策好服务</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/aboutUs.css"/>
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<input type="hidden" id="wesiteName" value=""/>
+<header>
+  <a class="goBack" href="index.html"></a>
+  <h1 id="shop_name">关于我们</h1>
+</header>
+<div class="content">
+  <!--<img src="img/aboutbanner.png"/>
+  <div class="content_p">
+    <p>家策商学院，是家策联盟旗下的专业培训服务机构。学院把握当前家庭服务人员从业水平和各类家庭对家庭服务人员的要求，本着积极满足并超越各类家庭的期望，结合地区科创中心、人力资源和保障部、各级劳动部门和民政部门的大力支持，联合各类社会人力服务机构，依托上海国际化高端人才聚集优势，集聚一批雄厚师资力量，致力于打造一批又一批超越同行业水平的高级育婴师、高级月嫂、高端家务师、高级家庭管家等岗位工种，力求引领中国家庭服务行业向着更规范、更稳定、更专业的方向发展！</p>
+  </div>-->
+</div>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+<script type="text/javascript">
+  $(function () {
+
+    //获取门店
+    $.ajax({
+      url: publicPath + "/api/index/info",
+      type: "post",
+      headers: params,
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            $("#wesiteName").val(dataJD.wesiteName);
+            console.log(data.msg);
+          } else {
+            checkAuth(data.code);
+          }
+        } else {
+          console.log(data.msg);
+        }
+      }
+    });
+    //微信分享
+    var wesiteName = $("#wesiteName").val();
+    var imgurl = "http://" + window.location.host + "/images/fxlogo.jpeg";
+    shareWechat.init_share_params = {
+      'onMenuShareTimeline.title': "欢迎走进" + wesiteName,
+      'onMenuShareTimeline.imgUrl': imgurl,
+      'onMenuShareAppMessage.title': wesiteName,
+      'onMenuShareAppMessage.imgUrl': imgurl,
+      'onMenuShareAppMessage.desc': '公司简介'
+    };
+    shareWechat.sharePage();
+
+    $.ajax({
+      url: publicPath + "/api/aboutus/getusinfo",
+      type: "post",
+      headers: params,
+      data: {},
+      dataType: "json",
+      success: function success(data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            $("#shop_name").html(dataJD.websiteName);
+            if(dataJD.content !="" && dataJD.content!=null){
+              $(".content").html(dataJD.content);
+            }else{
+              var	html1="<div class='about_us'>"+
+                  "<img src='"+dataJD.imageUrl+"'/>"+
+                  "</div>";
+              $(".content").html(html1);
+            }
+          }
+        } else {
+          console.log(data.msg);
+        }
+      },
+      error: function (err) {
+        console.log(err);
+      }
+    });
+  })
+</script>
+</html>

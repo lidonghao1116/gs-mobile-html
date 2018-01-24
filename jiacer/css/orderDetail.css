@@ -1,0 +1,486 @@
+/* .infoCard .ic-title i {font-size: 1.2rem;color: #808080;margin-left: 2.2rem;}
+
+.infoCard #process-info {display: flex;display: -webkit-flex;justify-content: center;align-items: flex-start;font-size: 1.2rem;border: 1px solid #E6E6E6; border-top: none;background-color: #FAFAFA;}
+.infoCard #process-info div {flex: 1;text-align: center;color: #CCCCCC;}
+.infoCard #process-info .pi-status .pis-info {color: #4D4D4D;margin-bottom: 1.1rem;}
+.infoCard #process-info .pi-status .pis-price {color: #CCCCCC;margin-bottom: 1.1rem;}
+.infoCard #process-info .pi-status span {color: #FF7E3F;}
+.infoCard .orderPrice {height: 4.2rem;border: 1px solid #E6E6E6;font-size: 1.2rem;line-height: 4.2rem;background-color: #FAFAFA;border-top: none;text-align: center;}
+.infoCard .orderPrice span {color: #808080;}
+.infoCard .viewContract {height: 2.1rem;line-height: 4.2rem;}
+.infoCard .viewContract a {float: right;color: #2E5EFB;display: none;} */
+
+/*.infoCard #basic-info .bi-intro .bi-b {height: 2.4rem;margin-top: .8rem;width: 100%;line-height: 2.4rem;}
+.infoCard #basic-info .bi-intro .bi-b span {font-size: 1rem;}*/
+/* .infoCard .changeStaff {height: 4.9rem;border-top: 1px solid #E6E6E6;}
+.infoCard .changeStaff a {display: block; width: 8.9rem;height: 2.7rem;border: 1px solid #B3B3B3;line-height: 2.7rem;text-align: center;color: #808080;float: right;margin: .9rem .7rem 0 0;}
+
+.reservation {border-top: 1px solid #E6E6E6;width: 100%; height: 4.9rem;background-color: #FFFFFF;position: fixed;bottom: 0;left: 0;display: flex;display: -webkit-flex;z-index: 10;}
+.reservation div {display: inherit;flex: 2;}
+.reservation div p {flex: 1;color: #808080;padding: .8rem 0 0 .7rem;font-size: 1rem;}
+.reservation div p span {display: block;margin-top: .3rem;font-size: 1.2rem;}
+.reservation div a {flex: 1;display: block;line-height: 4.9rem;text-align: center;}
+.reservation .reservation-btn {flex: 1;display:block;background-color: #FF9900;line-height: 4.9rem;text-align: center;font-size: 1.5rem;color: #FFFFFF;}
+
+
+.changeStaff-pop {width: 31rem;background-color: #FFFFFF;border-radius: 5px;position: fixed;left: 50%;top: 50%;margin-left: -15.5rem;margin-top: -7.25rem;z-index: 110;display: none;}
+.changeStaff-pop textarea {display: block;border: none;height: 10.3rem;width: 100%;resize: none;box-sizing: border-box;padding: 1.5rem 2rem;font-size: 1.2rem;}
+.changeStaff-pop .csp-btn {height: 4.2rem;display: flex;display: -webkit-flex;border-top: 1px solid #E6E6E6;}
+.changeStaff-pop .csp-btn a {display: block;flex: 1;height: 100%;line-height: 4.2rem;text-align: center;}
+.changeStaff-pop .csp-btn .csp-cancel {border-right: 1px solid #E6E6E6;}
+
+
+
+.cancelOrder-pop,.changehs-pop {width: 31rem;background-color: #FFFFFF;position: fixed;left: 50%;top: 50%;margin-left: -15.5rem;border-radius: 5px;z-index: 110;}
+.cancelOrder-pop .cop-btn,.changehs-pop .cp-btn {height: 4.2rem;display: flex;display: -webkit-flex;border-top: 1px solid #E6E6E6;}
+.cancelOrder-pop .cop-btn a,.changehs-pop .cp-btn a {display: block;flex: 1;height: 100%;line-height: 4.2rem;text-align: center;}
+.cancelOrder-pop .cop-btn .copb-cancel,.changehs-pop .cp-btn .cpb-cancel {border-right: 1px solid #E6E6E6;}
+#cancelOrder1,.changehs-pop {margin-top: -9rem;display: none;}
+#cancelOrder1 p,.changehs-pop p {text-align: center;line-height: 6rem;}
+#cancelOrder1 textarea,.changehs-pop textarea {display: block; width: 27.9rem;height: 4.9rem;border: 1px solid #E6E6E6;margin:0 auto 2rem auto;resize: none;font-size: 1.6rem;padding: .5rem;}
+#cancelOrder2 {padding-top: 1.7rem;margin-top: -10.2rem;display: none;}
+#cancelOrder2 textarea {display: block;width: 27.9rem;height: 4.9rem;border: 1px solid #E6E6E6;resize: none;margin: 0 auto;font-size: 1.6rem;padding: .5rem;}
+#cancelOrder2 .cop-refund {height: 4.4rem;display: flex;display: -webkit-flex;line-height: 4.4rem;}
+#cancelOrder2 .cop-refund p {height: 100%;flex: 1;padding-left: 1rem;box-sizing: border-box;}
+#cancelOrder2 .cop-refund p span {color: #FF681E;}
+#cancelOrder2 .cop-hint {font-size: 1rem;color: #808080;margin: 0 1rem 1.6rem 1rem;}
+
+
+.paymentDetail {width: 100%;height: 35.4rem;position: fixed;bottom: -35.4rem;left: 0; background-color: #FFFFFF;z-index: 110;}
+.paymentDetail .close-btn {position: absolute;top: .9rem;right: .9rem;}
+.paymentDetail .pd-title {height: 4.2rem;border-bottom: 1px solid #F0F0F0;font-size: 1.5rem;line-height: 4.2rem;text-align: center;}
+.paymentDetail .pd-amount {height: 4.2rem;border-bottom: 1px solid #F0F0F0;line-height: 4.2rem;padding: 0 1.2rem;}
+.paymentDetail .pd-amount span {float: right;}
+.paymentDetail .pd-method {border-bottom: 1px solid #F0F0F0;line-height: 4.2rem;}
+.paymentDetail .pd-method .pdm-title {height: 4.2rem;padding: 0 1.2rem;}
+.paymentDetail .pd-method .pdm-title span {color: #808080;float: right;}
+.paymentDetail .pd-method .pdm-title span img {width: .8rem;height: 1.5rem;margin-left: .7rem;}
+.paymentDetail .pd-method .pdm-title span .pullDown {transform: rotate(90deg);margin: 0;}
+.paymentDetail .pd-method .pdm-w {height: 4.2rem;padding: 0 1.5rem;position: relative;padding-left: 4.2rem;background-size: 2.5rem 2.5rem!important;margin-left: 1.6rem;background:url(../img/weixinzhifu.png) no-repeat left;}
+.paymentDetail .payment-btn {display: block;width: 34rem;height: 4.2rem;background-color: #FF9900;color: #FFFFFF;font-size: 1.5rem;text-align: center;line-height: 4.2rem;border-radius: 5px;margin: 16.7rem auto 0 auto;}
+
+.ca-btn {display: none;width: 16rem;height: 4.2rem;background-color: #FFFFFF;border: 1px solid #E6E6E6;line-height: 4.2rem;text-align: center;margin: 0 auto;} */
+
+body{
+    background-color: #f0f0f5;
+    padding-bottom: 5rem;
+    position: relative;
+}
+.right {
+    float: right;
+}
+.left{
+    float: left;
+}
+
+header {position: relative;}
+header h1 img {width: .8rem;height: .4rem;margin-left: .6rem;}
+#rl-layer {position: fixed;left: 0;right:0;bottom:0;background-color:#000000;z-index:90;-moz-opacity: 0.3;opacity:.30;filter: alpha(opacity=30);display: none;}
+
+.order_statu {
+    background: url(../img/orderbg.png) no-repeat;
+    padding: .9rem 1.5rem 0;
+    height: 7rem;
+    background-size: 100% 100%;
+}
+
+.order_statu p {
+    color: #ffe3b8;
+}
+
+.order_statu h3 {
+    color: #fff;
+    padding-left: 2.5rem;
+    background: url(../img/count.png) no-repeat;
+    background-position: left center;
+    background-size: 1.7rem auto;
+    margin-top: 1.3rem;
+    font-size: 1.6rem;
+}
+.order_statu h3 span.count {
+    font-size: 1.2rem;
+    color: #fff1db;
+    margin-left: 2rem;
+    display: none;
+}
+.card {
+    margin-top: 1.1rem;
+    background-color: #fff;
+}
+.order_process {
+    background-color: #fff;
+}
+
+.order_process h4 {
+    line-height: 4.3rem;
+    border-bottom: 1px solid #f0f0f5;
+    padding: 0 1.5rem;
+}
+
+.order_process h4 span {
+    color: #a7a7a7;
+}
+
+.process {text-align: center;padding: 1.4rem 1.5rem;  line-height: 1.4rem;}
+
+.process a {
+    display: inline-block;
+    width: 6rem;
+    text-align: center;
+    line-height: 1.4rem;
+}
+
+.process_b {
+    text-align: center;
+    padding: 1.4rem 1.5rem;
+    line-height: 1.4rem;
+}
+
+.process_b a {
+    display: inline-block;
+    width: 6rem;
+    text-align: center;
+    line-height: 1.4rem;
+    color: #888888;
+}
+.process_b a.active{
+        color: #ff9900;
+}
+
+ /* .process_b a.orderBalance {
+    color: #ff9900;
+}  */
+.process_t {
+    height: 1.4rem;
+    text-align: center;
+    margin: 0 2.2rem;
+    position: relative;
+}
+.process_t p {
+    height: .7rem;
+    width: 50%;
+    border-bottom: 1px solid #d5d5d5;
+}
+.process_t p.xi_orange {
+    width: 50%;
+    border-bottom: 1px solid #ff9900;
+}
+.process_t a {
+    display: inline-block;
+    width: 4.6rem;
+    height: 1.4rem;
+    border-radius: 100%;
+    position: absolute;
+    background: url(../img/dai.png) no-repeat;
+    background-size: 1.4rem;
+    background-position: center;
+    background-color: #fff;
+}
+.process_t a.l_a{
+    left: 0;
+    top: 0;
+}
+.process_t a.r_a{
+    right: 0;
+    top: 0;
+}
+.process_t a.m_a{
+    left: 50%;
+    top: 0;
+    margin-left: -2.3rem;
+}
+.process_t a.al_orange {
+    background: url(../img/complete.png) no-repeat;
+    background-size: 1.4rem;
+    background-position: center;
+    background-color: #fff;
+}
+
+.shop_box {
+    padding: 1.4rem;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+}
+
+.shop_box a {
+    color: #a8a8a8;
+}
+
+.shop_box a.phone {
+    font-size: 1.2rem;
+    color: #6b6b6b;
+    padding-left: 2rem;
+    background: url(../img/phonebg.png) no-repeat;
+    background-position: left center;
+    background-size: 1.3rem auto;
+}
+
+.shop_box a.shop {
+    padding-left: 2.5rem;
+    background: url(../img/mendian.png) no-repeat;
+    background-position: left center;
+    background-size: 1.4rem auto;
+}
+.staff_info {
+    padding: 1.5rem;
+}
+
+.staff_info img {
+    float: left;
+    width: 5.3rem;
+    height: auto;
+    border-radius: .2rem;
+}
+
+.staff_info .r_staff_info {
+    padding-left: 6.7rem;
+}
+
+.staff_info .r_staff_info p {
+    color: #a8a8a8;
+    font-size: 1.2rem;
+}
+
+.staff_info .r_staff_info h3 {
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.staff_info .r_staff_info h4 {
+    color: #6b6b6b;
+    font-size: 1.4rem;
+    margin-bottom: .5rem;
+}
+
+.staff_info .statu {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+}
+.order_info {
+    padding: 1.7rem 1.5rem .6rem;
+}
+
+.order_info.card ul li {
+    line-height: 2.3rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.order_info.card ul li label {
+    width: 7.5rem;
+    text-align: left;
+    float: left;
+    color: #6b6b6b;
+}
+
+.order_info.card ul li p {
+    padding-left: 7.5rem;
+    color: #333333;
+}
+.address_s h3 {
+        color: #333333;
+    font-size: 1.4rem;
+    background: url(../img/locationgr.png) no-repeat;
+    background-position: left .4rem;
+    background-size: 1.1rem;
+    padding-left: 1.9rem;
+}
+
+.address_s h3 span {
+    margin-left: 2.3rem;
+}
+
+.address_s p {
+        color: #888888;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    padding: .8rem 0 0 1.9rem;
+    background-position: 0 1rem;
+}
+
+.address_s {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+/* 底部按钮 */
+.bottom_bt {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: .9rem 1.5rem 1rem;
+    border-top: 1px solid #e6e6e6;
+    background-color: #fff;
+}
+
+.bottom_bt a {
+    display: inline-block;
+    line-height: 3.1rem;
+    width: 8rem;
+    text-align: center;
+    border-radius: .2rem;
+    font-size: 1.4rem;
+}
+
+
+.bottom_bt a.bt_cancel {
+    color: #6b6b6b;
+}
+
+.bottom_bt a.bt_pay {
+    color: #fff;
+    background-color: #ff9900;
+    display: none;
+}
+/*取消订单*/
+.cancelReservation-pop {
+    width: 31rem;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -15.5rem;
+    margin-top: -23rem;
+    border-radius: 5px;
+    z-index: 110;
+      display: none;  
+    border-radius: .4rem;
+    overflow: hidden;
+}
+.cancelReservation-pop .top_title {
+    padding: 2rem 1.5rem;
+    background-color: #fafafa;
+}
+
+.cancelReservation-pop .top_title h2 {
+    color: #333333;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.cancelReservation-pop .top_title p {
+    line-height: 1.8rem;
+    color: #888;
+}
+
+h3.alert_bg {
+    height: 1.5rem;
+    background: url(../img/alertbg.png) no-repeat;
+    background-size: 100% 1.5rem;
+    /* margin-top: -1px; */
+}
+
+.cancelReservation-pop .reason {
+    background-color: #fafafa;
+    padding: 1.8rem 2.5rem 2rem;
+}
+
+.reason h4 {
+    font-size: 1.4rem;
+    color: #4c4c4c;
+    margin-bottom: .5rem;
+}
+.cancelReservation-pop .reason ul {
+    position: relative;
+}
+
+.cancelReservation-pop .reason ul li {
+    margin: 1.6rem 0;
+    list-style: none;
+    line-height: 1.3rem;
+    font-size: 1.3rem;
+    color: #808080;
+    position: relative;
+}
+.top_title .refund {
+    font-size: 1.4rem;
+    margin-top: 1.4rem;
+}
+
+.top_title .refund span.tui {
+    float: right;
+    margin-right: 1rem;
+}
+
+.top_title .refund span a {
+    color: #ff9900;
+}
+
+.radio_box {
+    position: relative;
+    height: 1.4rem;
+    float: left;
+    width: 1.4rem;
+    margin-right: 1rem;
+}
+.reason ul li input[type='radio'] {
+    -moz-opacity: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    width: 100%;
+    height: 1.4rem;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    margin: 0 !important;
+    cursor: pointer;
+}
+.circle-box {
+    background-color: #fff;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 1px solid #d6d6d6;
+    line-height: 1.1rem;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 2;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.circle-box span {
+    width: .8rem;
+    height: .8rem;
+    background-color: #ff9900;
+    border-radius: 100%;
+    display: none;
+    position: absolute;
+    top: .3rem;
+    left: .3rem;
+}
+.radio_box .active {
+    border: 1px solid #ff9900;
+}
+.radio_box .active span {
+    display: block;
+}
+
+.other_reason {
+    display: none;
+}
+
+.other_reason textarea {
+   border: 1px solid #d6d6d6;
+    height: 3.4rem;
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    width: 90%;
+    padding: .5rem .5rem;
+    resize: none;
+}
+p.promt {
+    color: red;
+    line-height: 2.7rem;
+    position: absolute;
+    bottom: -3.2rem;
+    left: 2.2rem;
+}
+.cancelReservation-pop .crp-btn {background-color: #fff;height: 4.4rem;display: flex;display: -webkit-flex;border-top: 1px solid #d6d6d6;}
+.cancelReservation-pop .crp-btn a {display: block;flex: 1;height: 100%;line-height: 4.4rem;text-align: center; color: #888888;}
+.cancelReservation-pop .crp-btn .crpb-cancel {border-right: 1px solid #d6d6d6;}
+.cancelReservation-pop .crp-btn a.orange {
+    color: #ff9900;
+}

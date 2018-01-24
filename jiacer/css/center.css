@@ -1,0 +1,257 @@
+body{
+	background-color:#efeff4;
+}
+a:link    {color:#333;}
+a:visited {color:#333;}
+a:hover   {color:#333;}
+a:active  {color:#333;}
+input{
+	-webkit-appearance:none;
+}
+footer .mine {
+    background-image: url(../img/mine_on.png);
+}
+/* .height{
+	width:100%;
+	height:1.2rem;
+	background-color:#f0f0f0;
+} */
+a.set {
+    position: absolute;
+    right: 0.8rem;
+	top: 0px;
+    font-size: 1.2rem;
+    display: block;
+    height: 100%;
+    line-height: 4.4rem;
+}
+.account {
+    height: 14.3rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #fff;
+    background: url(../img/wodebg.png) no-repeat;
+    padding-top: 3.5rem;
+    position: relative;
+    background-size: 100% 100%;
+}
+.account a {
+    display: inline-block;
+}
+.account .back_index {
+    position: absolute;
+    left: 1.4rem;
+    top: 1.4rem;
+    width: .9rem;
+    height: 2rem;
+    display: block;
+    background: url(../img/wback.png) no-repeat;
+    background-size: .9rem auto;
+    background-position: left top;
+}
+.photo {
+    width: 7.2rem;
+    height: 7.2rem;
+    border-radius: 100%;
+    display: inline-block;
+    overflow: hidden;
+}
+.photo img {
+    width: 100%;
+    height: 100%;
+}
+.account p {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+}
+.account a:link    {color:#fff;}
+.account a:visited {color:#fff;}
+.account a:hover   {color:#fff;}
+.account a:active  {color:#fff;}
+.numb{
+	background:url(../img/numbarr.png) no-repeat;
+	padding-right: 1.2rem;
+    background-size: 0.6rem 1.2rem;
+    background-position: right center;
+}
+/* .reservation,.order {
+    padding: 0 0.8rem;
+    margin-top:1.2rem; 
+    background-color: #fff;
+}
+.reservation p ,.order p{
+    height: 4.2rem;
+    line-height: 4.2rem;
+    font-size: 1.6rem;
+    border-bottom: 1px solid #e6e6e6;
+}
+.reservation ul ,.order ul {
+    overflow: hidden;
+    padding: 1rem 0;
+}
+.reservation ul li ,.order ul li {
+    float: left;
+    height: 4rem;
+	box-sizing:border-box;
+}
+.reservation ul li a,.order ul li a {
+	font-size: 1.2rem;
+}
+.first,.second{
+	width:30%;
+}
+.third{
+	width:40%;
+	border-left:1px solid #e6e6e6;
+}
+.reservation ul li.first a{
+	background:url(../img/yuyue1.png) no-repeat;
+	background-position:center 0;
+	background-size:1.9rem 1.9rem;
+}
+.reservation ul li.second a{
+	background:url(../img/yuyue2.png) no-repeat;
+	background-position:center 0;
+	background-size:1.7rem 1.7rem;
+}
+.reservation ul li.third a{
+	background:url(../img/yuyue3.png) no-repeat;
+	background-position:center 0;
+	background-size:1.8rem 2.1rem;
+}
+.order ul li.first a{
+	background:url(../img/order1.png) no-repeat;
+	background-position:center 0;
+	background-size:2.2rem 2.2rem;
+}
+.order ul li.second a{
+	background:url(../img/order2.png) no-repeat;
+	background-position:center 0;
+	background-size:1.8rem 2.2rem;
+}
+.order ul li.third a{
+	background:url(../img/order3.png) no-repeat;
+	background-position:center 0;
+	background-size:1.7rem 2.2rem;
+}
+.reservation ul li a ,.order ul li a  {
+    display: block;
+    height: 100%;
+    padding-top: 2.5rem;
+    box-sizing: border-box;
+    color: #333333;
+    font-size: 1.2rem;
+    text-align: center;
+	position: relative;
+}
+.order ul {
+    border-bottom: 1px solid #e6e6e6;
+} */
+.icon {
+    position: absolute;
+    width: 0.7rem;
+    height: 1.2rem;
+    right: 1rem;
+    top: 50%;
+    margin-top: -0.6rem;
+}
+.mine_list {
+  margin-top: 1.2rem;
+  background-color: #fff;
+  margin-bottom: 4rem;
+}
+.mine_list a {
+  display: block;
+  padding: 0 1.9rem 0 .5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+.mine_list a p {
+  padding: 1.4rem 0;
+  line-height: 1.6rem;
+  font-size: 1.5rem;
+  color: #333333;
+  background: url(../img/righticon.png) no-repeat;
+  background-position: right center;
+  background-size: .8rem auto;
+}
+.mine_list a.border_n {
+  border: 0;
+}
+.mine_list p span {
+  width: 3.3rem;
+  text-align: center;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+.mine_list p span img {
+  width: 1.6rem;
+  vertical-align: baseline;
+}
+.order_h{
+    margin-top: 1.2rem;
+    background-color: #fff; 
+}
+.order_h p{
+    font-size: 1.5rem;
+    padding: 1.4rem 1.5rem 1.4rem 3.7rem;
+    line-height: 1.6rem;
+    border-bottom: 2px solid #efeff4;
+    background: url(../img/centerOrder.png) no-repeat;
+    background-position: 1.5rem 1.4rem;
+    background-size: 1.3rem auto; 
+    color: #333;
+}
+.order_h p a{
+    padding:0 1.3rem;
+    color: #a8a8a8;
+    font-size: 1.3rem;
+    background: url(../img/righticon.png) no-repeat;
+    background-position: right center;
+    background-size: .6rem auto;
+    float: right;
+}
+.order_h .order_statu{
+   display: flex;
+   display: -webkit-flex;
+   padding: 1.5rem 0;
+   width: 100%;
+   overflow: hidden;
+   height: 4.4rem;
+}
+.order_h .order_statu li{
+    float: left;
+    flex: 1;
+    text-align: center;
+    height: 4.4rem;
+    box-sizing:border-box;
+     background: url(../img/border_right.png) no-repeat;
+    background-size: 1px 3rem; 
+    background-position: right center;
+}
+.order_h .order_statu li a{
+    color: #6b6b6b;
+    font-size:1.3rem;
+    padding-top:3rem;
+    line-height: 1.3rem;
+    display: block;
+}
+ .order_h .order_statu li.order_qu a{
+    background:url(../img/quanbu.png) no-repeat;
+	background-position:center .1rem;
+	background-size:1.9rem auto;
+} 
+.order_h .order_statu li.order_pay a{
+    background:url(../img/centerOrder1.png) no-repeat;
+	background-position:center 0;
+	background-size:2.3rem auto;
+}
+.order_h .order_statu li.order_m a{
+    background:url(../img/centerOrder2.png) no-repeat;
+	background-position:center 0;
+	background-size:2.4rem auto;
+}
+.order_h .order_statu li.order_com a{
+    background:url(../img/centerOrder3.png) no-repeat;
+	background-position:center 0;
+	background-size:2rem auto;
+}

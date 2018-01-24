@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+  <title>地址管理</title>
+  <link rel="stylesheet" type="text/css" href="css/global.css"/>
+  <link rel="stylesheet" type="text/css" href="css/address.css"/>
+
+  <script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/mapping.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+<div id="layer"></div>
+<!--删除地址弹窗-->
+<div class="alert_div">
+  <input name='id' type='hidden' value=''/>
+  <div class="content">
+    <p>确定删除该地址吗？</p>
+  </div>
+  <div class="confirm_bt">
+    <a class="cancel" id="cancel">取消</a>
+    <a class="confirm" id="ok">确定</a>
+  </div>
+</div>
+<header>
+  <a class="goBack" href="center.html"></a>
+  <h1>地址管理</h1>
+</header>
+<div class="main_content">
+  <!-- <div class='add_list'>
+    <input name='id' type='hidden' value=''/>
+    <a href=''>
+      <div class='info_ad'>
+        <h2>张三<span>139 0000 0000</span></h2>
+        <h3>上海市-徐汇区-城区 &nbsp;&nbsp;南丹东路300号</h3>
+      </div>
+    </a>
+    <div class='operation'>
+      <p><a class='edit'>编辑</a><a class='delete'>删除</a></p>
+    </div>
+  </div>
+  <div class='add_list'>
+    <input name='id' type='hidden' value=''/>
+    <a href=''>
+      <div class='info_ad'>
+        <h2>张三<span>139 0000 0000</span></h2>
+        <h3>上海市-徐汇区-城区 &nbsp;&nbsp;南丹东路300号</h3>
+      </div>
+    </a>
+    <div class='operation'>
+      <p><a href='addressDetails.html?id=0' class='edit'>编辑</a><a class='delete'>删除</a></p>
+    </div>
+  </div> -->
+</div>
+<div class="button"><a href="addressDetails.html">+新建地址</a></div>
+<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/share_wachet.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function () {
+    //  var token ="2FVn7iYizaJRwvlUKgVZPjs4jWA0C9QxwQRttZiGG6ou577ehTF3RXG9-yhYCUPcKiajfAgp13jven4jy6-7sQ";
+    // var uid=68;
+    // var token=$.getUrlParam('token');
+    // var uid=$.getUrlParam('uid');
+    // 获取地址
+    if (isEmpty(params.uid)) {
+        window.location.href = "login.html";
+        return;
+      }
+    $.ajax({
+      url: publicPathCmn + "/api/user/address",
+      type: "get",
+      data: {},
+      dataType: "json",
+      headers: params,
+      success: function (data) {
+        if (data.success) {
+          if (data.code == 0) {
+            var dataJD = data.jsonData;
+            if (dataJD == "") {
+              $(".main_content").html("<p class='no_address'>暂无服务地址~</p>");
+            } else {
+              if (dataJD.length > 2) {
+                $(".button").remove();
+              }
+              var html = "";
+              $.each(dataJD, function (i, item) {
+                html += "<div class='add_list'>" +
+                    "<input name='id' type='hidden' value='" + item.id + "'/>" +
+                    "<a>" +
+                    "<div class='info_ad'>" +
+                    "<h2>" + item.userName + "<span>" + item.phone + "</span></h2>" +
+                    "<h3>" + item.provinceValue + "-" + item.cityValue + "-" + item.districtValue + "&nbsp;&nbsp;" + item.address + "</h3>" +
+                    "</div>" +
+                    "</a>" +
+                    "<div class='operation'>" +
+                    "<p><a href='addressDetails.html?id=" + item.id + "' class='edit'>编辑</a><a class='delete'>删除</a></p>" +
+                    "</div>" +
+                    "</div>";
+              });
+              $(".main_content").html(html);
+            }
+          } else {
+            checkAuth(data.code);
+          }
+        } else {
+          console.log(data.msg);
+        }
+      },
+    });
+
+    // 删除地址
+    $(".main_content").on("click", ".delete", function () {
+      $("#layer,.alert_div").show();
+      var id = $(this).parents(".add_list").find("input[name='id']").val();
+      $(".alert_div input[name='id']").val(id);
+    });
+    $("#ok").click(function () {
+      var addressId = "/" + $(".alert_div input[name='id']").val();
+      $.ajax({
+        url: publicPathCmn + "/api/user/address" + addressId+"/@delete",
+        type: "post",
+        data: params,
+        dataType: "json",
+        headers: params,
+        success: function (data) {
+          if (data.success) {
+            if (data.code == 0) {
+              location.reload();
+            } else {
+              console.log(data.msg);
+            }
+          } else {
+            checkAuth(data.code);
+            console.log(data.msg);
+          }
+        },
+      });
+    })
+    //关闭地址弹窗
+    $("#cancel").click(function () {
+      $("#layer,.alert_div").hide();
+    });
+
+  })
+</script>
+</body>
+</html>
